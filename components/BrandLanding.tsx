@@ -60,7 +60,7 @@ export const BrandLanding: React.FC = () => {
                             playsInline
                             poster="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=800&auto=format&fit=crop"
                         >
-                            <source src="https://videos.pexels.com/video-files/4450209/4450209-hd_720_1280_25fps.mp4" type="video/mp4" />
+                            <source src="https://cdn.coverr.co/videos/coverr-person-unboxing-a-package-5363/1080p.mp4" type="video/mp4" />
                         </video>
 
                         {/* Gradient Overlay */}
