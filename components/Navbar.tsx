@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Loader2, ArrowRight } from 'lucide-react';
-import { StripeBuyButton } from './StripeBuyButton';
 
 interface NavbarProps {
   page: 'brand' | 'creator';
@@ -124,9 +123,13 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch }) => {
           )}
 
           {!isCreator ? (
-            <div className="min-w-[140px] flex justify-center">
-              <StripeBuyButton />
-            </div>
+            <button
+              onClick={handleActionClick}
+              disabled={isLoading}
+              className={`text-white px-5 py-2 text-sm font-bold tracking-tight rounded-md shadow-lg transition-all active:scale-95 inline-block text-center decoration-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-darkest focus-visible:ring-offset-2 disabled:opacity-80 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center min-w-[140px] ${buttonClass}`}
+            >
+              {isLoading ? <Loader2 size={16} className="animate-spin" /> : "Book Slot"}
+            </button>
           ) : (
             <button
               onClick={handleActionClick}

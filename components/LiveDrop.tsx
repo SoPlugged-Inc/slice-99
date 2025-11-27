@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Check, ArrowRight, Lock, Loader2 } from 'lucide-react';
-import { StripeBuyButton } from './StripeBuyButton';
 
 interface Slot {
   id: number;
@@ -180,7 +179,29 @@ export const LiveDrop: React.FC = () => {
               </div>
 
               <div className="w-full sm:w-auto">
-                <StripeBuyButton />
+                <button
+                  onClick={handleActionClick}
+                  disabled={isLoading || !selectedSlot}
+                  className={`
+                            relative overflow-hidden group flex items-center justify-center gap-2 px-8 py-3 rounded-md font-bold text-sm tracking-wide transition-all duration-300 w-full sm:w-auto
+                            bg-primary text-white hover:bg-primary-hover shadow-lg shadow-primary/20
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+                            disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none
+                        `}
+                >
+                  {isLoading ? (
+                    <span className="relative z-10 flex items-center gap-2"><Loader2 size={16} className="animate-spin" /> Processing</span>
+                  ) : (
+                    <>
+                      <span className="relative z-10">
+                        {selectedSlot
+                          ? `Confirm Slot ${selectedSlot}`
+                          : WEEKLY_DROP.buttonText}
+                      </span>
+                      <ArrowRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           </div>
