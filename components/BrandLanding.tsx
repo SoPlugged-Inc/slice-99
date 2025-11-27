@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Package, Smartphone, CheckCircle2, Lightbulb, Play, Loader2, ChevronLeft, ChevronRight, Download, FileVideo, Eye, Heart, Share2, MousePointer2, Megaphone, Link } from 'lucide-react';
 import { LiveDrop } from './LiveDrop';
 import { TextReveal, ColumnBackground, SpotlightCard, Section, SectionHeading, LogoMarquee } from './Shared';
+import { StripeBuyButton } from './StripeBuyButton';
 
 export const BrandLanding: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -24,7 +25,7 @@ export const BrandLanding: React.FC = () => {
         setIsHeroLoading(true);
         setTimeout(() => {
             setIsHeroLoading(false);
-            window.open('https://google.com', '_blank');
+            window.open('https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00', '_blank');
         }, 1000);
     };
 
@@ -256,15 +257,9 @@ export const BrandLanding: React.FC = () => {
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                             {/* Button with Border Beam */}
-                            <div className="relative group rounded-md w-full sm:w-auto">
+                            <div className="relative group rounded-md w-full sm:w-auto flex justify-center">
                                 <div className="border-beam rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ '--duration': 4 } as React.CSSProperties}></div>
-                                <button
-                                    onClick={handleHeroClick}
-                                    disabled={isHeroLoading}
-                                    className="relative w-full sm:w-auto px-8 py-3.5 bg-primary text-white font-bold tracking-tight rounded-md hover:bg-primary-hover transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 flex items-center justify-center gap-2 disabled:opacity-80 disabled:cursor-not-allowed disabled:transform-none"
-                                >
-                                    {isHeroLoading ? <Loader2 size={20} className="animate-spin" /> : "Claim Slot ($99)"}
-                                </button>
+                                <StripeBuyButton />
                             </div>
 
                             <div className="text-sm text-neutral-dark flex items-center gap-2 justify-center">
