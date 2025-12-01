@@ -51,16 +51,11 @@ export const BrandLanding: React.FC = () => {
 
                     {/* Video Area */}
                     <div className="absolute inset-0 bg-neutral-800 flex items-center justify-center group cursor-pointer">
-                        <video
+                        <img
+                            src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=800&auto=format&fit=crop"
+                            alt="Viral Content"
                             className="absolute inset-0 w-full h-full object-cover"
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            poster="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=800&auto=format&fit=crop"
-                        >
-                            <source src="https://cdn.coverr.co/videos/coverr-person-unboxing-a-package-5363/1080p.mp4" type="video/mp4" />
-                        </video>
+                        />
 
                         {/* Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 z-10"></div>
@@ -369,14 +364,14 @@ export const BrandLanding: React.FC = () => {
                             <div className="w-full h-full flex flex-col md:flex-row items-center justify-center p-6 sm:p-12 gap-8 md:gap-16">
 
                                 {/* Visual Side */}
-                                <div className="w-full md:w-1/2 flex items-center justify-center">
+                                <div className="w-full md:w-1/2 flex items-center justify-center relative z-10 overflow-hidden">
                                     <div key={currentSlide} className="animate-[slideUpFade_0.5s_ease-out]">
                                         {slides[currentSlide].renderVisual()}
                                     </div>
                                 </div>
 
                                 {/* Text Context Side */}
-                                <div className="w-full md:w-1/2 max-w-sm text-center md:text-left">
+                                <div className="w-full md:w-1/2 max-w-sm text-center md:text-left overflow-hidden">
                                     <div key={currentSlide} className="animate-[slideUpFade_0.5s_ease-out_0.1s]">
                                         <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold mb-4">
                                             {slides[currentSlide].badge}

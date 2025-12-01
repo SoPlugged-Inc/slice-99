@@ -59,6 +59,7 @@ export default {
                 'clip-down': 'clipDown 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                 'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
                 'notification-slide': 'notificationSlide 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                'slideUpFade': 'slideUpFade 0.5s ease-out forwards',
             },
             backgroundImage: {
                 'grid-pattern': "linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)",
