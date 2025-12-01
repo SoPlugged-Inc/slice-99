@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://images.unsplash.com data:; connect-src 'self' https://formspree.io;">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
     <title>Slice99 | Earn more with UGC</title>
     <meta name="description"
         content="Join the roster for monthly creator gigs. We pool brand budgets to pay you what you're worth.">
@@ -68,7 +68,7 @@
                     For Brands
                 </a>
                 <button onclick="document.getElementById('apply-modal').classList.remove('hidden')"
-                    class="bg-white text-black px-5 py-2 text-sm font-bold uppercase tracking-wide hover:bg-orange-600 hover:text-white transition-all rounded-sm">
+                    class="bg-white text-black px-5 py-2 text-sm font-bold uppercase tracking-wide hover:bg-orange-600 hover:text-white transition-all rounded-sm cursor-pointer">
                     Apply Now
                 </button>
             </div>
@@ -314,14 +314,15 @@
                                     <div>
                                         <label for="name" class="block text-xs font-medium text-zinc-400 mb-1">Full
                                             Name</label>
-                                        <input type="text" name="name" id="name" required
-                                            class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors">
+                                        <input type="text" name="name" id="name" required placeholder="Jane Doe"
+                                            class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
                                     </div>
                                     <div>
                                         <label for="email" class="block text-xs font-medium text-zinc-400 mb-1">Email
                                             Address</label>
                                         <input type="email" name="email" id="email" required
-                                            class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors">
+                                            placeholder="jane@example.com"
+                                            class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
                                     </div>
                                 </div>
                                 <div>
@@ -329,13 +330,13 @@
                                         Social Handle (Full Link)</label>
                                     <input type="text" name="social" id="social" placeholder="tiktok.com/@yourname"
                                         required
-                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors">
+                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
                                 </div>
                                 <div>
                                     <label for="location" class="block text-xs font-medium text-zinc-400 mb-1">Location
                                         (City & Province)</label>
-                                    <input type="text" name="location" id="location" required
-                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors">
+                                    <input type="text" name="location" id="location" required placeholder="Toronto, ON"
+                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
                                 </div>
                             </div>
 
@@ -386,9 +387,9 @@
                                 <div>
                                     <label for="video_link" class="block text-xs font-medium text-zinc-400 mb-1">Link to
                                         your best 'Haul' or 'Showcase' video</label>
-                                    <input type="url" name="video_link" id="video_link" placeholder="https://..."
-                                        required
-                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors">
+                                    <input type="text" name="video_link" id="video_link"
+                                        placeholder="tiktok.com/video/..." required
+                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
                                     <p class="text-[10px] text-zinc-600 mt-1">Show us a video where you talk about a
                                         product. We want to see your lighting and hear your voice.</p>
                                 </div>
@@ -440,7 +441,8 @@
                                     <label for="dream_brand" class="block text-xs font-medium text-zinc-400 mb-1">One
                                         brand you really want to work with right now?</label>
                                     <input type="text" name="dream_brand" id="dream_brand"
-                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors">
+                                        placeholder="e.g. Nike, Glossier, etc."
+                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
                                 </div>
                             </div>
 
