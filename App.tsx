@@ -8,7 +8,7 @@ import { CreatorLanding } from './components/CreatorLanding';
 
 // Placeholder for the actual Light Logo file provided by the user
 // Replace this Data URI with your actual file path, e.g., "/logo-light.png"
-const LOGO_LIGHT_URL = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 40' fill='none'%3E%3Ctext x='0' y='55%25' dominant-baseline='middle' font-family='Libre Baskerville, serif' font-weight='700' font-size='28' letter-spacing='-1.5' fill='%23FFFFFF'%3Eco-create%3C/text%3E%3C/svg%3E`;
+const LOGO_LIGHT_URL = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 40' fill='none'%3E%3Ctext x='0' y='55%25' dominant-baseline='middle' font-family='Libre Baskerville, serif' font-weight='700' font-size='28' letter-spacing='-1.5' fill='%23FFFFFF'%3Eslice%3C/text%3E%3C/svg%3E`;
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'brand' | 'creator'>('brand');
@@ -33,11 +33,13 @@ function App() {
             {/* Logo Image */}
             <img
               src={LOGO_LIGHT_URL}
-              alt="Co-Create"
-              className="h-8 w-auto object-contain mb-1"
+              alt="Slice"
+              className="h-8 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
             />
-            <span className="text-xs text-neutral-500 uppercase tracking-widest">Share the creator. Split the cost.</span>
           </div>
+          <p className="text-neutral-light/60 text-xs font-medium">
+            &copy; 2025 Slice Inc.
+          </p>
 
           <div className="grid grid-cols-2 sm:flex gap-8 sm:gap-12 text-sm text-neutral-400">
             <div className="flex flex-col gap-3">

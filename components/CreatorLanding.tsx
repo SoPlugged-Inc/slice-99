@@ -5,14 +5,14 @@ import { TextReveal, TypewriterEffect, ColumnBackground, SpotlightCard, Section,
 
 const PhonePayoutVisual = () => {
   const [notifications, setNotifications] = useState([
-    { id: 1, time: 'Now', amount: 150.00, brand: 'Co-Create Payout' },
-    { id: 2, time: '2m ago', amount: 150.00, brand: 'Co-Create Payout' },
-    { id: 3, time: '1h ago', amount: 150.00, brand: 'Co-Create Payout' },
+    { id: 1, time: 'Now', amount: 150.00, brand: 'Slice Payout' },
+    { id: 2, time: '2m ago', amount: 150.00, brand: 'Slice Payout' },
+    { id: 3, time: '1h ago', amount: 150.00, brand: 'Slice Payout' },
   ]);
   const [balance, setBalance] = useState(450.00);
 
   useEffect(() => {
-    const brands = ['Co-Create Payout', 'Co-Create Payout', 'Bonus Payment'];
+    const brands = ['Slice Payout', 'Slice Payout', 'Bonus Payment'];
 
     const interval = setInterval(() => {
       const newId = Date.now();
@@ -135,7 +135,7 @@ export const CreatorLanding: React.FC = () => {
 
           <div className="w-full mb-8 flex items-center justify-center">
             <h1 className="text-4xl sm:text-6xl font-extrabold text-neutral-darkest tracking-tight leading-[1.1] text-center mx-auto max-w-3xl flex flex-col items-center">
-              <TypewriterEffect text={`Make more money\nwith UGC`} pauseDuration={5000} className="text-center" cursorClassName="text-creator" />
+              <TypewriterEffect text={`Predictable income.\nZero admin.`} pauseDuration={5000} className="text-center" cursorClassName="text-creator" />
             </h1>
           </div>
 
@@ -150,7 +150,7 @@ export const CreatorLanding: React.FC = () => {
                     disabled={isHeroLoading}
                     className="relative w-full sm:w-auto px-8 py-3.5 bg-creator text-white font-bold tracking-tight rounded-md hover:bg-creator-hover transition-all shadow-xl shadow-creator/20 hover:shadow-creator/40 hover:-translate-y-0.5 active:translate-y-0 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-creator focus-visible:ring-offset-2 flex items-center justify-center gap-2 disabled:opacity-80 disabled:cursor-not-allowed"
                   >
-                    {isHeroLoading ? <Loader2 size={20} className="animate-spin" /> : "Join Co-Create"}
+                    {isHeroLoading ? <Loader2 size={20} className="animate-spin" /> : "Join Slice"}
                   </button>
                 </div>
                 {/* Clean Micro-copy */}
@@ -193,7 +193,7 @@ export const CreatorLanding: React.FC = () => {
       {/* How It Works */}
       <Section className="bg-neutral-lightest border-y border-neutral-lighter py-10 sm:py-16" id="how-it-works">
         <SectionHeading
-          title="Why Creators Love Co-Create"
+          title="Why Creators Love Slice"
           subtitle="Predictable income. Zero negotiation."
         />
         <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-4">
@@ -236,7 +236,7 @@ export const CreatorLanding: React.FC = () => {
           <div className="grid grid-cols-3 bg-neutral-darkest p-4 text-[10px] sm:text-xs font-bold tracking-widest text-white uppercase border-b border-neutral-darker">
             <div className="text-neutral-400">Comparison</div>
             <div className="text-center">Brand Deals</div>
-            <div className="text-creator text-center">Co-Create</div>
+            <div className="text-creator text-center">Slice</div>
           </div>
 
           {[

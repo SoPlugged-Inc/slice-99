@@ -12,6 +12,18 @@ export default {
                 mono: ['"JetBrains Mono"', 'monospace'],
             },
             colors: {
+                zinc: {
+                    50: '#fafafa',
+                    900: '#18181b',
+                },
+                orange: {
+                    50: '#fff7ed',
+                    100: '#ffedd5',
+                    200: '#fed7aa',
+                    500: '#f97316',
+                    600: '#ea580c',
+                    700: '#c2410c',
+                },
                 primary: {
                     DEFAULT: '#0055FF',
                     hover: '#0044CC',
@@ -34,6 +46,9 @@ export default {
                     green: '#10b981',
                     'green-dark': '#047857',
                 }
+            },
+            borderRadius: {
+                'sm': '0.125rem',
             },
             boxShadow: {
                 'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',

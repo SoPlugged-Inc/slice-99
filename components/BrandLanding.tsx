@@ -245,13 +245,13 @@ export const BrandLanding: React.FC = () => {
                     </div>
 
                     <h1 className="text-4xl sm:text-6xl font-extrabold text-neutral-darkest tracking-tight mb-5 leading-[1.05] sm:leading-[1.1]">
-                        <TextReveal text="Get your product on TikTok." delay={0.1} className="block mb-1" />
-                        <TextReveal text="Guaranteed. For $99." delay={0.4} />
+                        <TextReveal text="The Fractional Creator Network." delay={0.1} className="block mb-1" />
+                        <TextReveal text="Premium UGC. $99 Flat." delay={0.4} />
                     </h1>
 
                     <div className={`transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <p className="text-lg sm:text-xl text-neutral-dark mb-8 max-w-2xl mx-auto leading-relaxed">
-                            We bundle you into a shared creator unboxing video to split the cost with other brands. We handle the creator, shipping, and filming.
+                            Stop overpaying for full sponsorships. We bundle non-competing brands into shared creator campaigns, delivering high-converting assets and guaranteed reach for a fraction of the cost.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -297,7 +297,7 @@ export const BrandLanding: React.FC = () => {
             <Section className="bg-neutral-lightest border-y border-neutral-lighter" id="how-it-works">
                 <SectionHeading
                     title="How It Works"
-                    subtitle="The easiest way to get authentic UGC for your brand without the headache."
+                    subtitle="The speed of a tech platform. The quality of a creative agency."
                 />
                 <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12">
                     {[
@@ -433,11 +433,11 @@ export const BrandLanding: React.FC = () => {
                     <div className="grid grid-cols-3 bg-neutral-darkest p-4 text-xs font-bold tracking-widest text-white uppercase border-b border-neutral-darker">
                         <div className="text-neutral-400">Comparison</div>
                         <div className="text-center">Traditional Agency</div>
-                        <div className="text-primary text-center">Co-Create</div>
+                        <div className="text-primary text-center">Slice</div>
                     </div>
 
                     {[
-                        { label: "Cost", bad: "$500 - $2,000+", good: "$99 Flat Rate" },
+                        { label: "Cost", bad: "Full Sponsorship ($2k+)", good: "Fractional Slot ($99)" },
                         { label: "Effort", bad: "Cold DMing & Negotiations", good: "Instant Booking" },
                         { label: "Logistics", bad: "Individual Shipping", good: "Consolidated Hub" },
                         { label: "Outcome", bad: "No Guarantee", good: "Guaranteed Post" },
@@ -459,7 +459,7 @@ export const BrandLanding: React.FC = () => {
 
             {/* FAQ */}
             <Section className="bg-white" id="faq">
-                <SectionHeading title="Frequently Asked Questions" subtitle="Everything you need to know about the Co-Create process." />
+                <SectionHeading title="Frequently Asked Questions" subtitle="Everything you need to know about the Slice process." />
                 <div className="max-w-3xl mx-auto space-y-4">
                     {[
                         { q: "Do I get the video file?", a: "Yes. You receive the raw video file with usage rights to repost on your own social channels or use in paid ads." },

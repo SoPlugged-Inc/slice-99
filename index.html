@@ -1,27 +1,776 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth scroll-pt-28">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  <title>Co-Create | Share the Creator. Split the Cost.</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <title>Slice99 | Viral Content. Sliced to $99.</title>
   <meta name="description"
-    content="Get your product on TikTok. Guaranteed. We bundle you into a shared creator unboxing video to split the cost with other brands." />
+    content="We pool non-competing brands to split the cost of a viral-style Influencer Haul. You get the content you need, and we handle the rest.">
 
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://slice99.com">
+  <meta property="og:title" content="Slice99 | Viral Content. Sliced to $99.">
+  <meta property="og:description"
+    content="We pool non-competing brands to split the cost of a viral-style Influencer Haul.">
+  <meta property="og:image" content="https://slice99.com/og-image.jpg">
 
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://slice99.com">
+  <meta property="twitter:title" content="Slice99 | Viral Content. Sliced to $99.">
+  <meta property="twitter:description"
+    content="We pool non-competing brands to split the cost of a viral-style Influencer Haul.">
+  <meta property="twitter:image" content="https://slice99.com/og-image.jpg">
 
-  <!-- Google Fonts -->
+  <!-- Canonical -->
+  <link rel="canonical" href="https://slice99.com" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="/index.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Slice99",
+      "url": "https://slice99.com",
+      "logo": "https://slice99.com/favicon.svg",
+      "description": "We pool non-competing brands to split the cost of a viral-style Influencer Haul. You get the content you need, and we handle the rest.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Slice Inc.",
+        "url": "https://slice99.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "99.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  </script>
+  <style>
+    /* Utilitarian Brutalism Utilities */
+    .brutal-border {
+      border: 2px solid #18181b;
+    }
+
+    .brutal-shadow {
+      box-shadow: 4px 4px 0px 0px #18181b;
+    }
+
+    .corner-bracket {
+      position: absolute;
+      width: 1rem;
+      height: 1rem;
+      border-color: #18181b;
+      border-style: solid;
+    }
+
+    .corner-tl {
+      top: -2px;
+      left: -2px;
+      border-width: 2px 0 0 2px;
+    }
+
+    .corner-tr {
+      top: -2px;
+      right: -2px;
+      border-width: 2px 2px 0 0;
+    }
+
+    .corner-bl {
+      bottom: -2px;
+      left: -2px;
+      border-width: 0 0 2px 2px;
+    }
+
+    .corner-br {
+      bottom: -2px;
+      right: -2px;
+      border-width: 0 2px 2px 0;
+    }
+
+    /* Hide scrollbar for carousel but allow functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 </head>
 
-<body class="bg-neutral-white text-neutral-darkest antialiased font-sans bg-grid-pattern bg-fixed overflow-x-hidden">
-  <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
+<body
+  class="bg-zinc-50 text-slate-900 font-sans antialiased selection:bg-orange-600 selection:text-white flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="w-full border-b-2 border-zinc-900 bg-zinc-50 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <a href="/" class="text-2xl font-black tracking-tighter text-slate-900 uppercase select-none">
+          SL<span class="text-orange-600">/</span>CE
+        </a>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex space-x-8 items-center">
+        <a href="#how-it-works" class="text-sm font-semibold hover:text-orange-600 transition-colors">How it Works</a>
+        <a href="creators.html" class="text-sm font-semibold hover:text-orange-600 transition-colors">For Creators</a>
+        <a href="#faq" class="text-sm font-semibold hover:text-orange-600 transition-colors">FAQ</a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="flex items-center">
+        <a href="https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00"
+          class="bg-orange-600 text-white px-5 py-2 text-sm font-bold uppercase tracking-wide hover:bg-orange-700 transition-colors rounded-sm shadow-sm">
+          Claim Slot ($99)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+
+          <!-- Text Content -->
+          <div class="text-center lg:text-left">
+            <h1
+              class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-6">
+              Viral Content.<br>
+              <span class="text-orange-600">Sliced to $99.</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-700 mb-10 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
+              We pool non-competing brands to split the cost of a viral-style Influencer Haul. You get the content you
+              need, and we handle the rest.
+            </p>
+          </div>
+
+          <!-- Visual: Live Drop Card -->
+          <div class="relative w-full max-w-md mx-auto lg:max-w-full">
+            <!-- Card Container -->
+            <div class="bg-white brutal-border p-6 relative">
+              <!-- Corner Brackets -->
+              <div class="corner-bracket corner-tl"></div>
+              <div class="corner-bracket corner-tr"></div>
+              <div class="corner-bracket corner-bl"></div>
+              <div class="corner-bracket corner-br"></div>
+
+              <!-- Header Data -->
+              <div
+                class="flex justify-between items-center border-b-2 border-zinc-100 pb-4 mb-6 font-mono text-xs sm:text-sm tracking-tight">
+                <span class="bg-zinc-100 px-2 py-1 rounded-sm">BATCH #004</span>
+                <div class="flex items-center gap-2">
+                  <span class="relative flex h-3 w-3">
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                  </span>
+                  <span class="font-bold text-red-600">RECORDING</span>
+                </div>
+              </div>
+
+              <!-- Dynamic Date -->
+              <div class="text-center mb-8">
+                <p class="text-sm text-slate-500 uppercase tracking-widest font-bold mb-2">Next Dispatch</p>
+                <p
+                  class="text-2xl sm:text-3xl font-mono font-bold text-slate-900 bg-zinc-50 inline-block px-4 py-2 border-2 border-zinc-200 rounded-sm">
+                  Friday, <span id="dispatch-date">Loading...</span>
+                </p>
+              </div>
+
+              <!-- Slots Grid -->
+              <div id="slots" class="grid grid-cols-2 gap-4">
+                <!-- Slot 1: Filled -->
+                <div class="relative group">
+                  <div class="absolute inset-0 bg-zinc-200 opacity-50 cursor-not-allowed z-10"></div>
+                  <div
+                    class="border-2 border-zinc-200 p-4 text-center bg-zinc-50 h-full flex flex-col justify-center items-center">
+                    <span class="font-mono text-xs text-zinc-400 mb-1">SLOT 01</span>
+                    <span class="font-bold text-zinc-400 uppercase">FILLED</span>
+                  </div>
+                </div>
+
+                <!-- Slot 2: Available -->
+                <div
+                  class="border-2 border-green-500 p-4 text-center bg-white relative hover:shadow-lg transition-shadow h-full flex flex-col justify-center items-center gap-2">
+                  <span class="font-mono text-xs text-green-600 font-bold">SLOT 02</span>
+                  <a href="https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00"
+                    class="w-full bg-orange-600 text-white text-xs font-bold py-2 px-1 uppercase hover:bg-orange-700 transition-colors block rounded-sm">
+                    Claim ($99)
+                  </a>
+                </div>
+
+                <!-- Slot 3: Available -->
+                <div
+                  class="border-2 border-green-500 p-4 text-center bg-white relative hover:shadow-lg transition-shadow h-full flex flex-col justify-center items-center gap-2">
+                  <span class="font-mono text-xs text-green-600 font-bold">SLOT 03</span>
+                  <a href="https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00"
+                    class="w-full bg-orange-600 text-white text-xs font-bold py-2 px-1 uppercase hover:bg-orange-700 transition-colors block rounded-sm">
+                    Claim ($99)
+                  </a>
+                </div>
+
+                <!-- Slot 4: Available -->
+                <div
+                  class="border-2 border-green-500 p-4 text-center bg-white relative hover:shadow-lg transition-shadow h-full flex flex-col justify-center items-center gap-2">
+                  <span class="font-mono text-xs text-green-600 font-bold">SLOT 04</span>
+                  <a href="https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00"
+                    class="w-full bg-orange-600 text-white text-xs font-bold py-2 px-1 uppercase hover:bg-orange-700 transition-colors block rounded-sm">
+                    Claim ($99)
+                  </a>
+                </div>
+              </div>
+
+              <!-- Decorative Barcode/Tech lines -->
+              <div class="mt-6 flex justify-between items-end opacity-30">
+                <div class="h-4 w-24 bg-zinc-900" style="clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);"></div>
+                <div class="font-mono text-[10px]">ID: 99-SLC-V4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-black tracking-tighter mb-4">HOW IT WORKS</h2>
+          <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Three simple steps to get your brand on the map.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div class="bg-white border-2 border-slate-900 p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow">
+            <div class="text-6xl font-black text-slate-200 mb-6">01</div>
+            <h3 class="text-xl font-bold mb-3">Claim Your Slot</h3>
+            <p class="text-zinc-600">Purchase a $99 slot. This secures your spot in our next creator drop.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-white border-2 border-slate-900 p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow">
+            <div class="text-6xl font-black text-slate-200 mb-6">02</div>
+            <h3 class="text-xl font-bold mb-3">Ship Product</h3>
+            <p class="text-zinc-600">Send your product to our HQ. We bundle it with 3 other non-competing brands.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-white border-2 border-slate-900 p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow">
+            <div class="text-6xl font-black text-slate-200 mb-6">03</div>
+            <h3 class="text-xl font-bold mb-3">Go Viral</h3>
+            <p class="text-zinc-600">Watch as creators showcase your product and share it with their audience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Stack (Carousel) -->
+    <section
+      class="py-24 bg-zinc-50 border-y-2 border-zinc-900 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Finder Window Container -->
+        <div
+          class="border-4 border-slate-900 rounded-sm bg-white shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] overflow-hidden relative flex flex-col">
+          <!-- Top Bar -->
+          <div class="bg-zinc-100 border-b-2 border-zinc-900 p-3 flex items-center justify-between shrink-0 h-12">
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500 border border-zinc-900"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-400 border border-zinc-900"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500 border border-zinc-900"></div>
+            </div>
+            <div id="file-name" class="font-mono text-xs font-bold text-zinc-500">viral_haul_v4.mp4</div>
+            <div class="w-10"></div>
+          </div>
+
+          <!-- Content Area -->
+          <div
+            class="relative bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px] min-h-[500px] md:h-[500px]">
+            <!-- Navigation Arrows -->
+            <button id="prev-slide" aria-label="Previous Slide"
+              class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-colors z-20 shadow-lg rounded-full">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            <button id="next-slide" aria-label="Next Slide"
+              class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-colors z-20 shadow-lg rounded-full">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+
+            <!-- Slide 1: Viral Content -->
+            <div class="carousel-slide block h-full animate-fade-in" data-filename="viral_haul_v4.mp4">
+              <div class="grid grid-cols-1 md:grid-cols-2 h-full">
+                <!-- Left Col (Visual) -->
+                <div
+                  class="h-full relative border-r-0 md:border-r-2 border-zinc-900/10 overflow-hidden flex items-center justify-center p-8">
+                  <div
+                    class="relative w-[220px] h-[440px] bg-zinc-900 rounded-[2rem] border-[6px] border-zinc-900 shadow-xl overflow-hidden ring-1 ring-black/5 transform scale-90 sm:scale-100">
+                    <!-- Notch -->
+                    <div
+                      class="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-zinc-900 rounded-b-lg z-20">
+                    </div>
+                    <!-- Image -->
+                    <img
+                      src="https://images.unsplash.com/photo-1611558709796-ae5650960b56?q=80&w=800&auto=format&fit=crop"
+                      alt="Viral Content" class="w-full h-full object-cover">
+
+                    <!-- TikTok UI Overlay -->
+                    <div class="absolute right-2 bottom-16 flex flex-col gap-3 items-center z-20">
+                      <div class="flex flex-col items-center gap-0.5">
+                        <div class="w-7 h-7 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center">
+                          <svg class="w-4 h-4 text-white fill-current" viewBox="0 0 24 24">
+                            <path
+                              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                          </svg>
+                        </div>
+                        <span class="text-[9px] font-bold text-white shadow-black drop-shadow-md">2.4k</span>
+                      </div>
+                      <div class="flex flex-col items-center gap-0.5">
+                        <div class="w-7 h-7 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center">
+                          <svg class="w-4 h-4 text-white fill-current" viewBox="0 0 24 24">
+                            <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z" />
+                          </svg>
+                        </div>
+                        <span class="text-[9px] font-bold text-white shadow-black drop-shadow-md">842</span>
+                      </div>
+                      <div class="w-7 h-7 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white fill-current" viewBox="0 0 24 24">
+                          <path
+                            d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92z" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <!-- Bottom Overlay UI -->
+                    <div class="absolute bottom-6 left-4 right-10 text-white z-10">
+                      <div class="flex items-center gap-2 mb-2">
+                        <div class="w-5 h-5 rounded-full bg-white/20 backdrop-blur-md"></div>
+                        <span class="text-[10px] font-bold shadow-black drop-shadow-md">@SarahFinds</span>
+                      </div>
+                      <p class="text-[9px] leading-tight opacity-90 drop-shadow-md">Checking out this month's discovery
+                        box! ✨ #haul #showcase</p>
+                    </div>
+                    <!-- Gradient -->
+                    <div
+                      class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60 pointer-events-none">
+                    </div>
+                  </div>
+                </div>
+                <!-- Right Col (Data) -->
+                <div class="p-8 md:p-12 flex flex-col justify-center bg-transparent">
+                  <span
+                    class="inline-block bg-orange-50 text-orange-700 border border-orange-200 px-3 py-1 text-xs font-mono font-bold mb-6 rounded-sm w-fit">9:16
+                    Vertical • 4K Resolution</span>
+                  <h3 class="text-4xl md:text-5xl font-black tracking-tighter mb-6 text-slate-900">Viral-Ready Content
+                  </h3>
+                  <p class="text-xl text-zinc-500 leading-relaxed">High-retention haul format optimized for TikTok &
+                    Reels. We capture the hook, the product, and the reaction.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: The Reach -->
+            <div class="carousel-slide hidden h-full animate-fade-in" data-filename="distribution_analytics.json">
+              <div class="grid grid-cols-1 md:grid-cols-2 h-full">
+                <!-- Left Col (Visual) -->
+                <div
+                  class="h-full relative border-r-0 md:border-r-2 border-zinc-900/10 overflow-hidden flex items-center justify-center p-8">
+                  <div
+                    class="w-[260px] bg-white border border-zinc-200 rounded-xl shadow-lg p-3 relative transform rotate-[-2deg] scale-90 sm:scale-100">
+                    <!-- Fake Post Header -->
+                    <div class="flex items-center gap-2 mb-2">
+                      <div class="w-6 h-6 rounded-full bg-zinc-100"></div>
+                      <div class="flex-1">
+                        <div class="h-2 w-20 bg-zinc-100 rounded mb-1"></div>
+                        <div class="h-1.5 w-12 bg-zinc-50 rounded"></div>
+                      </div>
+                    </div>
+                    <!-- Image -->
+                    <div class="aspect-[4/5] bg-zinc-100 rounded-lg mb-2 overflow-hidden relative">
+                      <img
+                        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-full object-cover">
+                    </div>
+                    <!-- Action Bar -->
+                    <div class="flex gap-3 mb-2">
+                      <div class="w-4 h-4 rounded-full bg-zinc-100"></div>
+                      <div class="w-4 h-4 rounded-full bg-zinc-100"></div>
+                      <div class="w-4 h-4 rounded-full bg-zinc-100"></div>
+                    </div>
+                    <!-- Link in Bio -->
+                    <div
+                      class="bg-orange-50 text-orange-600 text-[10px] font-bold py-1.5 px-2 rounded-md flex justify-between items-center">
+                      <span>Link in bio</span>
+                      <span>↗</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Right Col (Data) -->
+                <div class="p-8 md:p-12 flex flex-col justify-center bg-transparent">
+                  <span
+                    class="inline-block bg-orange-50 text-orange-700 border border-orange-200 px-3 py-1 text-xs font-mono font-bold mb-6 rounded-sm w-fit">Creator
+                    Posted • Organic Lift</span>
+                  <h3 class="text-4xl md:text-5xl font-black tracking-tighter mb-6 text-slate-900">Guaranteed Reach</h3>
+                  <p class="text-xl text-zinc-500 leading-relaxed">The creator posts directly to their audience. You get
+                    instant eyes on your brand, not just a video file.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: The Asset -->
+            <div class="carousel-slide hidden h-full animate-fade-in" data-filename="ownership_rights.pdf">
+              <div class="grid grid-cols-1 md:grid-cols-2 h-full">
+                <!-- Left Col (Visual) -->
+                <div
+                  class="h-full relative border-r-0 md:border-r-2 border-zinc-900/10 overflow-hidden flex items-center justify-center p-8">
+                  <div class="relative transform scale-90 sm:scale-100">
+                    <!-- File Card -->
+                    <div
+                      class="w-48 h-56 bg-white border border-zinc-200 rounded-xl shadow-lg flex flex-col items-center justify-center p-6 z-10 relative">
+                      <div
+                        class="w-16 h-16 bg-orange-50 text-orange-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                          </path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                      </div>
+                      <div class="text-sm font-bold text-slate-900 mb-1">final_video.mp4</div>
+                      <div class="text-xs text-slate-400 mb-4">24.5 MB</div>
+                      <div
+                        class="w-full bg-green-100 text-green-700 text-[10px] font-bold py-1 rounded text-center uppercase tracking-wide">
+                        Download Ready</div>
+                    </div>
+                    <!-- Ad Badge -->
+                    <div
+                      class="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white border border-zinc-200 shadow-xl p-4 rounded-lg w-40 -rotate-6 z-20">
+                      <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Usage Rights</div>
+                      <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
+                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                          </path>
+                        </svg>
+                        <span>Ad Account</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-slate-900 font-bold text-sm mt-1">
+                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                          </path>
+                        </svg>
+                        <span>Website</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Right Col (Data) -->
+                <div class="p-8 md:p-12 flex flex-col justify-center bg-transparent">
+                  <span
+                    class="inline-block bg-orange-50 text-orange-700 border border-orange-200 px-3 py-1 text-xs font-mono font-bold mb-6 rounded-sm w-fit">No
+                    Watermarks • Ad Rights Included</span>
+                  <h3 class="text-4xl md:text-5xl font-black tracking-tighter mb-6 text-slate-900">100% Ownership</h3>
+                  <p class="text-xl text-zinc-500 leading-relaxed">You own the raw asset forever. Run it as a Spark Ad,
+                    embed it on your site, or use it in emails.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Did You Know Section -->
+        <div class="mt-12 max-w-4xl mx-auto">
+          <div
+            class="bg-orange-50 border-l-4 border-orange-600 p-6 shadow-sm flex flex-col md:flex-row gap-6 items-start rounded-r-sm">
+            <div class="bg-white p-3 border-2 border-orange-100 shadow-sm shrink-0 rounded-sm">
+              <svg class="w-6 h-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-orange-700 font-black font-mono text-sm uppercase tracking-wider mb-2 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                Did You Know?
+              </h4>
+              <p class="text-slate-700 text-lg leading-relaxed font-medium">
+                Haul videos with multiple brands actually perform better than single-product reviews. Viewers watch
+                longer
+                to see "what else is in the box." By grouping up, you get more watch time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-slate-950 border-t-4 border-orange-600">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-orange-600 uppercase tracking-tight">Common Questions</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 lg:gap-16">
+          <!-- Q1 -->
+          <div>
+            <h3 class="text-xl font-bold text-zinc-50 mb-3">Do I choose the creator?</h3>
+            <p class="text-zinc-400 leading-relaxed">We curate the pool based on your brand vibe. We vet for engagement
+              and quality so you don't have to guess.</p>
+          </div>
+
+          <!-- Q2 -->
+          <div>
+            <h3 class="text-xl font-bold text-zinc-50 mb-3">Do I own the video?</h3>
+            <p class="text-zinc-400 leading-relaxed">Yes. You get the raw file with full usage rights for ads, website,
+              and social.</p>
+          </div>
+
+          <!-- Q3 -->
+          <div>
+            <h3 class="text-xl font-bold text-zinc-50 mb-3">What if I have a large product?</h3>
+            <p class="text-zinc-400 leading-relaxed">Our standard box fits items up to shoe-box size. For
+              furniture/large items, <a href="mailto:support@slice99.com" class="text-orange-600 hover:underline">please
+                email us first</a>.</p>
+          </div>
+
+          <!-- Q4 -->
+          <div>
+            <h3 class="text-xl font-bold text-zinc-50 mb-3">When does it ship?</h3>
+            <p class="text-zinc-400 leading-relaxed">We dispatch the box to the creator every Friday. You receive your
+              video ~14 days after dispatch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 text-zinc-500 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <p class="font-mono text-sm">Slice Inc. &copy; 2025.</p>
+      </div>
+      <div class="flex gap-6 text-sm font-semibold">
+        <button onclick="document.getElementById('terms-modal').classList.remove('hidden')"
+          class="hover:text-orange-500 transition-colors">Terms</button>
+        <button onclick="document.getElementById('privacy-modal').classList.remove('hidden')"
+          class="hover:text-orange-500 transition-colors">Privacy</button>
+        <a href="creators.html" class="hover:text-orange-500 transition-colors">Creator Apply</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Terms Modal -->
+  <div id="terms-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div class="fixed inset-0 bg-black/90 backdrop-blur-sm transition-opacity"
+      onclick="document.getElementById('terms-modal').classList.add('hidden')"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+      <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+        <div
+          class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl border-2 border-zinc-900">
+          <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div class="flex justify-between items-center mb-6 border-b-2 border-zinc-100 pb-4">
+              <h3 class="text-xl font-bold text-slate-900 uppercase tracking-tight">Terms of Service</h3>
+              <button onclick="document.getElementById('terms-modal').classList.add('hidden')"
+                class="text-zinc-400 hover:text-slate-900">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div class="prose prose-sm prose-zinc max-w-none text-slate-600 space-y-4">
+              <div>
+                <h4 class="font-bold text-slate-900">1. Introduction</h4>
+                <p>By purchasing a slot with Slice ("we", "us"), you agree to the following terms. We provide a service
+                  that pools resources from multiple brands to commission user-generated content (UGC) from creators.
+                </p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">2. Services & Deliverables</h4>
+                <p>We guarantee that the selected creator will produce and post one (1) video to their social media feed
+                  featuring your product alongside other brands. You will receive the raw video file for your own
+                  advertising use. While we guarantee the post will be made, we do not guarantee specific engagement
+                  numbers (views, likes, comments) or sales conversions.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">3. Shipping & Products</h4>
+                <p>You are responsible for shipping your product to our consolidation hub at your own
+                  expense. Products must be received by the deadline provided in your confirmation email. Late shipments
+                  may result in forfeiting your slot without refund. Products sent to creators are considered
+                  non-returnable gifts. We do not facilitate product returns.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">4. Payments & Refunds</h4>
+                <p>All payments are final. Because we commit funds to creators immediately upon filling a pool, we
+                  cannot offer refunds once a slot is purchased. If a scheduled creator becomes unavailable, we reserve
+                  the right to substitute with a creator of equal or greater engagement metrics.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">5. Usage Rights</h4>
+                <p>You are granted a non-exclusive, perpetual, worldwide license to use the produced video content for
+                  digital advertising and social media purposes. The creator retains moral rights and original copyright
+                  of the raw footage.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">6. Liability</h4>
+                <p>Slice is not liable for any lost, damaged, or stolen inventory during shipping. Our maximum liability
+                  for any claim related to our services is limited to the amount paid for the slot ($99 CAD).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Modal -->
+  <div id="privacy-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div class="fixed inset-0 bg-black/90 backdrop-blur-sm transition-opacity"
+      onclick="document.getElementById('privacy-modal').classList.add('hidden')"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+      <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+        <div
+          class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl border-2 border-zinc-900">
+          <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div class="flex justify-between items-center mb-6 border-b-2 border-zinc-100 pb-4">
+              <h3 class="text-xl font-bold text-slate-900 uppercase tracking-tight">Privacy Policy</h3>
+              <button onclick="document.getElementById('privacy-modal').classList.add('hidden')"
+                class="text-zinc-400 hover:text-slate-900">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div class="prose prose-sm prose-zinc max-w-none text-slate-600 space-y-4">
+              <div>
+                <h4 class="font-bold text-slate-900">1. Information Collection</h4>
+                <p>We collect information you provide directly to us, such as your name, email address, and shipping
+                  details when you purchase a slot.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">2. Use of Information</h4>
+                <p>We use this information to facilitate the logistics of the "drops", communicate with you about your
+                  order, and coordinate with creators.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">3. Sharing of Information</h4>
+                <p>We share necessary details (like product information) with the creators involved in your specific
+                  drop. We do not sell your personal data to third parties.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">4. Data Security</h4>
+                <p>We implement reasonable security measures to protect your information.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900">5. Contact Us</h4>
+                <p>If you have questions, please contact us at <a href="mailto:support@slice99.com"
+                    class="text-orange-600 hover:underline">support@slice99.com</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // --- Friday Scarcity Script ---
+    function getNextFriday() {
+      const today = new Date();
+      const dayOfWeek = today.getDay(); // 0 (Sun) to 6 (Sat)
+      const daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+
+      let nextFriday = new Date(today);
+      if (daysUntilFriday === 0) {
+        nextFriday.setDate(today.getDate() + 7);
+      } else {
+        nextFriday.setDate(today.getDate() + daysUntilFriday);
+      }
+
+      // Updated to only show Month and Day
+      const options = { month: 'short', day: 'numeric' };
+      return nextFriday.toLocaleDateString('en-US', options);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const dateElement = document.getElementById('dispatch-date');
+      if (dateElement) {
+        dateElement.textContent = getNextFriday();
+      }
+    });
+
+
+    // --- Carousel Logic ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const fileNameDisplay = document.getElementById('file-name');
+      const prevBtn = document.getElementById('prev-slide');
+      const nextBtn = document.getElementById('next-slide');
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+
+      function updateSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => {
+          slide.classList.add('hidden');
+          slide.classList.remove('block');
+        });
+
+        // Show current slide
+        const activeSlide = slides[index];
+        activeSlide.classList.remove('hidden');
+        activeSlide.classList.add('block');
+
+        // Update Filename
+        if (fileNameDisplay) {
+          const newFileName = activeSlide.getAttribute('data-filename');
+          fileNameDisplay.textContent = newFileName;
+        }
+      }
+
+      if (prevBtn && nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          currentSlide = (currentSlide + 1) % totalSlides;
+          updateSlide(currentSlide);
+        });
+
+        prevBtn.addEventListener('click', () => {
+          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+          updateSlide(currentSlide);
+        });
+      }
+
+      // Initialize
+      updateSlide(0);
+    });
+  </script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@ interface NavbarProps {
 
 // Placeholder for the actual Dark Logo file provided by the user
 // Replace this Data URI with your actual file path, e.g., "/logo-dark.png"
-const LOGO_DARK_URL = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 40' fill='none'%3E%3Ctext x='0' y='55%25' dominant-baseline='middle' font-family='Libre Baskerville, serif' font-weight='700' font-size='28' letter-spacing='-1.5' fill='%230F172A'%3Eco-create%3C/text%3E%3C/svg%3E`;
+const LOGO_DARK_URL = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 40' fill='none'%3E%3Ctext x='0' y='55%25' dominant-baseline='middle' font-family='Libre Baskerville, serif' font-weight='700' font-size='28' letter-spacing='-1.5' fill='%230F172A'%3Eslice%3C/text%3E%3C/svg%3E`;
 
 export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -60,12 +60,12 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch }) => {
           href="#"
           onClick={scrollToTop}
           className={`flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm ${isCreator ? 'focus-visible:ring-creator' : 'focus-visible:ring-primary'}`}
-          aria-label="Co-Create Home"
+          aria-label="Slice Home"
         >
           {/* Logo Image */}
           <img
             src={LOGO_DARK_URL}
-            alt="Co-Create"
+            alt="Slice"
             className="h-8 w-auto object-contain"
           />
 
