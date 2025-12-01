@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'index.html'),
-          creators: path.resolve(__dirname, 'creators.html'),
+          creators: path.resolve(__dirname, 'creators/index.html'),
         },
       },
     }
