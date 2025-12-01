@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; connect-src 'self' https://formspree.io;">
     <title>Slice99 | Earn more with UGC</title>
     <meta name="description"
         content="Join the roster for monthly creator gigs. We pool brand budgets to pay you what you're worth.">
@@ -24,40 +26,8 @@
         rel="stylesheet">
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        zinc: {
-                            50: '#fafafa',
-                            100: '#f4f4f5',
-                            400: '#a1a1aa',
-                            500: '#71717a',
-                            800: '#27272a',
-                            900: '#18181b',
-                        },
-                        slate: {
-                            900: '#0f172a',
-                            950: '#020617', // Deep Black
-                        },
-                        orange: {
-                            500: '#f97316',
-                            600: '#ea580c',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    borderRadius: {
-                        'sm': '0.125rem', // Sharp edges
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/index.css">
     <style>
         /* Blackbox Studio Utilities */
         .bento-border {
