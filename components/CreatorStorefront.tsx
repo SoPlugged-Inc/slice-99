@@ -167,7 +167,9 @@ export const CreatorStorefront: React.FC<CreatorStorefrontProps> = ({ data }) =>
     };
 
     const handleCopyLink = () => {
-        navigator.clipboard.writeText(window.location.href).then(() => {
+        // Construct clean URL: slice99.com/[name]
+        const cleanUrl = `https://slice99.com/${profileData.name.toLowerCase()}`;
+        navigator.clipboard.writeText(cleanUrl).then(() => {
             setCopyFeedback(true);
             setTimeout(() => setCopyFeedback(false), 2000);
         });

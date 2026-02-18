@@ -1,0 +1,46 @@
+[
+    {
+        "id": "ada",
+        "name": "Ada",
+        "handle": "@adathexplora",
+        "avatar": "/ada_profile.png",
+        "bio": "Shop the products featured in my latest video. I’ve partnered with Slice99 to make it easy for you to find and support these brands directly.",
+        "socials": {
+            "tiktok": "https://tiktok.com/@adathexplora",
+            "instagram": "https://www.instagram.com/adathexplora"
+        },
+        "theme": "light",
+        "products": [
+            {
+                "id": "prod_001",
+                "brandName": "Eyira",
+                "productName": "The Jollof Base (Standard)",
+                "price": "$26.00",
+                "productUrl": "https://www.eyira.shop/product/standard",
+                "status": "active",
+                "campaignId": "camp_004",
+                "description": "The secret to perfect smoked Jollof rice."
+            },
+            {
+                "id": "prod_002",
+                "brandName": "Oil & Well",
+                "productName": "Body Oil Discovery Set",
+                "price": "$50.00",
+                "productUrl": "https://oilandwell.com/products/body-oil-discovery-set",
+                "status": "active",
+                "campaignId": "camp_004",
+                "description": "Luxurious body oils for glowing skin."
+            },
+            {
+                "id": "prod_003",
+                "brandName": "Mills Kitchen",
+                "productName": "Authentic Naija Suya Spice",
+                "price": "$8.99",
+                "productUrl": "https://millskitchen.ca/products/authentic-naija-suya-spice",
+                "status": "active",
+                "campaignId": "camp_004",
+                "description": "Authentic spicy kick."
+            }
+        ]
+    }
+]
