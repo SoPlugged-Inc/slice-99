@@ -278,52 +278,54 @@ export const CreatorStorefront: React.FC<CreatorStorefrontProps> = ({ data }) =>
                 {/* 3. The "Live Box" (Active Campaign) */}
                 <section className="mb-10">
 
-                    <div className={`grid gap-4 ${activeProducts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
+                    <div className={`grid gap-x-6 gap-y-10 ${activeProducts.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
                         {activeProducts.map((product, index) => (
                             <article
                                 key={product.id}
-                                className={`group relative overflow-hidden rounded-2xl ${cardBg} backdrop-blur-sm border transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98] duration-300 ${activeProducts.length === 3 && index === 2 ? 'col-span-2 justify-self-center w-[calc(50%-0.5rem)]' : ''
-                                    }`}
+                                className={`group flex flex-col ${activeProducts.length === 3 && index === 2 ? 'col-span-2 justify-self-center w-[calc(50%-0.5rem)]' : ''}`}
                             >
-                                {/* Image */}
-                                <div className="aspect-[4/5] bg-zinc-100 overflow-hidden relative">
+                                {/* Image Container - Clean, no overlays */}
+                                <div className="aspect-square w-full bg-zinc-100 rounded-2xl overflow-hidden border border-zinc-200/50 relative">
                                     <ProductImage
                                         src={product.image}
                                         productUrl={product.productUrl}
                                         alt={product.productName}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         loadEager={true}
                                     />
-
-                                    {/* Gradient Overlay for text readability */}
-                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
-
-                                    {/* Price Tag - High Blur Glassmorphism */}
-                                    {product.price && (
-                                        <div className="absolute top-3 right-3 bg-white/30 backdrop-blur-xl border border-white/20 text-zinc-900 text-xs font-bold px-2 py-1 rounded-sm shadow-sm pointer-events-none">
-                                            {product.price}
-                                        </div>
-                                    )}
                                 </div>
 
-                                {/* Content */}
-                                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                    <div className="mb-3">
-                                        <p className="text-[10px] font-bold uppercase tracking-wider opacity-80 mb-1">{product.brandName}</p>
-                                        <h3 className="text-base font-bold leading-tight shadow-black drop-shadow-md">{product.productName}</h3>
+                                {/* Info Block - 16px padding from image */}
+                                <div className="mt-4 flex flex-col items-start w-full">
+                                    {/* Brand Name */}
+                                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 select-none mb-1 text-left">
+                                        {product.brandName}
+                                    </h4>
+
+                                    {/* Title and Price Group */}
+                                    <div className="flex flex-col w-full mb-4">
+                                        <h3 className={`text-base font-bold leading-tight text-left ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+                                            {product.productName}
+                                        </h3>
+
+                                        {product.price && (
+                                            <span className={`text-sm font-bold mt-1 text-left ${isDarkMode ? 'text-zinc-300' : 'text-zinc-900'}`}>
+                                                {product.price}
+                                            </span>
+                                        )}
                                     </div>
-
-                                    {/* Action Button */}
-                                    <a
-                                        href={product.productUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center w-full bg-orange-600 hover:bg-orange-700 hover:scale-105 active:scale-95 active:opacity-90 text-white font-bold text-sm py-3 px-4 rounded-xl transition-all duration-200 shadow-lg shadow-orange-900/20"
-                                        style={{ minHeight: '48px' }} // Touch target size
-                                    >
-                                        Shop Now
-                                    </a>
                                 </div>
+
+                                {/* Action Button - Full Width at Bottom */}
+                                <a
+                                    href={product.productUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="mt-auto flex items-center justify-center w-full bg-orange-600 hover:bg-orange-700 active:scale-[0.98] text-white font-bold text-sm py-3 px-4 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md"
+                                    style={{ minHeight: '48px' }}
+                                >
+                                    Shop Now
+                                </a>
                             </article>
                         ))}
                     </div>
