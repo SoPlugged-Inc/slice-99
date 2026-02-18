@@ -21,8 +21,9 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'index.html'),
-          creators: path.resolve(__dirname, 'creators/index.html'), // This now serves as the template for /slug/index.html
+          creators: path.resolve(__dirname, 'creators/index.html'),
           thank_you: path.resolve(__dirname, 'creators/thank-you.html'),
+          ada: path.resolve(__dirname, 'ada/index.html'),
         },
       },
     }
