@@ -386,7 +386,9 @@ export const CreatorStorefront: React.FC<CreatorStorefrontProps> = ({ data }) =>
             {/* Footer - Updated */}
             <footer className="py-8 mt-6 flex flex-col items-center justify-center border-t border-zinc-100 bg-white/50 backdrop-blur-sm">
                 <span className="text-[10px] font-mono tracking-widest uppercase text-gray-400">
-                    Powered by <a href="https://slice99.com" className="hover:text-zinc-600 hover:underline hover:decoration-zinc-400 hover:underline-offset-2 transition-colors">Slice99</a>
+                    <a href="https://slice99.com/creators/" className="text-[10px] font-mono tracking-widest uppercase text-gray-400 hover:text-zinc-600 hover:underline hover:decoration-zinc-400 hover:underline-offset-2 transition-colors">
+                        Become a Slice Creator
+                    </a>
                 </span>
             </footer>
 
