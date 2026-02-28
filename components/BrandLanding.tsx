@@ -1,7 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Package, Smartphone, CheckCircle2, Lightbulb, Play, Loader2, ChevronLeft, ChevronRight, Download, FileVideo, Eye, Heart, Share2, MousePointer2, Megaphone, Link } from 'lucide-react';
+import { Package, Smartphone, CheckCircle2, Lightbulb, Play, Loader2, ChevronLeft, ChevronRight, Download, FileVideo, Eye, Heart, Share2, MousePointer2, Megaphone, Link, ChevronDown } from 'lucide-react';
 import { LiveDrop } from './LiveDrop';
 import { TextReveal, ColumnBackground, SpotlightCard, Section, SectionHeading, LogoMarquee } from './Shared';
+
+const FaqItem: React.FC<{ faq: { q: string, a: string }, idx: number }> = ({ faq, idx }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+        <div className="bg-white rounded border border-neutral-lighter shadow-sm group hover:border-primary/50 transition-colors overflow-hidden">
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full text-left p-6 flex items-center justify-between focus:outline-none"
+            >
+                <h4 className="font-bold text-neutral-darkest text-sm uppercase tracking-wide group-hover:text-primary transition-colors flex items-center gap-2 m-0">
+                    <span className="text-neutral-lighter group-hover:text-primary/50">0{idx + 1}.</span>
+                    {faq.q}
+                </h4>
+                <ChevronDown size={18} className={`text-neutral-light transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+            <div className={`px-6 pb-6 pt-0 overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 pb-0'}`}>
+                <p className="text-neutral-dark text-sm leading-relaxed pl-6 border-l border-neutral-lighter group-hover:border-primary/20 transition-colors">{faq.a}</p>
+            </div>
+        </div>
+    );
+};
 
 export const BrandLanding: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -462,18 +483,12 @@ export const BrandLanding: React.FC = () => {
                 <div className="max-w-3xl mx-auto space-y-4">
                     {[
                         { q: "How is this only $99?", a: "We use a \"Pooling\" model. Instead of one brand paying $1,000+ for a high-tier creator, we pool 3-5 non-competing products into a single curated \"Discovery Box.\" This allows you to split the cost of production while still receiving a premium, professional video asset." },
-                        { q: "Who is the creator?", a: "Once a batch is filled, we match the pool with a vetted creator from our network who aligns with your product’s category (e.g., Wellness, Tech, or Lifestyle). All creators are part of our Professional Membership—meaning they are vetted for high engagement, authentic followers, and a proven track record of high-quality content." },
+                        { q: "Who is the creator?", a: "Once a batch is filled, we match the pool with a vetted creator from our network who aligns with your product’s category (e.g., Wellness, Tech, or Lifestyle). All creators are vetted for high engagement, authentic followers, and a proven track record of high-quality content." },
                         { q: "Do I have any creative control?", a: "Yes. While we handle the heavy lifting to keep your costs low, you will provide a \"Product Brief\" during checkout. This allows you to list up to three mandatory \"Must-Haves\" (e.g., \"Show the texture,\" or \"Mention it’s eco-friendly\") that the creator is required to include in their video." },
                         { q: "Do I get the video file?", a: "Absolutely. You receive the high-resolution raw video file with full usage rights. This means you can repost it on your own organic channels or use it as a \"TikTok-first\" creative in your paid ad campaigns." },
                         { q: "What if my product doesn't fit?", a: "We curate themed 'Discovery Boxes' so products fit naturally alongside each other. If your product is exceptionally large (e.g., furniture) or requires specific legal disclosures, please contact us at Email Support before booking your slot." },
                     ].map((faq, idx) => (
-                        <div key={idx} className="p-6 bg-white rounded border border-neutral-lighter hover:border-primary/50 transition-colors shadow-sm group">
-                            <h4 className="font-bold text-neutral-darkest mb-3 text-sm uppercase tracking-wide group-hover:text-primary transition-colors flex items-center gap-2">
-                                <span className="text-neutral-lighter group-hover:text-primary/50">0{idx + 1}.</span>
-                                {faq.q}
-                            </h4>
-                            <p className="text-neutral-dark text-sm leading-relaxed pl-6 border-l border-neutral-lighter group-hover:border-primary/20 transition-colors">{faq.a}</p>
-                        </div>
+                        <FaqItem key={idx} faq={faq} idx={idx} />
                     ))}
                 </div>
                 <div className="mt-8 text-center bg-neutral-lightest/50 p-4 rounded border border-neutral-lighter inline-block w-full">
