@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Package, Smartphone, CheckCircle2, Lightbulb, Play, Loader2, ChevronLeft, ChevronRight, Download, FileVideo, Eye, Heart, Share2, MousePointer2, Megaphone, Link } from 'lucide-react';
 import { LiveDrop } from './LiveDrop';
@@ -35,9 +34,9 @@ export const BrandLanding: React.FC = () => {
         {
             id: 0,
             label: "Final Video",
-            title: "Viral-Ready Content",
+            title: "TikTok-Ready Content",
             badge: "9:16 Vertical",
-            copy: "A high-quality, vertical video formatted for TikTok and Reels. We shoot, edit, and caption everything so it looks native to the platform.",
+            copy: "The creator shoots a high-quality, vertical video featuring all products in the haul.",
             renderVisual: () => (
                 <div className="relative w-48 sm:w-56 h-[400px] bg-neutral-darkest rounded-[2rem] shadow-2xl border-4 border-neutral-darkest overflow-hidden shrink-0 transform hover:scale-[1.02] transition-transform duration-500 mx-auto">
                     {/* Status Bar */}
@@ -51,11 +50,16 @@ export const BrandLanding: React.FC = () => {
 
                     {/* Video Area */}
                     <div className="absolute inset-0 bg-neutral-800 flex items-center justify-center group cursor-pointer">
-                        <img
-                            src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=800&auto=format&fit=crop"
-                            alt="Viral Content"
+                        <video
                             className="absolute inset-0 w-full h-full object-cover"
-                        />
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            poster="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=800&auto=format&fit=crop"
+                        >
+                            <source src="https://videos.pexels.com/video-files/4450209/4450209-hd_720_1280_25fps.mp4" type="video/mp4" />
+                        </video>
 
                         {/* Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 z-10"></div>
@@ -86,7 +90,7 @@ export const BrandLanding: React.FC = () => {
             label: "Distribution",
             title: "Guaranteed Eyes on Your Brand",
             badge: "Creator Posted",
-            copy: "We don’t just send you a file. The creator posts the video to their own feed, putting your brand in front of thousands of real Canadian shoppers.",
+            copy: "The creator posts the video to their feed, putting your brand in front of thousands of potential shoppers.",
             renderVisual: () => (
                 <div className="relative w-full max-w-xs mx-auto">
                     {/* Social Post Mockup */}
@@ -137,7 +141,7 @@ export const BrandLanding: React.FC = () => {
             label: "Traffic",
             title: "Shoppable Link-in-Bio",
             badge: "Click Tracking Included",
-            copy: 'We build a dedicated "Shop the Haul" landing page for every drop. Viewers can click straight to your product, and we provide you with data on exactly how many clicks you got.',
+            copy: 'We build a dedicated "Shop the Haul" landing page for every video. Viewers can click straight to your website to shop.',
             renderVisual: () => (
                 <div className="relative w-48 sm:w-56 h-[400px] bg-neutral-darkest rounded-[2rem] shadow-2xl border-4 border-neutral-darkest overflow-hidden shrink-0 mx-auto">
                     {/* Status Bar */}
@@ -184,7 +188,7 @@ export const BrandLanding: React.FC = () => {
             label: "Ownership",
             title: "Ad-Ready Assets",
             badge: "100% Usage Rights",
-            copy: "You own the raw video file forever. Run it as a Spark Ad, embed it on your website, or use it in email campaigns without extra licensing fees.",
+            copy: "You own the raw video file forever. Run it as a Meta Ad, embed it on your website, or use it in email campaigns without extra licensing fees.",
             renderVisual: () => (
                 <div className="relative w-full max-w-xs mx-auto flex flex-col gap-4">
                     {/* File Download Card */}
@@ -236,17 +240,17 @@ export const BrandLanding: React.FC = () => {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
                         </span>
-                        Now Boarding: {currentMonthDrop}
+                        Open for Booking: {currentMonthDrop}
                     </div>
 
                     <h1 className="text-4xl sm:text-6xl font-extrabold text-neutral-darkest tracking-tight mb-5 leading-[1.05] sm:leading-[1.1]">
-                        <TextReveal text="The Fractional Creator Network." delay={0.1} className="block mb-1" />
-                        <TextReveal text="Premium UGC. $99 Flat." delay={0.4} />
+                        <TextReveal text="Get your product on TikTok." delay={0.1} className="block mb-1" />
+                        <TextReveal text="Guaranteed. For $99." delay={0.4} />
                     </h1>
 
                     <div className={`transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <p className="text-lg sm:text-xl text-neutral-dark mb-8 max-w-2xl mx-auto leading-relaxed">
-                            Stop overpaying for full sponsorships. We bundle non-competing brands into shared creator campaigns, delivering high-converting assets and guaranteed reach for a fraction of the cost.
+                            We pool non-competing brands to split the cost of a UGC-style Haul.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -292,7 +296,7 @@ export const BrandLanding: React.FC = () => {
             <Section className="bg-neutral-lightest border-y border-neutral-lighter" id="how-it-works">
                 <SectionHeading
                     title="How It Works"
-                    subtitle="The speed of a tech platform. The quality of a creative agency."
+                    subtitle="The easiest way to get authentic UGC for your brand without the headache."
                 />
                 <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12">
                     {[
@@ -364,14 +368,14 @@ export const BrandLanding: React.FC = () => {
                             <div className="w-full h-full flex flex-col md:flex-row items-center justify-center p-6 sm:p-12 gap-8 md:gap-16">
 
                                 {/* Visual Side */}
-                                <div className="w-full md:w-1/2 flex items-center justify-center relative z-10 overflow-hidden">
+                                <div className="w-full md:w-1/2 flex items-center justify-center">
                                     <div key={currentSlide} className="animate-[slideUpFade_0.5s_ease-out]">
                                         {slides[currentSlide].renderVisual()}
                                     </div>
                                 </div>
 
                                 {/* Text Context Side */}
-                                <div className="w-full md:w-1/2 max-w-sm text-center md:text-left overflow-hidden">
+                                <div className="w-full md:w-1/2 max-w-sm text-center md:text-left">
                                     <div key={currentSlide} className="animate-[slideUpFade_0.5s_ease-out_0.1s]">
                                         <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold mb-4">
                                             {slides[currentSlide].badge}
@@ -425,14 +429,14 @@ export const BrandLanding: React.FC = () => {
             {/* Value Prop / Comparison */}
             <Section>
                 <div className="max-w-4xl mx-auto bg-white rounded-lg border border-neutral-lighter overflow-hidden shadow-soft hover:shadow-glow transition-shadow duration-500">
-                    <div className="grid grid-cols-3 bg-neutral-darkest p-4 text-xs font-bold tracking-widest text-white uppercase border-b border-neutral-darker">
+                    <div className="grid grid-cols-3 bg-neutral-darkest p-4 text-[10px] sm:text-xs font-bold tracking-widest text-white uppercase border-b border-neutral-darker">
                         <div className="text-neutral-400">Comparison</div>
                         <div className="text-center">Traditional Agency</div>
                         <div className="text-primary text-center">Slice</div>
                     </div>
 
                     {[
-                        { label: "Cost", bad: "Full Sponsorship ($2k+)", good: "Fractional Slot ($99)" },
+                        { label: "Cost", bad: "$2,000 - $5,000+", good: "$99 Flat Rate" },
                         { label: "Effort", bad: "Cold DMing & Negotiations", good: "Instant Booking" },
                         { label: "Logistics", bad: "Individual Shipping", good: "Consolidated Hub" },
                         { label: "Outcome", bad: "No Guarantee", good: "Guaranteed Post" },
@@ -472,7 +476,7 @@ export const BrandLanding: React.FC = () => {
                 </div>
                 <div className="mt-8 text-center bg-neutral-lightest/50 p-4 rounded border border-neutral-lighter inline-block w-full">
                     <p className="text-neutral-dark text-sm">
-                        Can't find what you're looking for? <a href="mailto:hello@joincocreate.ca" className="text-primary hover:underline font-bold ml-2">Email Support</a>
+                        Can't find what you're looking for? <a href="mailto:support@slice99.com" className="text-primary hover:underline font-bold ml-2">Email Support</a>
                     </p>
                 </div>
             </Section>

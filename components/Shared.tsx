@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 
 // --- Animation Components ---
@@ -12,10 +11,10 @@ export const TypewriterEffect: React.FC<{ text: string; className?: string; paus
   useEffect(() => {
     const handleTyping = () => {
       const fullText = text;
-
-      setDisplayText(current =>
-        isDeleting
-          ? fullText.substring(0, current.length - 1)
+      
+      setDisplayText(current => 
+        isDeleting 
+          ? fullText.substring(0, current.length - 1) 
           : fullText.substring(0, current.length + 1)
       );
 
@@ -47,8 +46,8 @@ export const TextReveal: React.FC<{ text: string; delay?: number; className?: st
     <span className={`inline-flex flex-wrap justify-center gap-x-2.5 gap-y-1 ${className}`}>
       {words.map((word, i) => (
         <span key={i} className="text-reveal-wrapper">
-          <span
-            className="text-reveal-inner"
+          <span 
+            className="text-reveal-inner" 
             style={{ animationDelay: `${delay + (i * 0.05)}s` }}
           >
             {word}
@@ -63,8 +62,8 @@ export const ColumnBackground = () => {
   return (
     <div className="absolute inset-0 grid grid-cols-6 sm:grid-cols-12 gap-4 pointer-events-none select-none -z-10 px-4 opacity-30 sm:opacity-20">
       {Array.from({ length: 12 }).map((_, i) => (
-        <div
-          key={i}
+        <div 
+          key={i} 
           className="h-full bg-neutral-lighter/60 animate-clip-down"
           style={{ animationDelay: `${i * 0.05}s` }}
         />
@@ -74,28 +73,28 @@ export const ColumnBackground = () => {
 };
 
 export const SpotlightCard: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = "" }) => {
-  const divRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current) return;
-    const rect = divRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    divRef.current.style.setProperty('--mouse-x', `${x}px`);
-    divRef.current.style.setProperty('--mouse-y', `${y}px`);
-  };
-
-  return (
-    <div
-      ref={divRef}
-      onMouseMove={handleMouseMove}
-      className={`spotlight-card bg-white rounded-lg border border-neutral-lighter transition-colors ${className}`}
-    >
-      <div className="relative z-10 h-full">
-        {children}
+    const divRef = useRef<HTMLDivElement>(null);
+  
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!divRef.current) return;
+      const rect = divRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      divRef.current.style.setProperty('--mouse-x', `${x}px`);
+      divRef.current.style.setProperty('--mouse-y', `${y}px`);
+    };
+  
+    return (
+      <div 
+        ref={divRef}
+        onMouseMove={handleMouseMove}
+        className={`spotlight-card bg-white rounded-lg border border-neutral-lighter transition-colors ${className}`}
+      >
+        <div className="relative z-10 h-full">
+            {children}
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 // --- Layout Components ---
@@ -116,15 +115,15 @@ export const SectionHeading: React.FC<{ title: string; subtitle?: string }> = ({
 );
 
 export const LogoMarquee = () => (
-  <div className="w-full overflow-hidden mask-linear-fade py-6 opacity-80 grayscale mix-blend-multiply">
-    <div className="flex gap-12 w-max animate-marquee hover:paused items-center">
-      {[...Array(2)].map((_, i) => (
-        <div key={i} className="flex gap-12 shrink-0">
-          {['Fashion', 'Beauty', 'Home Goods', 'Wellness', 'Tech', 'Food & Bev', 'Pet Care', 'Lifestyle'].map((name, idx) => (
-            <span key={idx} className="text-lg sm:text-xl font-bold text-neutral tracking-tight hover:text-primary transition-colors cursor-default">{name}</span>
-          ))}
+    <div className="w-full overflow-hidden mask-linear-fade py-6 opacity-60 grayscale mix-blend-multiply">
+        <div className="flex gap-12 w-max animate-marquee hover:paused items-center">
+             {[...Array(2)].map((_, i) => (
+                 <div key={i} className="flex gap-12 shrink-0">
+                     {['Fashion', 'Beauty', 'Home Goods', 'Wellness', 'Tech', 'Food & Bev', 'Pet Care', 'Lifestyle'].map((name, idx) => (
+                         <span key={idx} className="text-lg sm:text-xl font-bold text-neutral tracking-tight hover:text-primary transition-colors cursor-default">{name}</span>
+                     ))}
+                 </div>
+             ))}
         </div>
-      ))}
     </div>
-  </div>
 );

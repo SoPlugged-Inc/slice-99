@@ -4,13 +4,12 @@ import { Loader2, ArrowRight } from 'lucide-react';
 interface NavbarProps {
   page: 'brand' | 'creator';
   onSwitch: (page: 'brand' | 'creator') => void;
+  onApplyClick?: () => void;
 }
 
-// Placeholder for the actual Dark Logo file provided by the user
-// Replace this Data URI with your actual file path, e.g., "/logo-dark.png"
-const LOGO_DARK_URL = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 40' fill='none'%3E%3Ctext x='0' y='55%25' dominant-baseline='middle' font-family='Libre Baskerville, serif' font-weight='700' font-size='28' letter-spacing='-1.5' fill='%230F172A'%3Eslice%3C/text%3E%3C/svg%3E`;
 
-export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch }) => {
+
+export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) => {
   const [isLoading, setIsLoading] = useState(false);
   const isCreator = page === 'creator';
 
@@ -36,8 +35,13 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch }) => {
 
   const handleActionClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (isCreator && onApplyClick) {
+      onApplyClick();
+      return;
+    }
+
     setIsLoading(true);
-    const url = isCreator ? 'https://typeform.com' : 'https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00'; // Placeholder URLs
+    const url = 'https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00'; // Brand specific URL
     setTimeout(() => {
       setIsLoading(false);
       window.open(url, '_blank');
@@ -62,12 +66,10 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch }) => {
           className={`flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm ${isCreator ? 'focus-visible:ring-creator' : 'focus-visible:ring-primary'}`}
           aria-label="Slice Home"
         >
-          {/* Logo Image */}
-          <img
-            src={LOGO_DARK_URL}
-            alt="Slice"
-            className="h-8 w-auto object-contain"
-          />
+          {/* Logo Text */}
+          <div className="text-2xl font-black tracking-tighter text-neutral-darkest uppercase select-none">
+            SL<span className={isCreator ? 'text-creator' : 'text-primary'}>/</span>CE
+          </div>
 
           {isCreator && <span className="text-[10px] font-bold uppercase tracking-widest bg-neutral-lightest text-neutral-dark px-2 py-0.5 rounded ml-1 border border-neutral-lighter">Creator</span>}
         </a>
@@ -105,40 +107,26 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch }) => {
           {!isCreator ? (
             <button
               onClick={() => onSwitch('creator')}
-              className={`flex items-center gap-1 text-sm font-medium text-neutral-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-2 py-1 ${activeLinkClass}`}
+              className={`hidden sm:flex items-center gap-1 text-sm font-medium text-neutral-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-2 py-1 ${activeLinkClass}`}
             >
-              <span className="sm:hidden">Creators</span>
-              <span className="hidden sm:inline">Are you a creator?</span>
-              <ArrowRight size={14} />
+              Are you a creator? <ArrowRight size={14} />
             </button>
           ) : (
             <button
               onClick={() => onSwitch('brand')}
-              className={`flex items-center gap-1 text-sm font-medium text-neutral-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-2 py-1 ${activeLinkClass}`}
+              className={`hidden sm:flex items-center gap-1 text-sm font-medium text-neutral-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-2 py-1 ${activeLinkClass}`}
             >
-              <ArrowRight size={14} className="rotate-180" />
-              <span className="sm:hidden">Brands</span>
-              <span className="hidden sm:inline">Back to Brands</span>
+              <ArrowRight size={14} className="rotate-180" /> Back to Brands
             </button>
           )}
 
-          {!isCreator ? (
-            <button
-              onClick={handleActionClick}
-              disabled={isLoading}
-              className={`text-white px-5 py-2 text-sm font-bold tracking-tight rounded-md shadow-lg transition-all active:scale-95 inline-block text-center decoration-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-darkest focus-visible:ring-offset-2 disabled:opacity-80 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center min-w-[140px] ${buttonClass}`}
-            >
-              {isLoading ? <Loader2 size={16} className="animate-spin" /> : "Book Slot"}
-            </button>
-          ) : (
-            <button
-              onClick={handleActionClick}
-              disabled={isLoading}
-              className={`text-white px-5 py-2 text-sm font-bold tracking-tight rounded-md shadow-lg transition-all active:scale-95 inline-block text-center decoration-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-darkest focus-visible:ring-offset-2 disabled:opacity-80 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center min-w-[140px] ${buttonClass}`}
-            >
-              {isLoading ? <Loader2 size={16} className="animate-spin" /> : "Apply to Roster"}
-            </button>
-          )}
+          <button
+            onClick={handleActionClick}
+            disabled={isLoading}
+            className={`text-white px-5 py-2 text-sm font-bold tracking-tight rounded-md shadow-lg transition-all active:scale-95 inline-block text-center decoration-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-darkest focus-visible:ring-offset-2 disabled:opacity-80 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center min-w-[140px] ${buttonClass}`}
+          >
+            {isLoading ? <Loader2 size={16} className="animate-spin" /> : (!isCreator ? "Book Slot" : "Join Slice")}
+          </button>
         </div>
       </div>
     </nav>

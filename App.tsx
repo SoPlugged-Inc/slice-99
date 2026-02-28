@@ -1,24 +1,35 @@
-
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { TermsModal } from './components/TermsModal';
-
+import { ChatBot } from './components/ChatBot';
 import { BrandLanding } from './components/BrandLanding';
 import { CreatorLanding } from './components/CreatorLanding';
+import { CreatorApplyModal } from './components/CreatorApplyModal';
 
-// Placeholder for the actual Light Logo file provided by the user
-// Replace this Data URI with your actual file path, e.g., "/logo-light.png"
-const LOGO_LIGHT_URL = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 40' fill='none'%3E%3Ctext x='0' y='55%25' dominant-baseline='middle' font-family='Libre Baskerville, serif' font-weight='700' font-size='28' letter-spacing='-1.5' fill='%23FFFFFF'%3Eslice%3C/text%3E%3C/svg%3E`;
+
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'brand' | 'creator'>('brand');
+  const [currentPage, setCurrentPage] = useState<'brand' | 'creator'>(() => {
+    return window.location.pathname.startsWith('/creators') ? 'creator' : 'brand';
+  });
   const [isTermsOpen, setIsTermsOpen] = useState(false);
+  const [isCreatorApplyOpen, setIsCreatorApplyOpen] = useState(false);
+
+  const handlePageSwitch = (page: 'brand' | 'creator') => {
+    setCurrentPage(page);
+    window.history.pushState({}, '', page === 'creator' ? '/creators' : '/');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
 
   return (
     <div className="min-h-screen font-sans bg-neutral-white text-neutral-darkest bg-grid-pattern bg-fixed">
-      <Navbar page={currentPage} onSwitch={setCurrentPage} />
+      <Navbar
+        page={currentPage}
+        onSwitch={handlePageSwitch}
+        onApplyClick={() => setIsCreatorApplyOpen(true)}
+      />
 
-      {currentPage === 'brand' ? <BrandLanding /> : <CreatorLanding />}
+      {currentPage === 'brand' ? <BrandLanding /> : <CreatorLanding onApplyClick={() => setIsCreatorApplyOpen(true)} />}
 
       {/* Footer - Shared */}
       <footer className="bg-neutral-darkest text-neutral-light py-12 sm:py-16 px-4 border-t border-neutral-darker relative overflow-hidden">
@@ -30,22 +41,18 @@ function App() {
 
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative z-10">
           <div className="flex flex-col items-start">
-            {/* Logo Image */}
-            <img
-              src={LOGO_LIGHT_URL}
-              alt="Slice"
-              className="h-8 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-            />
+            {/* Logo Text */}
+            <div className="text-2xl font-black tracking-tighter text-white uppercase select-none mb-1">
+              SL<span className={currentPage === 'brand' ? 'text-primary' : 'text-creator'}>/</span>CE
+            </div>
+            <span className="text-xs text-neutral-500 uppercase tracking-widest">Share the creator. Split the cost.</span>
           </div>
-          <p className="text-neutral-light/60 text-xs font-medium">
-            &copy; 2025 Slice Inc.
-          </p>
 
           <div className="grid grid-cols-2 sm:flex gap-8 sm:gap-12 text-sm text-neutral-400">
             <div className="flex flex-col gap-3">
               <span className="text-white font-bold uppercase tracking-widest text-[10px]">Social</span>
               <a
-                href="https://www.instagram.com/joincocreate/"
+                href="https://www.instagram.com/slice99/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors hover:underline decoration-primary decoration-1 underline-offset-4"
@@ -56,10 +63,10 @@ function App() {
             <div className="flex flex-col gap-3">
               <span className="text-white font-bold uppercase tracking-widest text-[10px]">Contact</span>
               <a
-                href="mailto:hello@joincocreate.ca"
+                href="mailto:support@slice99.com"
                 className="hover:text-primary transition-colors hover:underline decoration-primary decoration-1 underline-offset-4"
               >
-                hello@joincocreate.ca
+                support@slice99.com
               </a>
             </div>
             <div className="flex flex-col gap-3">
@@ -79,14 +86,15 @@ function App() {
             Made in Canada
           </div>
           <div className="text-[10px] text-neutral-600">
-            &copy; 2025 Co-Create Inc.
+            &copy; 2026 Slice Inc.
           </div>
         </div>
       </footer>
 
       {/* Modals & Floating Elements */}
       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
-
+      <CreatorApplyModal isOpen={isCreatorApplyOpen} onClose={() => setIsCreatorApplyOpen(false)} />
+      {currentPage === 'brand' && <ChatBot />}
     </div>
   );
 }

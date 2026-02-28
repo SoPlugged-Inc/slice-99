@@ -39,19 +39,19 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div
+    <div 
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
-      <div
-        className="absolute inset-0 bg-neutral-darkest/60 backdrop-blur-sm transition-opacity"
+      <div 
+        className="absolute inset-0 bg-neutral-darkest/60 backdrop-blur-sm transition-opacity" 
         onClick={onClose}
         aria-hidden="true"
       />
-
-      <div
+      
+      <div 
         ref={modalRef}
         tabIndex={-1}
         className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl flex flex-col max-h-[90vh] animate-[slideUpFade_0.3s_ease-out] focus:outline-none"
@@ -59,7 +59,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-lighter">
           <h2 id="modal-title" className="text-xl font-bold text-neutral-darkest tracking-tight">Terms of Service</h2>
-          <button
+          <button 
             onClick={onClose}
             aria-label="Close modal"
             className="p-2 text-neutral-dark hover:text-neutral-darkest hover:bg-neutral-lightest rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -87,7 +87,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
           <section>
             <h3 className="font-bold text-neutral-darkest mb-2 text-base">3. Shipping & Products</h3>
             <ul className="list-disc pl-5 space-y-1">
-              <li>You are responsible for shipping your product to our consolidation hub in Kitchener, ON, at your own expense.</li>
+              <li>You are responsible for shipping your product to our consolidation hub in Canada, at your own expense.</li>
               <li>Products must be received by the deadline provided in your confirmation email. Late shipments may result in forfeiting your slot without refund.</li>
               <li>Products sent to creators are considered non-returnable gifts. We do not facilitate product returns.</li>
             </ul>
@@ -113,7 +113,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
               Slice is not liable for any lost, damaged, or stolen inventory during shipping. Our maximum liability for any claim related to our services is limited to the amount paid for the slot ($99 CAD).
             </p>
           </section>
-
+          
           <div className="pt-6 text-xs text-neutral text-opacity-80 border-t border-neutral-lighter">
             Last Updated: November 2024
           </div>
@@ -121,7 +121,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
 
         {/* Footer */}
         <div className="p-4 bg-neutral-lightest border-t border-neutral-lighter rounded-b-xl flex justify-end">
-          <button
+          <button 
             onClick={onClose}
             className="px-4 py-2 bg-neutral-darkest text-white text-sm font-medium rounded-md hover:bg-neutral-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >

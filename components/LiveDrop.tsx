@@ -21,7 +21,7 @@ const getNextFriday = () => {
 const WEEKLY_DROP = {
   id: 1,
   title: "The Weekly Mix (Generic)",
-  badge: "🟢 Boarding Now",
+  badge: "🟢 Spots Available",
   badgeColor: "bg-brand-green/10 text-brand-green-dark border-brand-green/20",
   buttonText: "Claim Slot ($99)",
   slots: [

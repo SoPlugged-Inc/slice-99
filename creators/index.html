@@ -1,521 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth scroll-pt-28">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://images.unsplash.com data:; connect-src 'self' https://formspree.io;">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-    <title>Slice99 | Earn more with UGC</title>
-    <meta name="description"
-        content="Join the roster for monthly creator gigs. We pool brand budgets to pay you what you're worth.">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://slice99.com/creators">
-    <meta property="og:title" content="Slice99 | Earn more with UGC">
-    <meta property="og:description"
-        content="Join the roster for monthly creator gigs. We pool brand budgets to pay you what you're worth.">
-    <meta property="og:image" content="https://slice99.com/og-image-creators.jpg">
-
-    <!-- Fonts -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slice | The Utility Layer for Creator Marketing</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <!-- Tailwind CSS -->
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="/index.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Inter"', 'sans-serif'],
+              serif: ['"Libre Baskerville"', 'serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              primary: {
+                DEFAULT: '#0055FF',
+                hover: '#0044CC',
+              },
+              creator: {
+                DEFAULT: '#ea580c',
+                hover: '#c2410c',
+              },
+              neutral: {
+                white: '#FFFFFF',
+                lightest: '#F5F7FA',
+                lighter: '#E2E8F0',
+                light: '#94A3B8',    
+                DEFAULT: '#64748B',  
+                dark: '#334155',
+                darker: '#1E293B',   
+                darkest: '#0F172A',
+              },
+              brand: {
+                green: '#10b981', 
+                'green-dark': '#047857',
+              }
+            },
+            boxShadow: {
+              'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+              'glow': '0 0 20px rgba(0, 85, 255, 0.15)',
+            },
+            animation: {
+              'marquee': 'marquee 40s linear infinite',
+              'clip-down': 'clipDown 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
+              'notification-slide': 'notificationSlide 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+            },
+            backgroundImage: {
+              'grid-pattern': "linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)",
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              clipDown: {
+                '0%': { 'clip-path': 'inset(0 0 100% 0)' },
+                '100%': { 'clip-path': 'inset(0 0 0 0)' },
+              },
+              'border-beam': {
+                '100%': { 'offset-distance': '100%' },
+              },
+              notificationSlide: {
+                '0%': { opacity: '0', transform: 'translateY(-20px) scale(0.95)' },
+                '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+              }
+            },
+          }
+        }
+      }
+    </script>
     <style>
-        /* Blackbox Studio Utilities */
-        .bento-border {
-            border: 1px solid #27272a;
-            /* zinc-800 */
-        }
-
-        .bento-card {
-            background-color: #000000;
-            border: 1px solid #27272a;
-            transition: border-color 0.3s ease;
-        }
-
-        .bento-card:hover {
-            border-color: #52525b;
-            /* zinc-600 */
-        }
+      .mask-linear-fade {
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      }
+      .border-beam {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        border: 1px solid transparent;
+        mask-clip: border-box;
+        -webkit-mask-clip: border-box;
+        mask-composite: exclude;
+        -webkit-mask-composite: xor;
+        mask-image: linear-gradient(transparent, transparent), linear-gradient(#000, #000);
+        -webkit-mask-image: linear-gradient(transparent, transparent), linear-gradient(#000, #000);
+      }
+      .border-beam::after {
+        content: "";
+        position: absolute;
+        aspect-ratio: 1;
+        width: calc(100% + 1rem);
+        offset-path: rect(0 auto auto 0 round calc(var(--rx) + 10px));
+        animation: border-beam 8s infinite linear;
+        background: linear-gradient(to left, transparent, #0055FF, transparent);
+        offset-anchor: 50% 50%;
+      }
     </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+        "react/": "https://aistudiocdn.com/react@^19.2.0/",
+        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+      }
+    }
+    </script>
+<link rel="stylesheet" href="/index.css">
 </head>
-
-<body
-    class="bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] text-zinc-100 font-sans antialiased selection:bg-orange-600 selection:text-white flex flex-col min-h-screen">
-
-    <!-- Navbar -->
-    <header class="w-full border-b border-zinc-900 bg-black/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center">
-                <a href="/" class="text-2xl font-black tracking-tighter text-white uppercase select-none">
-                    SL<span class="text-orange-600">/</span>CE
-                </a>
-            </div>
-
-            <!-- CTA Group -->
-            <div class="flex items-center gap-4">
-                <a href="/" class="text-zinc-500 hover:text-white text-sm font-semibold transition-colors">
-                    For Brands
-                </a>
-                <button onclick="document.getElementById('apply-modal').classList.remove('hidden')"
-                    class="bg-white text-black px-5 py-2 text-sm font-bold uppercase tracking-wide hover:bg-orange-600 hover:text-white transition-all rounded-sm cursor-pointer">
-                    Apply Now
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main class="flex-grow">
-        <!-- Hero Section -->
-        <section class="relative pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-
-                    <!-- Text Content -->
-                    <div class="text-center lg:text-left">
-                        <h1
-                            class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
-                            Earn more<br>
-                            <span class="bg-orange-600 text-white px-2">with UGC.</span>
-                        </h1>
-                        <p
-                            class="text-lg sm:text-xl text-zinc-400 mb-6 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
-                            Join the roster for monthly creator gigs. We pool brand budgets to pay you what you're
-                            worth.
-                        </p>
-                        <p class="text-xs text-zinc-600 font-mono uppercase tracking-widest">It's free to join.</p>
-                    </div>
-
-                    <!-- Visual: Stat Card -->
-                    <div class="relative w-full max-w-md mx-auto lg:max-w-full flex justify-center lg:justify-end">
-                        <div
-                            class="bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 p-8 rounded-2xl w-full max-w-sm shadow-2xl">
-                            <div class="flex justify-between items-start mb-8">
-                                <div class="flex flex-col">
-                                    <span class="text-zinc-500 text-xs font-bold uppercase tracking-wider mb-1">Flat
-                                        Rate Per Drop</span>
-                                    <span class="text-6xl font-bold text-white tracking-tighter">$200</span>
-                                    <span class="text-zinc-400 text-xs font-medium mt-2">+ 4 Free Products (Yours to
-                                        keep)</span>
-                                </div>
-                                <span
-                                    class="bg-green-900/30 text-green-400 border border-green-900/50 px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                                    Active
-                                </span>
-                            </div>
-
-                            <div class="space-y-3">
-                                <div class="h-1 w-full bg-zinc-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-white w-3/4 rounded-full"></div>
-                                </div>
-                                <div class="flex justify-between text-xs font-mono text-zinc-500">
-                                    <span>Spots Remaining</span>
-                                    <span>12/50</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Earning Breakdown -->
-        <section class="py-16 border-y border-zinc-900 bg-black/50 backdrop-blur-sm">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-2xl font-bold text-white mb-12 uppercase tracking-tight">Why it works</h2>
-
-                <div
-                    class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 font-mono text-sm sm:text-base">
-                    <!-- Part 1 -->
-                    <div class="flex flex-col items-center gap-4">
-                        <div
-                            class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-2xl">
-                            📦</div>
-                        <span class="text-zinc-400 font-bold">4 Brands Pooled</span>
-                    </div>
-
-                    <!-- Equals -->
-                    <div class="text-2xl text-zinc-600 font-bold">=</div>
-
-                    <!-- Part 2 -->
-                    <div class="flex flex-col items-center gap-4">
-                        <div
-                            class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-2xl text-green-400">
-                            $</div>
-                        <span class="text-white font-bold">1 Pro Payout ($200)</span>
-                    </div>
-
-                    <!-- Plus -->
-                    <div class="text-2xl text-zinc-600 font-bold">+</div>
-
-                    <!-- Part 3 -->
-                    <div class="flex flex-col items-center gap-4">
-                        <div
-                            class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-2xl">
-                            🎬</div>
-                        <span class="text-zinc-400 font-bold">Portfolio Content</span>
-                    </div>
-
-                    <!-- Plus -->
-                    <div class="text-2xl text-zinc-600 font-bold">+</div>
-
-                    <!-- Part 4 -->
-                    <div class="flex flex-col items-center gap-4">
-                        <div
-                            class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-2xl">
-                            🎁</div>
-                        <span class="text-zinc-400 font-bold">Free Product</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works (Bento Grid) -->
-        <section class="py-24">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-3 gap-6">
-                    <!-- Card 1: The Input -->
-                    <div class="bento-card p-8 rounded-xl flex flex-col justify-between h-80 group">
-                        <div>
-                            <div
-                                class="w-14 h-14 bg-zinc-900 rounded-lg flex items-center justify-center mb-8 group-hover:bg-zinc-800 transition-colors border border-zinc-800">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-4">We Ship.</h3>
-                            <p class="text-zinc-400 text-base leading-relaxed">A curated box of 4 brands lands at your
-                                door. We handle all the logistics and coordination so you don't have to.</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: The Output -->
-                    <div class="bento-card p-8 rounded-xl flex flex-col justify-between h-80 group">
-                        <div>
-                            <div
-                                class="w-14 h-14 bg-zinc-900 rounded-lg flex items-center justify-center mb-8 group-hover:bg-zinc-800 transition-colors border border-zinc-800">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-4">You Shoot.</h3>
-                            <p class="text-zinc-400 text-base leading-relaxed">One 60s haul video. No scripts, just
-                                authentic reaction. Show the products, share your thoughts, and keep it real.</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: The Income -->
-                    <div class="bento-card p-8 rounded-xl flex flex-col justify-between h-80 group">
-                        <div>
-                            <div
-                                class="w-14 h-14 bg-zinc-900 rounded-lg flex items-center justify-center mb-8 group-hover:bg-zinc-800 transition-colors border border-zinc-800">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-4">We Pay.</h3>
-                            <p class="text-zinc-400 text-base leading-relaxed">Submit a simple invoice. Get paid within
-                                48hrs of approval. No chasing payments or net-30 terms.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Creator FAQ -->
-        <section class="py-24 border-t border-zinc-900 bg-black/50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mb-16">
-                    <h2 class="text-3xl font-extrabold text-white uppercase tracking-tight">Creator FAQ</h2>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-12 lg:gap-16">
-                    <!-- Q1 -->
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-3">What kind of brands?</h3>
-                        <p class="text-zinc-400 leading-relaxed">We work with verified small businesses. Mix of Home,
-                            Fashion, and Lifestyle.</p>
-                    </div>
-
-                    <!-- Q2 -->
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-3">Do I need to post?</h3>
-                        <p class="text-zinc-400 leading-relaxed">Yes. The rate includes one post to your feed
-                            (TikTok/Reels).</p>
-                    </div>
-
-                    <!-- Q3 -->
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-3">How often are drops?</h3>
-                        <p class="text-zinc-400 leading-relaxed">We send boxes based on your niche and availability. You
-                            might receive a box as frequently as every week or less often depending on brand demand.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-black text-zinc-600 py-8 border-t border-zinc-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <a href="/" class="hover:text-white transition-colors text-sm font-mono">← Back to Brands</a>
-        </div>
-    </footer>
-
-    <!-- Apply Modal -->
-    <div id="apply-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog"
-        aria-modal="true">
-        <!-- Backdrop -->
-        <div class="fixed inset-0 bg-black/90 backdrop-blur-sm transition-opacity"
-            onclick="document.getElementById('apply-modal').classList.add('hidden')"></div>
-
-        <div class="fixed inset-0 z-10 overflow-y-auto">
-            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-                <!-- Modal Panel -->
-                <div
-                    class="relative transform overflow-hidden rounded-lg bg-zinc-950 border border-zinc-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
-                    <div class="bg-zinc-950 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                        <div class="flex justify-between items-center mb-6 border-b border-zinc-800 pb-4">
-                            <h3 class="text-xl font-bold text-white uppercase tracking-tight" id="modal-title">Apply to
-                                Roster</h3>
-                            <button onclick="document.getElementById('apply-modal').classList.add('hidden')"
-                                class="text-zinc-500 hover:text-white">
-                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div id="success-message" class="hidden text-center py-12">
-                            <div class="mb-6 flex justify-center">
-                                <div
-                                    class="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center border border-zinc-800">
-                                    <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2 tracking-tight">Application Received</h3>
-                            <p class="text-zinc-400 mb-6 text-sm">We review applications every Friday. We'll be in touch
-                                if it's a fit.</p>
-                            <button onclick="document.getElementById('apply-modal').classList.add('hidden')"
-                                class="bg-white text-black px-6 py-2 text-sm font-bold uppercase tracking-wide hover:bg-zinc-200 transition-all rounded-sm">
-                                Close
-                            </button>
-                        </div>
-
-                        <form id="application-form" action="https://formspree.io/f/xqarpnzb" method="POST"
-                            class="space-y-8">
-                            <!-- Section 1: The Vitals -->
-                            <div class="space-y-4">
-                                <h4 class="text-sm font-bold text-orange-500 uppercase tracking-wider">01 // The Vitals
-                                </h4>
-                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    <div>
-                                        <label for="name" class="block text-xs font-medium text-zinc-400 mb-1">Full
-                                            Name</label>
-                                        <input type="text" name="name" id="name" required placeholder="Jane Doe"
-                                            class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
-                                    </div>
-                                    <div>
-                                        <label for="email" class="block text-xs font-medium text-zinc-400 mb-1">Email
-                                            Address</label>
-                                        <input type="email" name="email" id="email" required
-                                            placeholder="jane@example.com"
-                                            class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="social" class="block text-xs font-medium text-zinc-400 mb-1">Primary
-                                        Social Handle (Full Link)</label>
-                                    <input type="text" name="social" id="social" placeholder="tiktok.com/@yourname"
-                                        required
-                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
-                                </div>
-                                <div>
-                                    <label for="location" class="block text-xs font-medium text-zinc-400 mb-1">Location
-                                        (City & Province)</label>
-                                    <input type="text" name="location" id="location" required placeholder="Toronto, ON"
-                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
-                                </div>
-                            </div>
-
-                            <!-- Section 2: The Vibe -->
-                            <div class="space-y-4">
-                                <h4 class="text-sm font-bold text-orange-500 uppercase tracking-wider">02 // The Vibe
-                                </h4>
-                                <p class="text-xs text-zinc-500">Which Haul Categories fit your content style? (Select
-                                    all that apply)</p>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <label
-                                        class="flex items-center space-x-3 p-3 border border-zinc-800 rounded-sm hover:bg-zinc-900 cursor-pointer transition-colors">
-                                        <input type="checkbox" name="categories" value="Aesthetic Home"
-                                            class="form-checkbox h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 rounded-sm focus:ring-orange-600 focus:ring-offset-zinc-900">
-                                        <span class="text-sm text-zinc-300">The Aesthetic Home</span>
-                                    </label>
-                                    <label
-                                        class="flex items-center space-x-3 p-3 border border-zinc-800 rounded-sm hover:bg-zinc-900 cursor-pointer transition-colors">
-                                        <input type="checkbox" name="categories" value="Wellness Routine"
-                                            class="form-checkbox h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 rounded-sm focus:ring-orange-600 focus:ring-offset-zinc-900">
-                                        <span class="text-sm text-zinc-300">The Wellness Routine</span>
-                                    </label>
-                                    <label
-                                        class="flex items-center space-x-3 p-3 border border-zinc-800 rounded-sm hover:bg-zinc-900 cursor-pointer transition-colors">
-                                        <input type="checkbox" name="categories" value="Fit Check"
-                                            class="form-checkbox h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 rounded-sm focus:ring-orange-600 focus:ring-offset-zinc-900">
-                                        <span class="text-sm text-zinc-300">The Fit Check</span>
-                                    </label>
-                                    <label
-                                        class="flex items-center space-x-3 p-3 border border-zinc-800 rounded-sm hover:bg-zinc-900 cursor-pointer transition-colors">
-                                        <input type="checkbox" name="categories" value="Desk Setup"
-                                            class="form-checkbox h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 rounded-sm focus:ring-orange-600 focus:ring-offset-zinc-900">
-                                        <span class="text-sm text-zinc-300">The Desk Setup</span>
-                                    </label>
-                                    <label
-                                        class="flex items-center space-x-3 p-3 border border-zinc-800 rounded-sm hover:bg-zinc-900 cursor-pointer transition-colors">
-                                        <input type="checkbox" name="categories" value="Pantry"
-                                            class="form-checkbox h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 rounded-sm focus:ring-orange-600 focus:ring-offset-zinc-900">
-                                        <span class="text-sm text-zinc-300">The Pantry</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Section 3: The Capability -->
-                            <div class="space-y-4">
-                                <h4 class="text-sm font-bold text-orange-500 uppercase tracking-wider">03 // The
-                                    Capability</h4>
-                                <div>
-                                    <label for="video_link" class="block text-xs font-medium text-zinc-400 mb-1">Link to
-                                        your best 'Haul' or 'Showcase' video</label>
-                                    <input type="text" name="video_link" id="video_link"
-                                        placeholder="tiktok.com/video/..." required
-                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
-                                    <p class="text-[10px] text-zinc-600 mt-1">Show us a video where you talk about a
-                                        product. We want to see your lighting and hear your voice.</p>
-                                </div>
-                            </div>
-
-                            <!-- Section 4: The Deal Breakers -->
-                            <div class="space-y-4">
-                                <h4 class="text-sm font-bold text-orange-500 uppercase tracking-wider">04 // The Deal
-                                    Breakers</h4>
-
-                                <div class="space-y-2">
-                                    <p class="text-sm text-zinc-300 font-medium">The Slice Model pays a flat rate of
-                                        $200 CAD + 4 Free Products per drop. Do you accept this rate?</p>
-                                    <div class="flex gap-4">
-                                        <label class="flex items-center space-x-2 cursor-pointer">
-                                            <input type="radio" name="rate_acceptance" value="Yes" required
-                                                class="form-radio h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 focus:ring-orange-600">
-                                            <span class="text-sm text-zinc-400">Yes, I'm in.</span>
-                                        </label>
-                                        <label class="flex items-center space-x-2 cursor-pointer">
-                                            <input type="radio" name="rate_acceptance" value="No" required
-                                                class="form-radio h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 focus:ring-orange-600">
-                                            <span class="text-sm text-zinc-400">No, my rates are higher.</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="space-y-2 pt-2">
-                                    <p class="text-sm text-zinc-300 font-medium">Brands get usage rights to run the
-                                        video as ads. Are you cool with that?</p>
-                                    <div class="flex gap-4">
-                                        <label class="flex items-center space-x-2 cursor-pointer">
-                                            <input type="radio" name="usage_rights" value="Yes" required
-                                                class="form-radio h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 focus:ring-orange-600">
-                                            <span class="text-sm text-zinc-400">Yes.</span>
-                                        </label>
-                                        <label class="flex items-center space-x-2 cursor-pointer">
-                                            <input type="radio" name="usage_rights" value="No" required
-                                                class="form-radio h-4 w-4 text-orange-600 bg-zinc-900 border-zinc-700 focus:ring-orange-600">
-                                            <span class="text-sm text-zinc-400">No.</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Secret Weapon -->
-                            <div class="space-y-4 pt-2 border-t border-zinc-800">
-                                <div>
-                                    <label for="dream_brand" class="block text-xs font-medium text-zinc-400 mb-1">One
-                                        brand you really want to work with right now?</label>
-                                    <input type="text" name="dream_brand" id="dream_brand"
-                                        placeholder="e.g. Nike, Glossier, etc."
-                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-orange-600 transition-colors placeholder-zinc-600">
-                                </div>
-                            </div>
-
-                            <div class="pt-4">
-                                <button type="submit"
-                                    class="w-full bg-orange-600 text-white font-bold uppercase tracking-wide py-3 rounded-sm hover:bg-orange-700 transition-colors shadow-lg shadow-orange-900/20">
-                                    Submit Application
-                                </button>
-                            </div>
-                        </form>
-                        <script>
-                            const form = document.getElementById('application-form');
-                            const successMessage = document.getElementById('success-message');
-                            const submitButton = form.querySelector('button[type="submit"]');
-
-                            form.addEventListener('submit', async function (e) {
-                                e.preventDefault();
-
-                                // Disable button and show loading state
-                                const originalBtnText = submitButton.innerText;
-                                submitButton.disabled = true;
-                                submitButton.innerText = 'Submitting...';
-
-                                const formData = new FormData(form);
-
-                                try {
-                                    const response = await fetch(form.action, {
-                                        method: 'POST',
-                                        body: formData,
-                                        headers: {
-                                            'Accept': 'application/json'
-                                        }
-                                    });
-
-                                    if (response.ok) {
-                                        form.classList.add('hidden');
-                                        successMessage.classList.remove('hidden');
-                                        form.reset();
-                                    } else {
-                                        alert('Oops! There was a problem submitting your form');
-                                    }
-                                } catch (error) {
-                                    alert('Oops! There was a problem submitting your form');
-                                } finally {
-                                    submitButton.disabled = false;
-                                    submitButton.innerText = originalBtnText;
-                                }
-                            });
-                        </script>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body class="bg-neutral-white text-neutral-darkest antialiased font-sans bg-grid-pattern bg-fixed overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
 </body>
-
 </html>

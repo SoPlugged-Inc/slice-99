@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Package, Video, DollarSign, CheckCircle2, ArrowRight, Loader2, Zap, Users, Info, Bell, Wallet } from 'lucide-react';
 import { TextReveal, TypewriterEffect, ColumnBackground, SpotlightCard, Section, SectionHeading, LogoMarquee } from './Shared';
@@ -30,7 +29,7 @@ const PhonePayoutVisual = () => {
         return prev + 150.00;
       });
 
-    }, 2000); // Faster loop for better visual engagement
+    }, 1500); // Faster loop for better visual engagement
 
     return () => clearInterval(interval);
   }, []);
@@ -104,7 +103,11 @@ const PhonePayoutVisual = () => {
   );
 };
 
-export const CreatorLanding: React.FC = () => {
+interface CreatorLandingProps {
+  onApplyClick?: () => void;
+}
+
+export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHeroLoading, setIsHeroLoading] = useState(false);
 
@@ -114,11 +117,9 @@ export const CreatorLanding: React.FC = () => {
 
   const handleApplyClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    setIsHeroLoading(true);
-    setTimeout(() => {
-      setIsHeroLoading(false);
-      window.open('https://typeform.com', '_blank');
-    }, 1000);
+    if (onApplyClick) {
+      onApplyClick();
+    }
   };
 
   return (
@@ -135,7 +136,7 @@ export const CreatorLanding: React.FC = () => {
 
           <div className="w-full mb-8 flex items-center justify-center">
             <h1 className="text-4xl sm:text-6xl font-extrabold text-neutral-darkest tracking-tight leading-[1.1] text-center mx-auto max-w-3xl flex flex-col items-center">
-              <TypewriterEffect text={`Predictable income.\nZero admin.`} pauseDuration={5000} className="text-center" cursorClassName="text-creator" />
+              <TypewriterEffect text={`Make more money\nwith UGC`} pauseDuration={5000} className="text-center" cursorClassName="text-creator" />
             </h1>
           </div>
 
