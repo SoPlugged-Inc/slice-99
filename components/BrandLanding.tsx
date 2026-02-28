@@ -309,7 +309,7 @@ export const BrandLanding: React.FC = () => {
                         {
                             step: "02",
                             title: "Ship",
-                            desc: "Send your product to our consolidation hub in Canada. We pack the haul.",
+                            desc: "Send your product to our consolidation hub in Canada. We pack the haul and ship it to the creator.",
                             icon: <Package className="text-primary" size={24} aria-hidden="true" />
                         },
                         {
@@ -461,9 +461,11 @@ export const BrandLanding: React.FC = () => {
                 <SectionHeading title="Frequently Asked Questions" subtitle="Everything you need to know about the Slice process." />
                 <div className="max-w-3xl mx-auto space-y-4">
                     {[
-                        { q: "Do I get the video file?", a: "Yes. You receive the raw video file with usage rights to repost on your own social channels or use in paid ads." },
-                        { q: "Who is the creator?", a: "Once the batch is filled, we match the pool with a vetted creator from our network who best fits the products. All creators are guaranteed to have 3% engagement and real followers." },
-                        { q: "What if my product doesn't fit?", a: "We curate generic 'Discovery Boxes' (e.g., Wellness, Home, Tech) so a wide variety of products fit naturally. If your product is too large (e.g., furniture), please contact us first." },
+                        { q: "How is this only $99?", a: "We use a \"Pooling\" model. Instead of one brand paying $1,000+ for a high-tier creator, we pool 3-5 non-competing products into a single curated \"Discovery Box.\" This allows you to split the cost of production while still receiving a premium, professional video asset." },
+                        { q: "Who is the creator?", a: "Once a batch is filled, we match the pool with a vetted creator from our network who aligns with your product’s category (e.g., Wellness, Tech, or Lifestyle). All creators are part of our Professional Membership—meaning they are vetted for high engagement, authentic followers, and a proven track record of high-quality content." },
+                        { q: "Do I have any creative control?", a: "Yes. While we handle the heavy lifting to keep your costs low, you will provide a \"Product Brief\" during checkout. This allows you to list up to three mandatory \"Must-Haves\" (e.g., \"Show the texture,\" or \"Mention it’s eco-friendly\") that the creator is required to include in their video." },
+                        { q: "Do I get the video file?", a: "Absolutely. You receive the high-resolution raw video file with full usage rights. This means you can repost it on your own organic channels or use it as a \"TikTok-first\" creative in your paid ad campaigns." },
+                        { q: "What if my product doesn't fit?", a: "We curate themed 'Discovery Boxes' so products fit naturally alongside each other. If your product is exceptionally large (e.g., furniture) or requires specific legal disclosures, please contact us at Email Support before booking your slot." },
                     ].map((faq, idx) => (
                         <div key={idx} className="p-6 bg-white rounded border border-neutral-lighter hover:border-primary/50 transition-colors shadow-sm group">
                             <h4 className="font-bold text-neutral-darkest mb-3 text-sm uppercase tracking-wide group-hover:text-primary transition-colors flex items-center gap-2">
