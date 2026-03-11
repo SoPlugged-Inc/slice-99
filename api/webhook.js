@@ -104,33 +104,39 @@ export default async function handler(req, res) {
             const emailSubject = `Payment Confirmed: ${businessName} x Slice99 Onboarding & Shipping Instructions`;
 
             const htmlTemplate = `
-                <p>Hi ${businessName},</p>
-                
-                <p>This email confirms that we have received your payment for the upcoming Slice99 influencer campaign slot. We are excited to move into the logistics phase of this pool for your <strong>${itemToBeFilmed}</strong>.</p>
-                
-                <p>To ensure a seamless launch, please find your next steps and campaign timeline below:</p>
-                
-                <h3>1. Shipping Instructions</h3>
-                <p>Please ship your product to our central processing hub. This allows us to oversee the unboxing and "bundle" creation before final distribution to our matched creators.</p>
-                
-                <p><strong>Shipping Address:</strong><br/>
-                Slice99 C/O Nina Barango<br/>
-                631 Montessor Crescent<br/>
-                Ottawa, ON K0A3K0</p>
-                
-                <p>Please reply to this thread with your tracking number once the package has been dispatched.</p>
-                
-                <h3>2. Projected Timeline</h3>
-                
-                <p><strong>Logistics:</strong> Once the pool is completed and all products have arrived, they will be distributed to a creator in our roster.</p>
-                
-                <p><strong>Content Creation:</strong> Content is scheduled to go live within 14 days of the pool being fully distributed.</p>
-                
-                <p>If you have any questions, please reply directly to this email.</p>
-                
-                <p>Best regards,<br/>
-                The Slice99 Support Team</p>
-            `;
+<div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee;">
+  <!-- Header Bar -->
+  <div style="background-color: #000000; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; margin: -20px -20px 20px -20px;">
+    <h1 style="color: #ffffff; margin: 0; font-size: 24px; letter-spacing: 1px;">SLICE99</h1>
+  </div>
+
+  <h2 style="color: #333;">Payment Confirmed</h2>
+  <p style="font-size: 16px; line-height: 1.5; color: #555;">
+    Hi <strong>${businessName}</strong>, we've received your payment for the upcoming Slice99 campaign slot. We are excited to feature your <strong>${itemToBeFilmed}</strong>.
+  </p>
+  
+  <div style="background-color: #f0fdf4; border-left: 4px solid #16a34a; padding: 15px; border-radius: 0 8px 8px 0; margin: 20px 0;">
+    <h3 style="margin-top: 0; color: #166534;">1. Shipping Instructions</h3>
+    <p style="margin-bottom: 5px; color: #15803d;">Please ship your product to our hub:</p>
+    <p style="font-weight: bold; color: #166534;">
+      Slice99 C/O Nina Barango<br>
+      631 Montessor Crescent<br>
+      Ottawa, ON K0A 3K0
+    </p>
+  </div>
+
+  <h3 style="color: #333;">2. Projected Timeline</h3>
+  <ul style="color: #555; line-height: 1.6;">
+    <li><strong>Logistics:</strong> Once the pool is completed, products are distributed to our creators.</li>
+    <li><strong>Content:</strong> Live within 14 days of full distribution.</li>
+  </ul>
+
+  <p style="margin-top: 30px; font-size: 14px; color: #888; border-top: 1px solid #eee; padding-top: 20px;">
+    Best regards,<br>
+    <strong>The Slice99 Support Team</strong>
+  </p>
+</div>
+`;
 
             try {
                 const { data, error } = await resend.emails.send({
