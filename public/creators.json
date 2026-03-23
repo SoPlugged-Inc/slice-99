@@ -42,5 +42,48 @@
                 "description": "Authentic spicy kick."
             }
         ]
+    },
+    {
+        "id": "olamide",
+        "name": "Olamide",
+        "handle": "@lamidefadesere",
+        "avatar": "",
+        "bio": "Shop the products featured in my latest video. I’ve partnered with Slice99 to make it easy for you to find and support these brands directly.",
+        "socials": {
+            "instagram": "https://www.instagram.com/lamidefadesere/"
+        },
+        "theme": "light",
+        "products": [
+            {
+                "id": "prod_004",
+                "brandName": "Ivora Skin",
+                "productName": "Ivora Glow Scrub - Natural Sugar Exfoliant",
+                "price": "$25.00",
+                "productUrl": "https://ivoraskin.com/en/collections/ivora-skin-copy/products/ivora-glow-scrub-natural-sugar-exfoliant",
+                "status": "active",
+                "campaignId": "camp_004",
+                "description": "Exfoliates, brightens, and softens with organic sugar, avocado oil, and beeswax."
+            },
+            {
+                "id": "prod_002",
+                "brandName": "Oil & Well",
+                "productName": "Body Oil Discovery Set",
+                "price": "$50.00",
+                "productUrl": "https://oilandwell.com/products/body-oil-discovery-set",
+                "status": "active",
+                "campaignId": "camp_004",
+                "description": "Luxurious body oils for glowing skin."
+            },
+            {
+                "id": "prod_003",
+                "brandName": "Mills Kitchen",
+                "productName": "Authentic Naija Suya Spice",
+                "price": "$8.99",
+                "productUrl": "https://millskitchen.ca/products/authentic-naija-suya-spice",
+                "status": "active",
+                "campaignId": "camp_004",
+                "description": "Authentic spicy kick."
+            }
+        ]
     }
 ]

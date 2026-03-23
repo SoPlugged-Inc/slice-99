@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
           creators: path.resolve(__dirname, 'creators/index.html'),
           thank_you: path.resolve(__dirname, 'creators/thank-you.html'),
           ada: path.resolve(__dirname, 'ada/index.html'),
+          olamide: path.resolve(__dirname, 'olamide/index.html'),
         },
       },
     }
