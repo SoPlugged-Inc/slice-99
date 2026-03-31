@@ -265,7 +265,28 @@ export const BrandLanding: React.FC = () => {
                     </div>
 
                     <h1 className="text-4xl sm:text-6xl font-extrabold text-neutral-darkest tracking-tight mb-5 leading-[1.05] sm:leading-[1.1]">
-                        <TextReveal text="Get your product on TikTok." delay={0.1} className="block mb-1" />
+                        <span className="block mb-1 inline-flex flex-wrap justify-center gap-x-2.5 gap-y-1">
+                            {["Get", "your", "product", "on"].map((word, i) => (
+                                <span key={i} className="text-reveal-wrapper">
+                                    <span className="text-reveal-inner" style={{ animationDelay: `${0.1 + (i * 0.05)}s` }}>
+                                        {word}
+                                    </span>
+                                </span>
+                            ))}
+                            <span className="text-reveal-wrapper">
+                                <span className="text-reveal-inner" style={{ animationDelay: `${0.1 + (4 * 0.05)}s` }}>
+                                    <span id="revolving-text" className="inline-block overflow-hidden h-[1.05em] sm:h-[1.1em] align-baseline text-[#0061FF]">
+                                        <ul className="animate-slide-vertical m-0 p-0 list-none flex flex-col text-left whitespace-nowrap">
+                                            <li className="h-[1.05em] sm:h-[1.1em] leading-[1.05] sm:leading-[1.1]">TikTok</li>
+                                            <li className="h-[1.05em] sm:h-[1.1em] leading-[1.05] sm:leading-[1.1]">Instagram</li>
+                                            <li className="h-[1.05em] sm:h-[1.1em] leading-[1.05] sm:leading-[1.1]">LinkedIn</li>
+                                            <li className="h-[1.05em] sm:h-[1.1em] leading-[1.05] sm:leading-[1.1]">Facebook</li>
+                                            <li className="h-[1.05em] sm:h-[1.1em] leading-[1.05] sm:leading-[1.1]" aria-hidden="true">TikTok</li>
+                                        </ul>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
                         <TextReveal text="Guaranteed. For $99." delay={0.4} />
                     </h1>
 

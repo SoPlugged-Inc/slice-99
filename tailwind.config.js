@@ -60,6 +60,7 @@ export default {
                 'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
                 'notification-slide': 'notificationSlide 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
                 'slideUpFade': 'slideUpFade 0.5s ease-out forwards',
+                'slide-vertical': 'slideVertical 12s cubic-bezier(0.4, 0, 0.2, 1) infinite',
             },
             backgroundImage: {
                 'grid-pattern': "linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)",
@@ -79,6 +80,13 @@ export default {
                 notificationSlide: {
                     '0%': { opacity: '0', transform: 'translateY(-20px) scale(0.95)' },
                     '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+                },
+                slideVertical: {
+                    '0%, 21.66%': { transform: 'translateY(0)' },
+                    '25%, 46.66%': { transform: 'translateY(-20%)' },
+                    '50%, 71.66%': { transform: 'translateY(-40%)' },
+                    '75%, 96.66%': { transform: 'translateY(-60%)' },
+                    '100%': { transform: 'translateY(-80%)' },
                 }
             },
         }
