@@ -1,44 +1,49 @@
-import pkg from '@notionhq/client';
-const { Client } = pkg;
-
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  if (!process.env.NOTION_API_KEY || !process.env.NOTION_DATABASE_ID) {
+  const { NOTION_API_KEY, NOTION_DATABASE_ID } = process.env;
+
+  if (!NOTION_API_KEY || !NOTION_DATABASE_ID) {
     return res.status(500).json({ 
-      message: 'Notion credentials missing in environment variables.',
+      message: 'Notion credentials missing.',
       details: 'Ensure NOTION_API_KEY and NOTION_DATABASE_ID are set in the Vercel dashboard.'
     });
   }
 
   try {
-    const notion = new Client({
-      auth: process.env.NOTION_API_KEY,
+    const response = await fetch(`https://api.notion.com/v1/databases/${NOTION_DATABASE_ID}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${NOTION_API_KEY}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        filter: {
+          property: 'Status',
+          status: {
+            equals: 'Published',
+          },
+        },
+        sorts: [
+          {
+            property: 'Date',
+            direction: 'descending',
+          },
+        ],
+      }),
     });
 
-    if (!notion.databases || typeof notion.databases.query !== 'function') {
-      throw new Error(`Notion Client initialized incorrectly. Available properties: ${Object.keys(notion).join(', ')}`);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Notion API returned ${response.status}`);
     }
 
-    const response = await notion.databases.query({
-      database_id: process.env.NOTION_DATABASE_ID,
-      filter: {
-        property: 'Status',
-        status: {
-          equals: 'Published',
-        },
-      },
-      sorts: [
-        {
-          property: 'Date',
-          direction: 'descending',
-        },
-      ],
-    });
-
-    const posts = response.results.map((page) => ({
+    const data = await response.json();
+    
+    const posts = data.results.map((page) => ({
       id: page.id,
       title: page.properties.Name?.title[0]?.plain_text || 'Untitled',
       slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
@@ -48,10 +53,10 @@ export default async function handler(req, res) {
 
     return res.status(200).json(posts);
   } catch (error) {
-    console.error('Notion API Error:', error);
+    console.error('Notion Direct Fetch Error:', error);
     return res.status(500).json({ 
-      message: 'Error fetching studies',
-      details: error.message || 'Unknown Notion error'
+      message: 'Error fetching studies via REST API',
+      details: error.message || 'Unknown REST error'
     });
   }
 }
