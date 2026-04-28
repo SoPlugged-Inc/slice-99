@@ -1,4 +1,5 @@
-import { Client } from '@notionhq/client';
+import pkg from '@notionhq/client';
+const { Client } = pkg;
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -12,11 +13,15 @@ export default async function handler(req, res) {
     });
   }
 
-  const notion = new Client({
-    auth: process.env.NOTION_API_KEY,
-  });
-
   try {
+    const notion = new Client({
+      auth: process.env.NOTION_API_KEY,
+    });
+
+    if (!notion.databases || typeof notion.databases.query !== 'function') {
+      throw new Error(`Notion Client initialized incorrectly. Available properties: ${Object.keys(notion).join(', ')}`);
+    }
+
     const response = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID,
       filter: {
