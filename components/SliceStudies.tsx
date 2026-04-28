@@ -12,18 +12,21 @@ interface Post {
 export const SliceStudies: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchStudies = async () => {
             try {
                 const response = await fetch('/api/studies');
-                if (!response.ok) throw new Error('Failed to fetch');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.details || errorData.message || 'Failed to fetch');
+                }
                 const data = await response.json();
                 setPosts(data);
-            } catch (err) {
+            } catch (err: any) {
                 console.error(err);
-                setError(true);
+                setError(err.message);
             } finally {
                 setLoading(false);
             }
@@ -34,12 +37,17 @@ export const SliceStudies: React.FC = () => {
 
     if (error) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center text-center p-6">
-                <h2 className="text-2xl font-bold mb-4">Unable to load studies.</h2>
-                <p className="text-neutral-dark mb-8">Please check your Notion connection or try again later.</p>
+            <div className="min-h-screen flex flex-col items-center justify-center text-center p-12 pt-40">
+                <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                   <Clock size={32} />
+                </div>
+                <h2 className="text-3xl font-medium mb-4 tracking-tight">Unable to sync studies.</h2>
+                <p className="text-neutral-dark mb-8 max-w-md mx-auto font-light leading-relaxed">
+                    Error: <span className="font-mono text-sm bg-neutral-100 px-2 py-1 rounded">{error}</span>
+                </p>
                 <button 
                     onClick={() => window.location.reload()}
-                    className="px-6 py-3 bg-primary text-white rounded-xl font-bold"
+                    className="px-8 py-4 bg-neutral-darkest text-white rounded-2xl font-bold hover:bg-primary transition-all shadow-xl"
                 >
                     Retry Connection
                 </button>
