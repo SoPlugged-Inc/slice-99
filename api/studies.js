@@ -5,6 +5,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
+  if (!process.env.NOTION_API_KEY || !process.env.NOTION_DATABASE_ID) {
+    return res.status(500).json({ 
+      message: 'Notion credentials missing in environment variables.',
+      details: 'Ensure NOTION_API_KEY and NOTION_DATABASE_ID are set in the Vercel dashboard.'
+    });
+  }
+
   const notion = new Client({
     auth: process.env.NOTION_API_KEY,
   });
