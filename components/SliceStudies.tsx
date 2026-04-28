@@ -9,9 +9,13 @@ interface Post {
     date: string;
 }
 
+import ReactMarkdown from 'react-markdown';
+
 export const SliceStudies: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
+    const [selectedPost, setSelectedPost] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [postLoading, setPostLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -35,6 +39,21 @@ export const SliceStudies: React.FC = () => {
         fetchStudies();
     }, []);
 
+    const handlePostClick = async (id: string) => {
+        setPostLoading(true);
+        try {
+            const response = await fetch(`/api/post?id=${id}`);
+            if (!response.ok) throw new Error('Failed to load post content');
+            const data = await response.json();
+            setSelectedPost(data);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setPostLoading(false);
+        }
+    };
+
     if (error) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center text-center p-12 pt-40">
@@ -55,6 +74,43 @@ export const SliceStudies: React.FC = () => {
         );
     }
 
+    if (selectedPost) {
+        return (
+            <div className="min-h-screen bg-neutral-white pt-32 pb-24 px-6 sm:px-12">
+                <article className="max-w-3xl mx-auto">
+                    <button 
+                        onClick={() => setSelectedPost(null)}
+                        className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-neutral-light hover:text-primary transition-colors mb-16 group"
+                    >
+                        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to all studies
+                    </button>
+                    
+                    <header className="mb-16">
+                        <time className="text-sm font-bold tracking-widest uppercase text-neutral-light block mb-4">
+                            {new Date(selectedPost.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        </time>
+                        <h1 className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.05] text-neutral-darkest mb-8">
+                            {selectedPost.title}
+                        </h1>
+                    </header>
+
+                    <div className="prose prose-lg prose-neutral max-w-none prose-headings:font-medium prose-headings:tracking-tight prose-a:text-primary prose-a:decoration-1 prose-a:underline-offset-4 hover:prose-a:underline prose-p:text-neutral-dark prose-p:font-light prose-p:leading-relaxed">
+                        <ReactMarkdown>{selectedPost.content}</ReactMarkdown>
+                    </div>
+
+                    <div className="mt-24 pt-12 border-t border-neutral-darkest/10 text-center">
+                        <button 
+                            onClick={() => setSelectedPost(null)}
+                            className="px-8 py-4 bg-neutral-darkest text-white rounded-xl font-bold hover:bg-primary transition-all shadow-lg"
+                        >
+                            Read more studies
+                        </button>
+                    </div>
+                </article>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-neutral-white pt-32 pb-24 px-6 sm:px-12">
             <div className="max-w-4xl mx-auto">
@@ -71,7 +127,7 @@ export const SliceStudies: React.FC = () => {
                     </p>
                 </header>
 
-                {loading ? (
+                {loading || postLoading ? (
                     <div className="space-y-12">
                         {[1, 2, 3].map(i => (
                             <div key={i} className="animate-pulse space-y-4">
@@ -84,7 +140,11 @@ export const SliceStudies: React.FC = () => {
                 ) : (
                     <div className="grid gap-16 md:gap-24">
                         {posts.map((post) => (
-                            <article key={post.id} className="group cursor-pointer">
+                            <article 
+                                key={post.id} 
+                                className="group cursor-pointer"
+                                onClick={() => handlePostClick(post.id)}
+                            >
                                 <div className="flex flex-col gap-6">
                                     <div className="flex items-center gap-4 text-[10px] font-bold tracking-widest uppercase text-neutral-light">
                                         <time>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
@@ -108,6 +168,7 @@ export const SliceStudies: React.FC = () => {
                         ))}
                     </div>
                 )}
+                {/* Newsletter / CTA ... */}
 
                 {/* Newsletter / CTA */}
                 <div className="mt-32 p-12 bg-neutral-darkest rounded-[2.5rem] relative overflow-hidden">
