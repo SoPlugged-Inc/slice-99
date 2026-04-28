@@ -44,6 +44,9 @@ export default async function handler(req, res) {
     return res.status(200).json(posts);
   } catch (error) {
     console.error('Notion API Error:', error);
-    return res.status(500).json({ message: 'Error fetching studies' });
+    return res.status(500).json({ 
+      message: 'Error fetching studies',
+      details: error.message || 'Unknown Notion error'
+    });
   }
 }
