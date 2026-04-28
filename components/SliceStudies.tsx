@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ExternalLink, Clock, User, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Clock, User, ChevronRight, CheckCircle } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 interface Post {
     id: string;
@@ -9,14 +10,14 @@ interface Post {
     date: string;
 }
 
-import ReactMarkdown from 'react-markdown';
-
 export const SliceStudies: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [selectedPost, setSelectedPost] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [postLoading, setPostLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [email, setEmail] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         const fetchStudies = async () => {
@@ -38,6 +39,25 @@ export const SliceStudies: React.FC = () => {
 
         fetchStudies();
     }, []);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+        
+        try {
+            const response = await fetch('https://formspree.io/f/xnjlezlq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            if (response.ok) {
+                setSubmitted(true);
+                setEmail('');
+            }
+        } catch (err) {
+            console.error('Form submission error:', err);
+        }
+    };
 
     const handlePostClick = async (id: string) => {
         setPostLoading(true);
@@ -168,7 +188,6 @@ export const SliceStudies: React.FC = () => {
                         ))}
                     </div>
                 )}
-                {/* Newsletter / CTA ... */}
 
                 {/* Newsletter / CTA */}
                 <div className="mt-32 p-12 bg-neutral-darkest rounded-[2.5rem] relative overflow-hidden">
@@ -178,16 +197,34 @@ export const SliceStudies: React.FC = () => {
                             <h3 className="text-3xl font-medium text-white mb-2">Get the playbook.</h3>
                             <p className="text-neutral-400 font-light">Weekly creator teardowns delivered to your inbox.</p>
                         </div>
-                        <div className="flex w-full md:w-auto gap-3">
-                            <input 
-                                type="email" 
-                                placeholder="Enter your email" 
-                                className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white w-full md:w-64 focus:outline-none focus:border-primary transition-colors"
-                            />
-                            <button className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-hover transition-all whitespace-nowrap shadow-xl">
-                                Join 2k+ Founders
-                            </button>
-                        </div>
+                        
+                        {submitted ? (
+                            <div className="flex items-center gap-3 bg-white/5 border border-primary/20 px-8 py-6 rounded-2xl animate-clip-down">
+                                <CheckCircle className="text-primary" size={24} />
+                                <div className="text-left">
+                                    <p className="text-white font-bold">You're on the list!</p>
+                                    <p className="text-neutral-400 text-xs font-light">Check your inbox for the first study.</p>
+                                </div>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="flex w-full md:w-auto gap-3">
+                                <input 
+                                    required
+                                    type="email" 
+                                    name="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Enter your email" 
+                                    className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white w-full md:w-64 focus:outline-none focus:border-primary transition-colors"
+                                />
+                                <button 
+                                    type="submit"
+                                    className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-hover transition-all whitespace-nowrap shadow-xl"
+                                >
+                                    Join 2k+ Founders
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </div>
             </div>
