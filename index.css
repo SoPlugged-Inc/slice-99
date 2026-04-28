@@ -28,7 +28,7 @@
     width: calc(100% + 1rem);
     offset-path: rect(0 auto auto 0 round calc(var(--rx) + 10px));
     animation: border-beam 8s infinite linear;
-    background: linear-gradient(to left, transparent, #0055FF, transparent);
+    background: linear-gradient(to left, transparent, #FF4500, transparent);
     offset-anchor: 50% 50%;
   }
 }

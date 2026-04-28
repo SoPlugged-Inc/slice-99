@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Loader2, ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
-  page: 'brand' | 'creator';
-  onSwitch: (page: 'brand' | 'creator') => void;
+  page: 'brand' | 'creator' | 'blog';
+  onSwitch: (page: 'brand' | 'creator' | 'blog') => void;
   onApplyClick?: () => void;
 }
 
@@ -12,10 +12,15 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) => {
   const [isLoading, setIsLoading] = useState(false);
   const isCreator = page === 'creator';
+  const isBlog = page === 'blog';
 
   const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isBlog) {
+      onSwitch('brand');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -35,17 +40,15 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) 
 
   const handleActionClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isCreator && onApplyClick) {
-      onApplyClick();
-      return;
+    
+    if (!isCreator) {
+      onSwitch('creator');
     }
-
-    setIsLoading(true);
-    const url = 'https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00'; // Brand specific URL
-    setTimeout(() => {
-      setIsLoading(false);
-      window.open(url, '_blank');
-    }, 1000);
+    
+    if (onApplyClick) {
+      // Small timeout to allow route switch to process visually
+      setTimeout(() => onApplyClick(), 100);
+    }
   };
 
   // Theme classes
@@ -76,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) 
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-dark">
-          {!isCreator ? (
+          {!isCreator && !isBlog && (
             <>
               <a
                 href="#how-it-works"
@@ -93,23 +96,20 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) 
                 FAQ
               </a>
             </>
-          ) : (
-            <button
-              onClick={() => onSwitch('brand')}
-              className={`transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-1 ${activeLinkClass}`}
-            >
-              For Brands
-            </button>
           )}
         </div>
 
         <div className="flex items-center gap-4">
           {!isCreator ? (
             <button
-              onClick={() => onSwitch('creator')}
+              onClick={() => onSwitch(isBlog ? 'brand' : 'creator')}
               className={`hidden sm:flex items-center gap-1 text-sm font-medium text-neutral-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-2 py-1 ${activeLinkClass}`}
             >
-              Are you a creator? <ArrowRight size={14} />
+              {isBlog ? (
+                <><ArrowRight size={14} className="rotate-180" /> Back to Home</>
+              ) : (
+                <>Are you a creator? <ArrowRight size={14} /></>
+              )}
             </button>
           ) : (
             <button
@@ -125,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) 
             disabled={isLoading}
             className={`text-white px-5 py-2 text-sm font-bold tracking-tight rounded-md shadow-lg transition-all active:scale-95 inline-block text-center decoration-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-darkest focus-visible:ring-offset-2 disabled:opacity-80 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center min-w-[140px] ${buttonClass}`}
           >
-            {isLoading ? <Loader2 size={16} className="animate-spin" /> : (!isCreator ? "Book Slot" : "Join Slice")}
+            {!isCreator ? "Join the Roster" : "Join Slice"}
           </button>
         </div>
       </div>

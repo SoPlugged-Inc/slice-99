@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { TermsModal } from './components/TermsModal';
-import { ChatBot } from './components/ChatBot';
 import { BrandLanding } from './components/BrandLanding';
 import { CreatorLanding } from './components/CreatorLanding';
 import { CreatorApplyModal } from './components/CreatorApplyModal';
+import { SliceStudies } from './components/SliceStudies';
 
 
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'brand' | 'creator'>(() => {
-    return window.location.pathname.startsWith('/creators') ? 'creator' : 'brand';
+  const [currentPage, setCurrentPage] = useState<'brand' | 'creator' | 'blog'>(() => {
+    const path = window.location.pathname;
+    if (path.startsWith('/creators')) return 'creator';
+    if (path.startsWith('/blog')) return 'blog';
+    return 'brand';
   });
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isCreatorApplyOpen, setIsCreatorApplyOpen] = useState(false);
 
-  const handlePageSwitch = (page: 'brand' | 'creator') => {
+  const handlePageSwitch = (page: 'brand' | 'creator' | 'blog') => {
     setCurrentPage(page);
-    window.history.pushState({}, '', page === 'creator' ? '/creators' : '/');
+    let path = '/';
+    if (page === 'creator') path = '/creators';
+    if (page === 'blog') path = '/blog';
+    window.history.pushState({}, '', path);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -29,7 +35,9 @@ function App() {
         onApplyClick={() => setIsCreatorApplyOpen(true)}
       />
 
-      {currentPage === 'brand' ? <BrandLanding /> : <CreatorLanding onApplyClick={() => setIsCreatorApplyOpen(true)} />}
+      {currentPage === 'brand' && <BrandLanding />}
+      {currentPage === 'creator' && <CreatorLanding onApplyClick={() => setIsCreatorApplyOpen(true)} />}
+      {currentPage === 'blog' && <SliceStudies />}
 
       {/* Footer - Shared */}
       <footer className="bg-neutral-darkest text-neutral-light py-12 sm:py-16 px-4 border-t border-neutral-darker relative overflow-hidden">
@@ -70,6 +78,15 @@ function App() {
               </a>
             </div>
             <div className="flex flex-col gap-3">
+              <span className="text-white font-bold uppercase tracking-widest text-[10px]">Resources</span>
+              <button
+                onClick={() => handlePageSwitch('blog')}
+                className="text-left hover:text-primary transition-colors hover:underline decoration-primary decoration-1 underline-offset-4"
+              >
+                Slice Studies
+              </button>
+            </div>
+            <div className="flex flex-col gap-3">
               <span className="text-white font-bold uppercase tracking-widest text-[10px]">Legal</span>
               <button
                 onClick={() => setIsTermsOpen(true)}
@@ -94,7 +111,6 @@ function App() {
       {/* Modals & Floating Elements */}
       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
       <CreatorApplyModal isOpen={isCreatorApplyOpen} onClose={() => setIsCreatorApplyOpen(false)} />
-      {currentPage === 'brand' && <ChatBot />}
     </div>
   );
 }

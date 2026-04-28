@@ -25,22 +25,22 @@ export default {
                     700: '#c2410c',
                 },
                 primary: {
-                    DEFAULT: '#0055FF',
-                    hover: '#0044CC',
+                    DEFAULT: '#FF4500', // Strong accent
+                    hover: '#CC3700',
                 },
                 creator: {
-                    DEFAULT: '#FF3879',
-                    hover: '#E01E5A',
+                    DEFAULT: '#FF4500',
+                    hover: '#CC3700',
                 },
                 neutral: {
                     white: '#FFFFFF',
-                    lightest: '#F5F7FA',
-                    lighter: '#E2E8F0',
-                    light: '#94A3B8',
-                    DEFAULT: '#64748B',
-                    dark: '#334155',
-                    darker: '#1E293B',
-                    darkest: '#0F172A',
+                    lightest: '#FDFBF7', // Cream
+                    lighter: '#E8E4DB', // Cream border
+                    light: '#A39E93',
+                    DEFAULT: '#7A756C',
+                    dark: '#3A3A3A',
+                    darker: '#222222',
+                    darkest: '#111111', // Black
                 },
                 brand: {
                     green: '#10b981',
@@ -61,6 +61,10 @@ export default {
                 'notification-slide': 'notificationSlide 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
                 'slideUpFade': 'slideUpFade 0.5s ease-out forwards',
                 'slide-vertical': 'slideVertical 12s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                'float-1': 'float 6s ease-in-out infinite',
+                'float-2': 'float 8s ease-in-out infinite',
+                'float-3': 'float 7s ease-in-out infinite',
+                'float-4': 'float 9s ease-in-out infinite',
             },
             backgroundImage: {
                 'grid-pattern': "linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)",
@@ -87,6 +91,10 @@ export default {
                     '50%, 71.66%': { transform: 'translateY(-40%)' },
                     '75%, 96.66%': { transform: 'translateY(-60%)' },
                     '100%': { transform: 'translateY(-80%)' },
+                },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0px)' },
+                    '50%': { transform: 'translateY(-20px)' },
                 }
             },
         }
