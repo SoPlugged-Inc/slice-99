@@ -123,7 +123,7 @@ export const SliceStudies: React.FC = () => {
                         <span className="font-serif italic text-primary">Creator Growth.</span>
                     </h1>
                     <p className="text-xl text-neutral-dark font-light max-w-2xl leading-relaxed">
-                        Real-world case studies, creator teardowns, and the exact strategies used to scale founder-led brands through fractionalized UGC.
+                        Real-world case studies, algorithm hacks, and the exact strategies used to scale founder-led brands through content marketing.
                     </p>
                 </header>
 

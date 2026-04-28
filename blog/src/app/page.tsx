@@ -17,7 +17,7 @@ export default async function BlogIndex() {
             Slice Studies: <br className="hidden sm:block" /> Creator Growth.
           </h1>
           <p className="mt-6 text-xl text-[#7A756C] font-light max-w-2xl">
-            Real-world case studies, creator teardowns, and the exact strategies used to scale founder-led brands through fractionalized UGC.
+            Real-world case studies, algorithm hacks, and the exact strategies used to scale founder-led brands through content marketing.
           </p>
         </header>
 
