@@ -454,7 +454,7 @@ export const BrandLanding: React.FC = () => {
                         <p className="text-xl text-neutral-dark leading-relaxed font-light mb-10 max-w-xl">
                             We don't believe in licensing fees or temporary usage. When you buy a slice, you own the asset.
                             <br /><br />
-                            <strong className="text-neutral-darkest font-medium">Build your asset library.</strong> From Meta ads to out-of-home billboards, your campaign content is ready to be deployed across every channel you own. No renewals, no hidden costs.
+                            <strong className="text-neutral-darkest font-medium">Build your asset library.</strong> From Meta ads to out-of-home billboards, your campaign content is ready to be deployed across every channel you own.
                         </p>
 
                         <div className="flex flex-wrap gap-12">
@@ -780,7 +780,7 @@ export const BrandLanding: React.FC = () => {
                         <ExternalLink size={20} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                     <div className="mt-8 text-sm text-neutral-dark font-mono tracking-widest uppercase font-bold">
-                        $99 Per Slice <span className="opacity-50">/</span> Zero DMs
+                        $99 Per Slice <span className="opacity-50">/</span> No Hidden Fees
                     </div>
                 </div>
             </div>

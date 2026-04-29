@@ -65,7 +65,7 @@ export const SliceStudies: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!email) return;
-        
+
         try {
             const response = await fetch('https://formspree.io/f/xnjlezlq', {
                 method: 'POST',
@@ -89,7 +89,7 @@ export const SliceStudies: React.FC = () => {
             const data = await response.json();
             setSelectedPost(data);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
+
             if (updateUrl) {
                 const post = posts.find(p => p.id === id);
                 if (post) {
@@ -134,13 +134,13 @@ export const SliceStudies: React.FC = () => {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center text-center p-12 pt-40">
                 <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                   <Clock size={32} />
+                    <Clock size={32} />
                 </div>
                 <h2 className="text-3xl font-medium mb-4 tracking-tight">Unable to sync studies.</h2>
                 <p className="text-neutral-dark mb-8 max-w-md mx-auto font-light leading-relaxed">
                     Error: <span className="font-mono text-sm bg-neutral-100 px-2 py-1 rounded">{error}</span>
                 </p>
-                <button 
+                <button
                     onClick={() => window.location.reload()}
                     className="px-8 py-4 bg-neutral-darkest text-white rounded-2xl font-bold hover:bg-primary transition-all shadow-xl"
                 >
@@ -157,7 +157,7 @@ export const SliceStudies: React.FC = () => {
                     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
                 )}
                 <article className="max-w-3xl mx-auto">
-                    <button 
+                    <button
                         onClick={() => {
                             setSelectedPost(null);
                             window.history.pushState({}, '', '/blog');
@@ -166,7 +166,7 @@ export const SliceStudies: React.FC = () => {
                     >
                         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to all studies
                     </button>
-                    
+
                     <header className="mb-16">
                         <time className="text-sm font-bold tracking-widest uppercase text-neutral-light block mb-4">
                             {new Date(selectedPost.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
@@ -190,7 +190,7 @@ export const SliceStudies: React.FC = () => {
                     </div>
 
                     <div className="mt-24 pt-12 border-t border-neutral-darkest/10 text-center">
-                        <button 
+                        <button
                             onClick={() => {
                                 setSelectedPost(null);
                                 window.history.pushState({}, '', '/blog');
@@ -235,8 +235,8 @@ export const SliceStudies: React.FC = () => {
                 ) : (
                     <div className="grid gap-16 md:gap-24">
                         {posts.map((post) => (
-                            <article 
-                                key={post.id} 
+                            <article
+                                key={post.id}
                                 className="group cursor-pointer"
                                 onClick={() => handlePostClick(post.id)}
                             >
@@ -246,11 +246,11 @@ export const SliceStudies: React.FC = () => {
                                         <span className="w-1 h-1 rounded-full bg-neutral-lighter"></span>
                                         <span className="text-neutral-dark">5 min read</span>
                                     </div>
-                                    
+
                                     <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-neutral-darkest group-hover:text-primary transition-all duration-300">
                                         {post.title}
                                     </h2>
-                                    
+
                                     <p className="text-lg text-neutral-dark font-light leading-relaxed max-w-3xl">
                                         {post.description}
                                     </p>
@@ -272,7 +272,7 @@ export const SliceStudies: React.FC = () => {
                             <h3 className="text-3xl font-medium text-white mb-2">Get the playbook.</h3>
                             <p className="text-neutral-400 font-light">Weekly creator teardowns delivered to your inbox.</p>
                         </div>
-                        
+
                         {submitted ? (
                             <div className="flex items-center gap-3 bg-white/5 border border-primary/20 px-8 py-6 rounded-2xl animate-clip-down">
                                 <CheckCircle className="text-primary" size={24} />
@@ -283,20 +283,20 @@ export const SliceStudies: React.FC = () => {
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="flex w-full md:w-auto gap-3">
-                                <input 
+                                <input
                                     required
-                                    type="email" 
+                                    type="email"
                                     name="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Enter your email" 
+                                    placeholder="Enter your email"
                                     className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white w-full md:w-64 focus:outline-none focus:border-primary transition-colors"
                                 />
-                                <button 
+                                <button
                                     type="submit"
                                     className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-hover transition-all whitespace-nowrap shadow-xl"
                                 >
-                                    Join 2k+ Founders
+                                    Join 300+ Founders
                                 </button>
                             </form>
                         )}
