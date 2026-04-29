@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ArrowLeft, ExternalLink, Clock, User, ChevronRight, CheckCircle } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
@@ -40,6 +40,18 @@ export const SliceStudies: React.FC = () => {
         fetchStudies();
     }, []);
 
+    // Handle deep link to subscribe
+    useEffect(() => {
+        if (!loading && window.location.hash === '#subscribe') {
+            const el = document.getElementById('subscribe-section');
+            if (el) {
+                setTimeout(() => {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    }, [loading]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!email) return;
@@ -67,12 +79,44 @@ export const SliceStudies: React.FC = () => {
             const data = await response.json();
             setSelectedPost(data);
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Update URL for the post (without reloading)
+            const post = posts.find(p => p.id === id);
+            if (post) {
+                window.history.pushState({}, '', `/blog#${post.slug}`);
+            }
         } catch (err: any) {
             setError(err.message);
         } finally {
             setPostLoading(false);
         }
     };
+
+    const schemaData = useMemo(() => {
+        if (!selectedPost) return null;
+        return {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": selectedPost.title,
+            "datePublished": selectedPost.date,
+            "author": {
+                "@type": "Organization",
+                "name": "Slice",
+                "url": "https://slice99.com"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Slice",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://slice99.com/favicon.svg"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": window.location.href
+            }
+        };
+    }, [selectedPost]);
 
     if (error) {
         return (
@@ -97,9 +141,17 @@ export const SliceStudies: React.FC = () => {
     if (selectedPost) {
         return (
             <div className="min-h-screen bg-neutral-white pt-32 pb-24 px-6 sm:px-12">
+                {schemaData && (
+                    <script type="application/ld+json">
+                        {JSON.stringify(schemaData)}
+                    </script>
+                )}
                 <article className="max-w-3xl mx-auto">
                     <button 
-                        onClick={() => setSelectedPost(null)}
+                        onClick={() => {
+                            setSelectedPost(null);
+                            window.history.pushState({}, '', '/blog');
+                        }}
                         className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-neutral-light hover:text-primary transition-colors mb-16 group"
                     >
                         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to all studies
@@ -114,13 +166,26 @@ export const SliceStudies: React.FC = () => {
                         </h1>
                     </header>
 
-                    <div className="prose prose-lg prose-neutral max-w-none prose-headings:font-medium prose-headings:tracking-tight prose-a:text-primary prose-a:decoration-1 prose-a:underline-offset-4 hover:prose-a:underline prose-p:text-neutral-dark prose-p:font-light prose-p:leading-relaxed">
+                    {/* Enhanced Typography Section */}
+                    <div className="prose prose-xl prose-neutral max-w-none 
+                        prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-neutral-darkest
+                        prose-p:text-neutral-dark prose-p:font-light prose-p:leading-[1.7] prose-p:mb-8
+                        prose-strong:font-bold prose-strong:text-neutral-darkest
+                        prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:py-2 prose-blockquote:px-8 prose-blockquote:rounded-r-2xl prose-blockquote:italic
+                        prose-img:rounded-[2rem] prose-img:shadow-2xl
+                        prose-a:text-primary prose-a:decoration-1 prose-a:underline-offset-4 hover:prose-a:underline
+                        prose-li:text-neutral-dark prose-li:font-light
+                        ">
                         <ReactMarkdown>{selectedPost.content}</ReactMarkdown>
                     </div>
 
                     <div className="mt-24 pt-12 border-t border-neutral-darkest/10 text-center">
                         <button 
-                            onClick={() => setSelectedPost(null)}
+                            onClick={() => {
+                                setSelectedPost(null);
+                                window.history.pushState({}, '', '/blog');
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
                             className="px-8 py-4 bg-neutral-darkest text-white rounded-xl font-bold hover:bg-primary transition-all shadow-lg"
                         >
                             Read more studies
@@ -190,7 +255,7 @@ export const SliceStudies: React.FC = () => {
                 )}
 
                 {/* Newsletter / CTA */}
-                <div className="mt-32 p-12 bg-neutral-darkest rounded-[2.5rem] relative overflow-hidden">
+                <div id="subscribe-section" className="mt-32 p-12 bg-neutral-darkest rounded-[2.5rem] relative overflow-hidden">
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
                         <div>
