@@ -29,6 +29,16 @@ export const SliceStudies: React.FC = () => {
                 }
                 const data = await response.json();
                 setPosts(data);
+
+                // Handle initial slug from URL
+                const pathParts = window.location.pathname.split('/');
+                if (pathParts.length > 2 && pathParts[1] === 'blog') {
+                    const slug = pathParts[2];
+                    const post = data.find((p: Post) => p.slug === slug);
+                    if (post) {
+                        handlePostClick(post.id, false); // false to avoid redundant pushState
+                    }
+                }
             } catch (err: any) {
                 console.error(err);
                 setError(err.message);
@@ -71,7 +81,7 @@ export const SliceStudies: React.FC = () => {
         }
     };
 
-    const handlePostClick = async (id: string) => {
+    const handlePostClick = async (id: string, updateUrl = true) => {
         setPostLoading(true);
         try {
             const response = await fetch(`/api/post?id=${id}`);
@@ -79,10 +89,12 @@ export const SliceStudies: React.FC = () => {
             const data = await response.json();
             setSelectedPost(data);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            // Update URL for the post (without reloading)
-            const post = posts.find(p => p.id === id);
-            if (post) {
-                window.history.pushState({}, '', `/blog#${post.slug}`);
+            
+            if (updateUrl) {
+                const post = posts.find(p => p.id === id);
+                if (post) {
+                    window.history.pushState({}, '', `/blog/${post.slug}`);
+                }
             }
         } catch (err: any) {
             setError(err.message);
@@ -142,9 +154,7 @@ export const SliceStudies: React.FC = () => {
         return (
             <div className="min-h-screen bg-neutral-white pt-32 pb-24 px-6 sm:px-12">
                 {schemaData && (
-                    <script type="application/ld+json">
-                        {JSON.stringify(schemaData)}
-                    </script>
+                    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
                 )}
                 <article className="max-w-3xl mx-auto">
                     <button 
