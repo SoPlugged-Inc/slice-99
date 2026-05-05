@@ -75,7 +75,7 @@ const creatorPosts = [
     }
 ];
 
-export const BrandLanding: React.FC = () => {
+export const BrandLanding: React.FC<{ onSwitch?: (page: 'brand' | 'creator' | 'blog') => void }> = ({ onSwitch }) => {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const [testimonialIdx, setTestimonialIdx] = useState(0);
     const [postIdx, setPostIdx] = useState(0);
@@ -112,11 +112,22 @@ export const BrandLanding: React.FC = () => {
                             Stop burning budget on agency fees and endless creator DMs. Get usable UGC for $99 per video.
                         </p>
 
-                        <div className="flex justify-start gap-6 font-sans">
-                            <button onClick={() => window.open('https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00', '_blank')} className="group relative px-6 sm:px-8 py-3.5 sm:py-4 bg-neutral-darkest text-white text-base sm:text-lg font-medium rounded-xl hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(255,69,0,0.3)] transition-all flex items-center justify-center gap-2 overflow-hidden overflow-visible z-10 w-full sm:w-auto hover:bg-brand-orange">
+                        <div className="flex flex-col sm:flex-row items-center gap-6 font-sans">
+                            <button onClick={handleHeroClick} className="group relative px-8 py-4 bg-neutral-darkest text-white text-lg font-medium rounded-xl hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(255,69,0,0.3)] transition-all flex items-center justify-center gap-2 whitespace-nowrap hover:bg-primary">
                                 Get a Slice
                                 <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
                             </button>
+                            <a 
+                                href="#how-it-works" 
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="text-sm font-bold text-neutral-darkest border-b border-primary/30 hover:border-primary pb-0.5 transition-all flex items-center gap-2 group"
+                            >
+                                See how it works
+                                <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
+                            </a>
                         </div>
 
                         {/* Social Proof / Micro-copy */}
@@ -229,8 +240,7 @@ export const BrandLanding: React.FC = () => {
                             <strong className="text-neutral-darkest font-medium">Slice is a fractionalized UGC engine.</strong> We replaced 5-figure agency retainers with a budget-friendly pipeline. You send us your product(s)), we pool them with complimentary brands and match them to vetted creators on our roster.
                         </p>
 
-                        {/* Inline Deliverables Badges */}
-                        <div className="flex flex-wrap gap-3">
+                        <div className="flex flex-wrap gap-3 mb-10">
                             <span className="px-4 py-2 rounded-full border border-neutral-200 bg-white text-sm font-medium text-neutral-dark flex items-center gap-2 shadow-sm">
                                 <Check size={16} className="text-primary" /> Raw Video File
                             </span>
@@ -241,6 +251,8 @@ export const BrandLanding: React.FC = () => {
                                 <Check size={16} className="text-primary" /> Commercial Rights
                             </span>
                         </div>
+
+
                     </div>
 
                     {/* Scrappy Image Right */}
@@ -314,6 +326,13 @@ export const BrandLanding: React.FC = () => {
                         <p className="text-xl leading-relaxed font-light text-neutral-300 mb-10">
                             Every slice includes a dedicated "Shop the Haul" landing page. Viewers click straight to your checkout, while we track the exact ROI of your $99 slot. With continuous data aggregation, we're building the largest predictive algorithm for creator marketing.
                         </p>
+                        <div className="flex flex-col sm:flex-row items-center gap-6">
+                            <button onClick={handleHeroClick} className="group relative px-8 py-4 bg-primary text-white text-lg font-medium rounded-xl hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(255,69,0,0.3)] transition-all flex items-center justify-center gap-2 whitespace-nowrap">
+                                Get a Slice
+                                <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
+                            </button>
+                            <span className="text-neutral-500 text-xs italic font-light">Performance data included.</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -347,6 +366,8 @@ export const BrandLanding: React.FC = () => {
                                 <div className="text-[10px] uppercase tracking-widest text-neutral-light font-bold mt-1">Engagement</div>
                             </div>
                         </div>
+
+
                     </div>
 
                     {/* Browser Mockup Visual Right */}
@@ -467,6 +488,8 @@ export const BrandLanding: React.FC = () => {
                                 <span className="text-[10px] uppercase tracking-widest text-neutral-light mt-1 font-bold">4K Source Included</span>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -662,9 +685,21 @@ export const BrandLanding: React.FC = () => {
                             Brands trust <br />
                             <span className="font-serif italic text-primary">Slice99.</span>
                         </h2>
-                        <p className="text-xl text-neutral-dark font-light max-w-sm">
+                        <p className="text-xl text-neutral-dark font-light max-w-sm mb-10">
                             Founder-led brands are abandoning bloated agency retainers for our fractionalized UGC engine.
                         </p>
+                        <div className="flex flex-col sm:flex-row items-center gap-6">
+                            <button onClick={handleHeroClick} className="group relative px-8 py-4 bg-neutral-darkest text-white text-lg font-medium rounded-xl hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(255,69,0,0.3)] transition-all flex items-center justify-center gap-2 whitespace-nowrap hover:bg-primary">
+                                Get a Slice
+                                <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
+                            </button>
+                            <button
+                                onClick={() => onSwitch?.('blog')}
+                                className="text-sm font-bold text-neutral-darkest border-b border-primary/30 hover:border-primary pb-0.5 transition-all whitespace-nowrap"
+                            >
+                                Read success stories
+                            </button>
+                        </div>
                     </div>
 
                     {/* Right Side: Editorial Testimonial Carousel styled like #paid */}
@@ -745,6 +780,17 @@ export const BrandLanding: React.FC = () => {
                             onClick={() => setOpenFaq(idx === openFaq ? null : idx)}
                         />
                     ))}
+                </div>
+
+                <div className="mt-20 flex flex-col items-center">
+                    <h3 className="text-2xl font-medium text-neutral-darkest mb-4">Still have questions?</h3>
+                    <p className="text-neutral-dark mb-10 font-light text-center max-w-md">Our team is here to help you whenever you're ready to ship your first box</p>
+                    <div className="flex flex-col items-center">
+                        <a href="mailto:support@slice99.com" className="text-sm font-bold tracking-widest uppercase text-neutral-darkest border-b-2 border-primary/30 hover:border-primary pb-1 transition-all flex items-center gap-2 group">
+                            Chat with us
+                            <MessageSquare size={16} className="group-hover:scale-110 transition-transform" />
+                        </a>
+                    </div>
                 </div>
             </div>
 

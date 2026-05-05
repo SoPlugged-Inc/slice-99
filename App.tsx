@@ -35,7 +35,7 @@ function App() {
         onApplyClick={() => setIsCreatorApplyOpen(true)}
       />
 
-      {currentPage === 'brand' && <BrandLanding />}
+      {currentPage === 'brand' && <BrandLanding onSwitch={handlePageSwitch} />}
       {currentPage === 'creator' && <CreatorLanding onApplyClick={() => setIsCreatorApplyOpen(true)} />}
       {currentPage === 'blog' && <SliceStudies />}
 

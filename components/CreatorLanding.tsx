@@ -247,9 +247,22 @@ export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) 
                                 High-end brands. <br />
                                 <span className="font-serif italic text-primary">Simple steps.</span>
                             </h2>
-                            <p className="text-xl text-neutral-dark font-light leading-relaxed max-w-xl">
+                            <p className="text-xl text-neutral-dark font-light leading-relaxed max-w-xl mb-10">
                                 We've removed the worst parts of being a creator—the chasing, the endless DMs, and the 60-day payment terms. You focus on the content; we handle the rest.
                             </p>
+                            <div className="flex flex-col sm:flex-row items-center gap-8">
+                                <button
+                                    onClick={handleApplyClick}
+                                    className="px-8 py-4 bg-neutral-darkest text-white font-bold rounded-xl hover:bg-primary transition-all shadow-xl flex items-center justify-center gap-2 group w-full sm:w-auto"
+                                >
+                                    Join the Roster
+                                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                </button>
+                                <div className="text-sm font-bold tracking-widest uppercase text-neutral-darkest border-b-2 border-primary/30 pb-1 flex items-center gap-2">
+                                    <Zap size={14} className="text-primary" />
+                                    <span>Fast approval process</span>
+                                </div>
+                            </div>
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             {[
@@ -302,6 +315,16 @@ export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) 
                                 <p className="text-xl text-neutral-dark font-light leading-relaxed max-w-xl mb-12">
                                     Once your content is uploaded, we trigger your payout. $200.00 CAD per video, delivered straight to your bank account or Stripe wallet within 48 hours.
                                 </p>
+                                <div className="mb-12 flex flex-col sm:flex-row items-center gap-8">
+                                    <button
+                                        onClick={handleApplyClick}
+                                        className="px-8 py-4 bg-neutral-darkest text-white font-bold rounded-xl hover:bg-primary transition-all shadow-xl flex items-center justify-center gap-2 group w-full sm:w-auto"
+                                    >
+                                        Start earning today
+                                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                    <span className="text-neutral-500 text-sm italic font-light">No payout minimums. No waiting.</span>
+                                </div>
 
                                 <div className="grid grid-cols-2 gap-8 sm:gap-12">
                                     <div className="border-l-2 border-primary pl-6">
@@ -386,6 +409,17 @@ export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) 
                             </div>
                         ))}
                     </div>
+
+                    <div className="mt-20 flex flex-col items-center gap-6">
+                        <button
+                            onClick={handleApplyClick}
+                            className="px-12 py-6 bg-neutral-darkest text-white text-xl font-bold rounded-2xl hover:bg-primary transition-all shadow-2xl flex items-center justify-center gap-3 group"
+                        >
+                            Join the Roster
+                            <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                        <a href="#faq" onClick={(e) => { e.preventDefault(); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-sm font-bold tracking-widest uppercase text-neutral-darkest border-b border-neutral-darkest/20 hover:border-primary transition-all">View all creator benefits</a>
+                    </div>
                 </div>
             </Section>
 
@@ -432,6 +466,24 @@ export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) 
                             <p className="text-neutral-dark text-sm leading-relaxed pl-6 border-l border-neutral-lighter group-hover:border-creator/20 transition-colors">{faq.a}</p>
                         </div>
                     ))}
+                </div>
+
+                <div className="mt-20 flex flex-col items-center">
+                    <h3 className="text-2xl font-bold text-neutral-darkest mb-4">Have more questions?</h3>
+                    <p className="text-neutral-dark mb-10 font-light text-center max-w-md">We're looking for authentic voices to join our Fall roster. Ready to turn your lifestyle into revenue?</p>
+                    <div className="flex flex-col sm:flex-row items-center gap-8">
+                        <button
+                            onClick={handleApplyClick}
+                            className="px-10 py-5 bg-neutral-darkest text-white text-lg font-bold rounded-xl hover:bg-primary transition-all shadow-xl flex items-center justify-center gap-2 group w-full sm:w-auto"
+                        >
+                            Apply to the Roster
+                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                        <a href="mailto:support@slice99.com" className="text-sm font-bold tracking-widest uppercase text-neutral-darkest border-b-2 border-primary/30 hover:border-primary pb-1 transition-all flex items-center gap-2 group">
+                            Contact Support
+                            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                        </a>
+                    </div>
                 </div>
             </Section>
         </>
