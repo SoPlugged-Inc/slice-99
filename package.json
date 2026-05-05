@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/generate-snippets.cjs && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "agent": "node scripts/growth-agent.js"
   },
   "dependencies": {
     "@google/genai": "^1.43.0",

@@ -49,6 +49,8 @@ export default async function handler(req, res) {
       slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
       description: page.properties.Description?.rich_text[0]?.plain_text || '',
       date: page.properties.Date?.date?.start || page.created_time,
+      category: page.properties.Category?.select?.name || '',
+      results: page.properties.Results?.rich_text[0]?.plain_text || '',
     }));
 
     return res.status(200).json(posts);

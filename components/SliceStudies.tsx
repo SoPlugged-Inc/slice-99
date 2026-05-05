@@ -8,6 +8,8 @@ interface Post {
     slug: string;
     description: string;
     date: string;
+    results?: string;
+    category?: string;
 }
 
 export const SliceStudies: React.FC = () => {
@@ -105,11 +107,13 @@ export const SliceStudies: React.FC = () => {
 
     const schemaData = useMemo(() => {
         if (!selectedPost) return null;
-        return {
+        
+        const baseSchema = {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": selectedPost.title,
             "datePublished": selectedPost.date,
+            "description": selectedPost.description,
             "author": {
                 "@type": "Organization",
                 "name": "Slice",
@@ -128,6 +132,34 @@ export const SliceStudies: React.FC = () => {
                 "@id": window.location.href
             }
         };
+
+        // Add Speakable and Dataset markup if Results exist
+        if (selectedPost.results) {
+            return [
+                baseSchema,
+                {
+                    "@context": "https://schema.org",
+                    "@type": "SpeakableSpecification",
+                    "xpath": [
+                        "/html/head/title",
+                        "//*[@id='post-summary']"
+                    ]
+                },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Dataset",
+                    "name": `${selectedPost.title} - Performance Data`,
+                    "description": `Factual records of growth outcomes: ${selectedPost.results}`,
+                    "creator": {
+                        "@type": "Organization",
+                        "name": "Slice"
+                    },
+                    "variableMeasured": "Marketing Performance Outcomes"
+                }
+            ];
+        }
+
+        return baseSchema;
     }, [selectedPost]);
 
     if (error) {
@@ -174,7 +206,19 @@ export const SliceStudies: React.FC = () => {
                         <h1 className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.05] text-neutral-darkest mb-8">
                             {selectedPost.title}
                         </h1>
+                        {selectedPost.category && (
+                            <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold tracking-widest uppercase">
+                                {selectedPost.category}
+                            </span>
+                        )}
                     </header>
+
+                    {/* Summary Blockquote for LLMs and Quick Readers */}
+                    <div id="post-summary" className="mb-12">
+                        <blockquote className="border-l-4 border-primary bg-primary/5 py-6 px-8 rounded-r-2xl italic text-xl text-neutral-darkest font-light leading-relaxed">
+                            {selectedPost.description}
+                        </blockquote>
+                    </div>
 
                     {/* Enhanced Typography Section */}
                     <div className="prose prose-xl prose-neutral max-w-none 

@@ -38,6 +38,8 @@ async function generateSnippets() {
       const description = page.properties.Description?.rich_text[0]?.plain_text || '';
       const slug = page.properties.Slug?.rich_text[0]?.plain_text || page.id;
       const date = page.properties.Date?.date?.start || page.created_time;
+      const category = page.properties.Category?.select?.name || '';
+      const results = page.properties.Results?.rich_text[0]?.plain_text || '';
 
       // Ensure 100-word limit approximately
       const summary = description.split(' ').slice(0, 100).join(' ') + (description.split(' ').length > 100 ? '...' : '');
@@ -46,7 +48,9 @@ async function generateSnippets() {
         title,
         url: `https://slice99.com/blog#${slug}`,
         date,
-        summary
+        summary,
+        category,
+        results
       };
     });
 
