@@ -473,25 +473,25 @@ export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) 
                             city="Toronto" 
                             date="Autumn 2024" 
                             type="Loft Launch" 
-                            image="/Users/sotariye/.gemini/antigravity/brain/73caf4b9-8c1b-4422-92f9-315ceb47f495/toronto_loft_event_1778597477987.png" 
+                            image="/assets/events/toronto.png" 
                         />
                         <CityCard 
                             city="New York" 
                             date="Winter 2024" 
                             type="Brand Dinner" 
-                            image="/Users/sotariye/.gemini/antigravity/brain/73caf4b9-8c1b-4422-92f9-315ceb47f495/nyc_brand_dinner_1778597496937.png" 
+                            image="/assets/events/nyc.png" 
                         />
                         <CityCard 
                             city="Los Angeles" 
                             date="Summer 2024" 
                             type="Creator Summit" 
-                            image="/Users/sotariye/.gemini/antigravity/brain/73caf4b9-8c1b-4422-92f9-315ceb47f495/la_creator_event_1778597517146.png" 
+                            image="/assets/events/la.png" 
                         />
                         <CityCard 
                             city="Vancouver" 
                             date="Spring 2025" 
                             type="Luxury Pop-up" 
-                            image="/Users/sotariye/.gemini/antigravity/brain/73caf4b9-8c1b-4422-92f9-315ceb47f495/vancouver_popup_event_1778597537514.png" 
+                            image="/assets/events/vancouver.png" 
                         />
                     </div>
                 </div>
