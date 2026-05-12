@@ -456,42 +456,38 @@ export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) 
                                 <span className="font-serif italic text-primary">the box.</span>
                             </h2>
                             <p className="text-2xl text-neutral-dark font-light leading-relaxed max-w-2xl">
-                                Our roster gets more than just products—they get access. From intimate brand dinners in Toronto to exclusive PR trips and VIP summits across North America.
+                                Creators on our roster get more than just products—they get access. From intimate brand dinners in Toronto to exclusive PR trips and VIP summits across North America.
                             </p>
                         </div>
                         <div className="lg:col-span-4 lg:text-right">
-                             <div className="text-sm font-bold tracking-[0.2em] uppercase text-neutral-darkest border-b-2 border-primary/30 pb-2 inline-flex items-center gap-2 mb-4">
+                            <div className="text-sm font-bold tracking-[0.2em] uppercase text-neutral-darkest border-b-2 border-primary/30 pb-2 inline-flex items-center gap-2 mb-4">
                                 <Zap size={14} className="text-primary" />
-                                <span>100+ Annual Events</span>
+                                <span>20+ Annual Events</span>
                             </div>
-                            <p className="text-sm text-neutral-light italic font-light">Reserved for active roster members.</p>
+                            <p className="text-sm text-neutral-light italic font-light">Reserved for Slice Creators.</p>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <CityCard 
-                            city="Toronto" 
-                            date="Autumn 2024" 
-                            type="Loft Launch" 
-                            image="/assets/events/toronto.png" 
+                        <CityCard
+                            city="Toronto"
+                            date="Loft Launch"
+                            image="/assets/events/toronto.png"
                         />
-                        <CityCard 
-                            city="New York" 
-                            date="Winter 2024" 
-                            type="Brand Dinner" 
-                            image="/assets/events/nyc.png" 
+                        <CityCard
+                            city="New York"
+                            date="Brand Dinner"
+                            image="/assets/events/nyc.png"
                         />
-                        <CityCard 
-                            city="Los Angeles" 
-                            date="Summer 2024" 
-                            type="Creator Summit" 
-                            image="/assets/events/la.png" 
+                        <CityCard
+                            city="Los Angeles"
+                            date="Creator Summit"
+                            image="/assets/events/la.png"
                         />
-                        <CityCard 
-                            city="Vancouver" 
-                            date="Spring 2025" 
-                            type="Luxury Pop-up" 
-                            image="/assets/events/vancouver.png" 
+                        <CityCard
+                            city="Vancouver"
+                            date="Pop-up"
+                            image="/assets/events/vancouver.png"
                         />
                     </div>
                 </div>
