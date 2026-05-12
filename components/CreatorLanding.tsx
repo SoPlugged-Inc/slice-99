@@ -101,57 +101,24 @@ const PhonePayoutVisual = () => {
     );
 };
 
-const EventVisual = () => {
-    return (
-        <div className="relative mx-auto border-gray-900 bg-gray-900 border-[8px] rounded-[3rem] h-[500px] w-[280px] shadow-2xl flex flex-col items-center justify-start overflow-hidden transform hover:scale-[1.02] transition-all duration-500 group/phone">
-            {/* Dynamic Island */}
-            <div className="absolute top-0 w-full flex justify-center z-20 pt-2">
-                <div className="h-6 w-24 bg-black rounded-full shadow-sm group-hover/phone:w-28 transition-all"></div>
-            </div>
-
-            {/* Screen Content */}
-            <div className="w-full h-full bg-[#0a0a0a] overflow-hidden relative font-sans flex flex-col">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/40 via-transparent to-transparent"></div>
-                
-                {/* Header */}
-                <div className="pt-12 px-6 pb-6 relative z-10">
-                    <div className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Upcoming Invites</div>
-                    <h3 className="text-2xl font-bold text-white tracking-tight">Your Roster Access</h3>
-                </div>
-
-                {/* Invite Cards */}
-                <div className="flex-1 px-4 space-y-4 relative z-10 overflow-hidden">
-                    {[
-                        { title: "Summer PR Suite", city: "Toronto, ON", date: "July 12", color: "from-primary/30" },
-                        { title: "Brand Launch VIP", city: "New York, NY", date: "Aug 05", color: "from-neutral-dark/20" },
-                        { title: "Creator Summit", city: "Los Angeles, CA", date: "Sept 20", color: "from-primary/10" }
-                    ].map((event, i) => (
-                        <div key={i} className={`bg-white/5 border border-white/10 p-4 rounded-2xl backdrop-blur-sm bg-gradient-to-br ${event.color} to-transparent transform transition-all duration-500 hover:scale-[1.02]`}>
-                            <div className="flex justify-between items-start mb-4">
-                                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white">
-                                    <Ticket size={14} />
-                                </div>
-                                <div className="text-[10px] font-bold text-white/40 uppercase">{event.date}</div>
-                            </div>
-                            <div className="text-sm font-bold text-white mb-1">{event.title}</div>
-                            <div className="flex items-center gap-1 text-[10px] text-white/60">
-                                <MapPin size={10} />
-                                <span>{event.city}</span>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Bottom Blur */}
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent z-20"></div>
-                <div className="absolute bottom-8 left-0 right-0 flex justify-center z-30">
-                    <div className="bg-primary text-white text-[10px] font-bold px-6 py-2 rounded-full shadow-lg shadow-primary/20">Claim Invitation</div>
-                </div>
-            </div>
+const CityCard = ({ city, date, type, image }: { city: string; date: string; type: string; image: string }) => (
+    <div className="group relative overflow-hidden rounded-[2rem] bg-white border border-neutral-100 shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2">
+        <div className="aspect-[4/5] overflow-hidden relative">
+            <img src={image} alt={city} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-darkest via-neutral-darkest/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
         </div>
-    );
-};
+        <div className="absolute bottom-0 left-0 right-0 p-8 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <div className="inline-flex px-2 py-0.5 rounded bg-primary/20 backdrop-blur-md text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-4 border border-primary/30">
+                {type}
+            </div>
+            <h3 className="text-3xl font-bold tracking-tight mb-2 leading-none">{city}</h3>
+            <p className="text-sm text-neutral-300 font-light italic">{date}</p>
+        </div>
+        <div className="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-500 rotate-45 group-hover:rotate-0">
+            <ArrowRight size={20} />
+        </div>
+    </div>
+);
 
 interface CreatorLandingProps {
     onApplyClick?: () => void;
@@ -427,84 +394,6 @@ export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) 
                 </div>
             </Section>
 
-            {/* PR & EVENTS */}
-            <Section className="bg-white py-32" id="events">
-                <div className="max-w-[1400px] mx-auto px-6">
-                    <div className="bg-neutral-darkest rounded-[3rem] p-8 sm:p-20 relative overflow-hidden group">
-                        {/* Dramatic Glow */}
-                        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/10 blur-[140px] rounded-full pointer-events-none"></div>
-
-                        <div className="relative z-10 grid lg:grid-cols-12 gap-16 items-center">
-                            <div className="lg:col-span-5 order-2 lg:order-1">
-                                <div className="relative">
-                                    <EventVisual />
-                                    {/* Floating Badges */}
-                                    <div className="absolute -top-6 -left-6 bg-white p-4 rounded-2xl shadow-2xl rotate-[-6deg] hidden sm:block animate-float-1">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                                <Users size={20} />
-                                            </div>
-                                            <div>
-                                                <div className="text-lg font-bold text-neutral-darkest">VIP Only</div>
-                                                <div className="text-[10px] uppercase tracking-widest text-neutral-light font-bold">Event Access</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="absolute -bottom-6 -right-6 bg-primary text-white p-4 rounded-2xl shadow-2xl rotate-[6deg] hidden sm:block animate-float-3">
-                                        <div className="text-lg font-bold">100+</div>
-                                        <div className="text-[10px] uppercase tracking-widest opacity-80 font-bold">Annual PR Events</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="lg:col-span-7 order-1 lg:order-2">
-                                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-8">Exclusive Networking</h3>
-                                <h2 className="text-4xl md:text-6xl font-medium text-white mb-8 tracking-tight leading-[1.1]">
-                                    The coolest events <br />
-                                    <span className="text-neutral-400 font-serif italic">you'll be invited to</span> <br />
-                                    all year.
-                                </h2>
-                                <p className="text-xl text-neutral-300 font-light leading-relaxed max-w-xl mb-12">
-                                    Our roster doesn't just get paid—they get access. From private brand dinners in Toronto to exclusive PR moments in NYC and LA, we make sure you're at the center of the industry's most talked-about events.
-                                </p>
-                                
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-primary shrink-0">
-                                            <MapPin size={20} />
-                                        </div>
-                                        <div>
-                                            <div className="text-white font-bold mb-1">Cross-Border PR</div>
-                                            <div className="text-sm text-neutral-400">Exclusive invites to moments across Canada and the US.</div>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-primary shrink-0">
-                                            <Users size={20} />
-                                        </div>
-                                        <div>
-                                            <div className="text-white font-bold mb-1">Curated Circles</div>
-                                            <div className="text-sm text-neutral-400">Network with founders, VCs, and top-tier creators.</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col sm:flex-row items-center gap-8">
-                                    <button
-                                        onClick={handleApplyClick}
-                                        className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-white hover:text-neutral-darkest transition-all shadow-xl flex items-center justify-center gap-2 group w-full sm:w-auto"
-                                    >
-                                        Apply for access
-                                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                                    </button>
-                                    <span className="text-neutral-400 text-sm italic font-light">Reserved for active roster members.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Section>
-
             {/* COMPARISON - The Creator OS */}
             <Section className="py-32 bg-neutral-lightest">
                 <div className="max-w-[1200px] mx-auto px-6">
@@ -549,6 +438,61 @@ export const CreatorLanding: React.FC<CreatorLandingProps> = ({ onApplyClick }) 
                             <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                         <a href="#faq" onClick={(e) => { e.preventDefault(); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-sm font-bold tracking-widest uppercase text-neutral-darkest border-b border-neutral-darkest/20 hover:border-primary transition-all">View all creator benefits</a>
+                    </div>
+                </div>
+            </Section>
+
+            {/* EXCLUSIVE ACCESS - REDESIGNED */}
+            <Section className="bg-white py-32" id="exclusive-access">
+                <div className="max-w-[1400px] mx-auto px-6">
+                    <div className="grid lg:grid-cols-12 gap-16 items-end mb-20">
+                        <div className="lg:col-span-8">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-neutral-lightest text-neutral-dark rounded-full text-[10px] font-bold tracking-[0.2em] uppercase mb-8 border border-neutral-lighter">
+                                <Users size={12} className="text-primary" />
+                                Roster Exclusive
+                            </div>
+                            <h2 className="text-5xl md:text-8xl font-medium tracking-tight leading-[0.9] text-neutral-darkest mb-8">
+                                Beyond <br />
+                                <span className="font-serif italic text-primary">the box.</span>
+                            </h2>
+                            <p className="text-2xl text-neutral-dark font-light leading-relaxed max-w-2xl">
+                                Our roster gets more than just products—they get access. From intimate brand dinners in Toronto to exclusive PR trips and VIP summits across North America.
+                            </p>
+                        </div>
+                        <div className="lg:col-span-4 lg:text-right">
+                             <div className="text-sm font-bold tracking-[0.2em] uppercase text-neutral-darkest border-b-2 border-primary/30 pb-2 inline-flex items-center gap-2 mb-4">
+                                <Zap size={14} className="text-primary" />
+                                <span>100+ Annual Events</span>
+                            </div>
+                            <p className="text-sm text-neutral-light italic font-light">Reserved for active roster members.</p>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <CityCard 
+                            city="Toronto" 
+                            date="Autumn 2024" 
+                            type="Loft Launch" 
+                            image="/Users/sotariye/.gemini/antigravity/brain/73caf4b9-8c1b-4422-92f9-315ceb47f495/toronto_loft_event_1778597477987.png" 
+                        />
+                        <CityCard 
+                            city="New York" 
+                            date="Winter 2024" 
+                            type="Brand Dinner" 
+                            image="/Users/sotariye/.gemini/antigravity/brain/73caf4b9-8c1b-4422-92f9-315ceb47f495/nyc_brand_dinner_1778597496937.png" 
+                        />
+                        <CityCard 
+                            city="Los Angeles" 
+                            date="Summer 2024" 
+                            type="Creator Summit" 
+                            image="/Users/sotariye/.gemini/antigravity/brain/73caf4b9-8c1b-4422-92f9-315ceb47f495/la_creator_event_1778597517146.png" 
+                        />
+                        <CityCard 
+                            city="Vancouver" 
+                            date="Spring 2025" 
+                            type="Luxury Pop-up" 
+                            image="/Users/sotariye/.gemini/antigravity/brain/73caf4b9-8c1b-4422-92f9-315ceb47f495/vancouver_popup_event_1778597537514.png" 
+                        />
                     </div>
                 </div>
             </Section>
