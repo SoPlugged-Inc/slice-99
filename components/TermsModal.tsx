@@ -85,11 +85,11 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
           </section>
 
           <section>
-            <h3 className="font-bold text-neutral-darkest mb-2 text-base">3. Shipping & Products</h3>
+            <h3 className="font-bold text-neutral-darkest mb-2 text-base">3. Platform Access & Integration</h3>
             <ul className="list-disc pl-5 space-y-1">
-              <li>You are responsible for shipping your product to our consolidation hub in Canada, at your own expense.</li>
-              <li>Products must be received by the deadline provided in your confirmation email. Late shipments may result in forfeiting your slot without refund.</li>
-              <li>Products sent to creators are considered non-returnable gifts. We do not facilitate product returns.</li>
+              <li>You are responsible for providing premium account logins, pre-configured sandbox credentials, or subscription access to your digital product for the creator.</li>
+              <li>Access details must be submitted before the deadline provided in your booking wizard or onboarding confirmation email. Late configurations may result in forfeiting your slot without refund.</li>
+              <li>Featured digital integrations or accounts set up for the creators are considered active, non-returnable workspace access setups. We do not require creators to cancel accounts or purge profiles after filming.</li>
             </ul>
           </section>
 
@@ -110,7 +110,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose }) => {
           <section>
             <h3 className="font-bold text-neutral-darkest mb-2 text-base">6. Liability</h3>
             <p>
-              Slice is not liable for any lost, damaged, or stolen inventory during shipping. Our maximum liability for any claim related to our services is limited to the amount paid for the slot ($99 CAD).
+              Slice is not liable for any platform downtime, virtual setup issues, or credential configurations related to your B2C product. Our maximum liability for any claim related to our services is limited to the amount paid for the slot ($99 CAD).
             </p>
           </section>
           

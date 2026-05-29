@@ -5,6 +5,7 @@ import { BrandLanding } from './components/BrandLanding';
 import { CreatorLanding } from './components/CreatorLanding';
 import { CreatorApplyModal } from './components/CreatorApplyModal';
 import { SliceStudies } from './components/SliceStudies';
+import { BrandBookModal } from './components/BrandBookModal';
 
 
 
@@ -17,6 +18,13 @@ function App() {
   });
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isCreatorApplyOpen, setIsCreatorApplyOpen] = useState(false);
+  const [isBrandBookOpen, setIsBrandBookOpen] = useState(false);
+  const [initialBookPackage, setInitialBookPackage] = useState<'pilot' | 'growth' | 'enterprise'>('pilot');
+
+  const handleBrandBookTrigger = (pkg: 'pilot' | 'growth' | 'enterprise' = 'pilot') => {
+    setInitialBookPackage(pkg);
+    setIsBrandBookOpen(true);
+  };
 
   const handlePageSwitch = (page: 'brand' | 'creator' | 'blog') => {
     setCurrentPage(page);
@@ -28,14 +36,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans bg-neutral-white text-neutral-darkest bg-grid-pattern bg-fixed">
+    <div className="min-h-screen font-sans bg-[#FDFBF7] text-neutral-darkest bg-fixed">
       <Navbar
         page={currentPage}
         onSwitch={handlePageSwitch}
         onApplyClick={() => setIsCreatorApplyOpen(true)}
       />
 
-      {currentPage === 'brand' && <BrandLanding onSwitch={handlePageSwitch} />}
+      {currentPage === 'brand' && <BrandLanding onSwitch={handlePageSwitch} onBookClick={handleBrandBookTrigger} />}
       {currentPage === 'creator' && <CreatorLanding onApplyClick={() => setIsCreatorApplyOpen(true)} />}
       {currentPage === 'blog' && <SliceStudies />}
 
@@ -58,17 +66,6 @@ function App() {
 
           <div className="grid grid-cols-2 sm:flex gap-8 sm:gap-12 text-sm text-neutral-400">
             <div className="flex flex-col gap-3">
-              <span className="text-white font-bold uppercase tracking-widest text-[10px]">Social</span>
-              <a
-                href="https://www.instagram.com/slice99/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors hover:underline decoration-primary decoration-1 underline-offset-4"
-              >
-                Instagram
-              </a>
-            </div>
-            <div className="flex flex-col gap-3">
               <span className="text-white font-bold uppercase tracking-widest text-[10px]">Contact</span>
               <a
                 href="mailto:support@slice99.com"
@@ -85,15 +82,31 @@ function App() {
               >
                 Slice Studies
               </button>
-            </div>
-            <div className="flex flex-col gap-3">
-              <span className="text-white font-bold uppercase tracking-widest text-[10px]">Legal</span>
               <button
                 onClick={() => setIsTermsOpen(true)}
                 className="text-left hover:text-primary transition-colors hover:underline decoration-primary decoration-1 underline-offset-4"
               >
                 Terms of Service
               </button>
+            </div>
+            <div className="flex flex-col gap-3">
+              <span className="text-white font-bold uppercase tracking-widest text-[10px]">Social</span>
+              <a
+                href="https://www.instagram.com/slice99/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors hover:underline decoration-primary decoration-1 underline-offset-4"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.linkedin.com/company/slice99/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors hover:underline decoration-primary decoration-1 underline-offset-4"
+              >
+                LinkedIn
+              </a>
             </div>
           </div>
         </div>
@@ -111,6 +124,7 @@ function App() {
       {/* Modals & Floating Elements */}
       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
       <CreatorApplyModal isOpen={isCreatorApplyOpen} onClose={() => setIsCreatorApplyOpen(false)} />
+      <BrandBookModal isOpen={isBrandBookOpen} onClose={() => setIsBrandBookOpen(false)} initialPackage={initialBookPackage} />
     </div>
   );
 }

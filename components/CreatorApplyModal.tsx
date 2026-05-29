@@ -119,18 +119,24 @@ export const CreatorApplyModal: React.FC<CreatorApplyModalProps> = ({ isOpen, on
                                         </div>
                                     </div>
 
-                                    {/* Section 2: The Vibe */}
+                                    {/* Section 2: What Resonates */}
                                     <div className="space-y-4">
-                                        <h4 className="text-sm font-bold text-creator uppercase tracking-wider">02 // The Vibe</h4>
-                                        <p className="text-xs text-neutral-500">Which Haul Categories fit your content style? (Select all that apply)</p>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                            {['The Aesthetic Home', 'The Wellness Routine', 'The Fit Check', 'The Desk Setup', 'The Pantry'].map((cat) => (
-                                                <label key={cat} className="flex items-center space-x-3 p-3 border border-neutral-800 rounded-sm hover:bg-neutral-900 cursor-pointer transition-colors">
-                                                    <input type="checkbox" name="categories" value={cat}
-                                                        className="form-checkbox h-4 w-4 text-creator bg-neutral-900 border-neutral-700 rounded-sm focus:ring-creator focus:ring-offset-neutral-900" />
-                                                    <span className="text-sm text-neutral-300">{cat}</span>
-                                                </label>
-                                            ))}
+                                        <h4 className="text-sm font-bold text-creator uppercase tracking-wider">02 // What Resonates</h4>
+                                        <p className="text-sm text-neutral-400 font-medium leading-relaxed">
+                                            In our opinion, everyone is a creator, but to help us match better we need to know what type of product resonates best with each creator on our roster.
+                                        </p>
+                                        <div>
+                                            <label htmlFor="product_resonance" className="block text-xs font-medium text-neutral-500 mb-2">
+                                                What B2C tools, digital products, or software do you find yourself naturally using, loving, or talking about?
+                                            </label>
+                                            <textarea
+                                                name="product_resonance"
+                                                id="product_resonance"
+                                                required
+                                                rows={3}
+                                                placeholder="e.g. Figma for design, Discord for community, Loom for quick updates, or mechanical keyboards, workspace accessories, etc. Tell us what resonates best with your setup..."
+                                                className="w-full bg-neutral-900 border border-neutral-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-creator transition-colors placeholder-neutral-600 text-sm resize-none"
+                                            />
                                         </div>
                                     </div>
 
@@ -138,10 +144,26 @@ export const CreatorApplyModal: React.FC<CreatorApplyModalProps> = ({ isOpen, on
                                     <div className="space-y-4">
                                         <h4 className="text-sm font-bold text-creator uppercase tracking-wider">03 // The Capability</h4>
                                         <div>
-                                            <label htmlFor="video_link" className="block text-xs font-medium text-neutral-400 mb-1">Link to your best 'Haul' or 'Showcase' video</label>
-                                            <input type="text" name="video_link" id="video_link" placeholder="tiktok.com/video/..." required
+                                            <label htmlFor="video_link" className="block text-xs font-medium text-neutral-400 mb-1">
+                                                Link to your best 'setup' or 'routine' video (Optional)
+                                            </label>
+                                            <input type="text" name="video_link" id="video_link" placeholder="tiktok.com/video/... or drive.google.com/..."
                                                 className="w-full bg-neutral-900 border border-neutral-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-creator transition-colors placeholder-neutral-600" />
-                                            <p className="text-[10px] text-neutral-600 mt-1">Show us a video where you talk about a product. We want to see your lighting and hear your voice.</p>
+                                            <p className="text-[10px] text-neutral-600 mt-1">
+                                                Show us a video showing a workspace or a daily routine if you have one.
+                                            </p>
+                                        </div>
+                                        <div className="pt-2">
+                                            <label htmlFor="setup_description" className="block text-xs font-medium text-neutral-400 mb-1">
+                                                Or, tell us about your daily workflow setup and styling
+                                            </label>
+                                            <textarea
+                                                name="setup_description"
+                                                id="setup_description"
+                                                rows={3}
+                                                placeholder="No video handy? No problem. Describe your setup, tools, desk accessories, lighting, or overall aesthetic vibe..."
+                                                className="w-full bg-neutral-900 border border-neutral-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-creator transition-colors placeholder-neutral-600 text-sm resize-none"
+                                            />
                                         </div>
                                     </div>
 
@@ -150,7 +172,7 @@ export const CreatorApplyModal: React.FC<CreatorApplyModalProps> = ({ isOpen, on
                                         <h4 className="text-sm font-bold text-creator uppercase tracking-wider">04 // The Deal Breakers</h4>
 
                                         <div className="space-y-2">
-                                            <p className="text-sm text-neutral-300 font-medium">The Slice Model pays a flat rate of $200 CAD + 4 Free Products per drop. Do you accept this rate?</p>
+                                            <p className="text-sm text-neutral-300 font-medium">The Slice Model pays a flat rate of $200 CAD per video. Do you accept this rate?</p>
                                             <div className="flex gap-4">
                                                 <label className="flex items-center space-x-2 cursor-pointer">
                                                     <input type="radio" name="rate_acceptance" value="Yes" required
@@ -186,7 +208,7 @@ export const CreatorApplyModal: React.FC<CreatorApplyModalProps> = ({ isOpen, on
                                     <div className="space-y-4 pt-2 border-t border-neutral-800">
                                         <div>
                                             <label htmlFor="dream_brand" className="block text-xs font-medium text-neutral-400 mb-1">One brand you really want to work with right now?</label>
-                                            <input type="text" name="dream_brand" id="dream_brand" placeholder="e.g. Nike, Glossier, etc."
+                                            <input type="text" name="dream_brand" id="dream_brand" placeholder="e.g. Figma, Trello, Loom, etc."
                                                 className="w-full bg-neutral-900 border border-neutral-800 rounded-sm px-3 py-2 text-white focus:outline-none focus:border-creator transition-colors placeholder-neutral-600" />
                                         </div>
                                     </div>

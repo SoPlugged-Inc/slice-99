@@ -31,6 +31,50 @@
     background: linear-gradient(to left, transparent, #FF4500, transparent);
     offset-anchor: 50% 50%;
   }
+
+  @keyframes slide-up-fade {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up-fade {
+    animation: slide-up-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes ambient-glow {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      opacity: 0.02;
+    }
+    50% {
+      transform: translate(-48%, -48%) scale(1.05) rotate(180deg);
+      opacity: 0.04;
+    }
+  }
+
+  .animate-ambient-glow {
+    animation: ambient-glow 25s ease-in-out infinite;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
 }
 button, a, [role="button"], .cursor-pointer {
   cursor: pointer !important;

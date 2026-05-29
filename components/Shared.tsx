@@ -119,7 +119,7 @@ export const LogoMarquee = () => (
         <div className="flex gap-12 w-max animate-marquee hover:paused items-center">
              {[...Array(2)].map((_, i) => (
                  <div key={i} className="flex gap-12 shrink-0">
-                     {['Fashion', 'Beauty', 'Home Goods', 'Wellness', 'Tech', 'Food & Bev', 'Pet Care', 'Lifestyle'].map((name, idx) => (
+                     {['Mobile Apps', 'AI Tools', 'Browser Extensions', 'Productivity Tools', 'Design Software', 'Desktop Apps', 'Fintech Utilities', 'Creator Software'].map((name, idx) => (
                          <span key={idx} className="text-lg sm:text-xl font-bold text-neutral tracking-tight hover:text-primary transition-colors cursor-default">{name}</span>
                      ))}
                  </div>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Loader2, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
   page: 'brand' | 'creator' | 'blog';
@@ -7,16 +7,14 @@ interface NavbarProps {
   onApplyClick?: () => void;
 }
 
-
-
 export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const isCreator = page === 'creator';
   const isBlog = page === 'blog';
+  const isBrand = page === 'brand';
 
   const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    if (isBlog) {
+    if (!isBrand) {
       onSwitch('brand');
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -27,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) 
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const headerOffset = 80; // Height of navbar + buffer
+      const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
@@ -38,60 +36,109 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) 
     }
   };
 
-  const handleActionClick = (e: React.MouseEvent) => {
+  const handlePrimaryAction = (e: React.MouseEvent) => {
     e.preventDefault();
-    
-    if (!isCreator) {
-      onSwitch('creator');
-    }
-    
-    if (onApplyClick) {
-      // Small timeout to allow route switch to process visually
-      setTimeout(() => onApplyClick(), 100);
+    if (isCreator) {
+      if (onApplyClick) onApplyClick();
+    } else {
+      if (isBlog) {
+        onSwitch('brand');
+        setTimeout(() => {
+          const element = document.getElementById('pricing');
+          if (element) {
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            window.scrollTo({ top: elementPosition + window.scrollY - headerOffset, behavior: 'smooth' });
+          }
+        }, 150);
+      } else {
+        const element = document.getElementById('pricing');
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          window.scrollTo({ top: elementPosition + window.scrollY - headerOffset, behavior: 'smooth' });
+        }
+      }
     }
   };
 
-  // Theme classes
-  const activeLinkClass = isCreator
-    ? "hover:text-creator focus-visible:ring-creator"
-    : "hover:text-primary focus-visible:ring-primary";
-
-  const buttonClass = isCreator
-    ? "bg-creator hover:bg-creator-hover shadow-creator/20 hover:shadow-creator/30 focus-visible:ring-creator"
-    : "bg-primary hover:bg-primary-hover shadow-primary/20 hover:shadow-primary/30 focus-visible:ring-primary";
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-white/90 backdrop-blur-md border-b border-neutral-lighter supports-[backdrop-filter]:bg-neutral-white/60">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FDFBF7]/90 backdrop-blur-md border-b border-[#E8E4DB]/50 transition-all duration-300 shadow-none">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
+        {/* Logo area */}
         <a
           href="#"
           onClick={scrollToTop}
-          className={`flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm ${isCreator ? 'focus-visible:ring-creator' : 'focus-visible:ring-primary'}`}
+          className="flex items-center gap-2 group focus-visible:outline-none"
           aria-label="Slice Home"
         >
-          {/* Logo Text */}
-          <div className="text-2xl font-black tracking-tighter text-neutral-darkest uppercase select-none">
-            SL<span className={isCreator ? 'text-creator' : 'text-primary'}>/</span>CE
+          <div className="text-xl font-black tracking-tight text-neutral-darkest uppercase select-none flex items-center gap-0.5">
+            SL<span className="text-primary font-serif">/</span>CE
           </div>
-
-          {isCreator && <span className="text-[10px] font-bold uppercase tracking-widest bg-neutral-lightest text-neutral-dark px-2 py-0.5 rounded ml-1 border border-neutral-lighter">Creator</span>}
         </a>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-dark">
-          {!isCreator && !isBlog && (
+        {/* Dynamic Contextual Navigation Links */}
+        <div className="hidden md:flex items-center gap-8 text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-dark">
+          {isBrand && (
             <>
               <a
-                href="#how-it-works"
-                onClick={(e) => scrollToSection(e, 'how-it-works')}
-                className={`transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-1 ${activeLinkClass}`}
+                href="#cac-calculator"
+                onClick={(e) => scrollToSection(e, 'cac-calculator')}
+                className="transition-colors hover:text-neutral-darkest animate-none"
               >
-                How it Works
+                Calculator
+              </a>
+              <a
+                href="#pricing"
+                onClick={(e) => scrollToSection(e, 'pricing')}
+                className="transition-colors hover:text-neutral-darkest animate-none"
+              >
+                Pricing
               </a>
               <a
                 href="#faq"
                 onClick={(e) => scrollToSection(e, 'faq')}
-                className={`transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-1 ${activeLinkClass}`}
+                className="transition-colors hover:text-neutral-darkest animate-none"
+              >
+                FAQ
+              </a>
+              <button
+                onClick={() => onSwitch('blog')}
+                className="transition-colors hover:text-neutral-darkest font-mono font-bold uppercase tracking-wider animate-none"
+              >
+                Case Studies
+              </button>
+            </>
+          )}
+
+          {isCreator && (
+            <>
+              <a
+                href="#how-it-works"
+                onClick={(e) => scrollToSection(e, 'how-it-works')}
+                className="transition-colors hover:text-neutral-darkest animate-none"
+              >
+                The Routine
+              </a>
+              <a
+                href="#earnings"
+                onClick={(e) => scrollToSection(e, 'earnings')}
+                className="transition-colors hover:text-[#111111] animate-none"
+              >
+                Earnings
+              </a>
+              <a
+                href="#exclusive-access"
+                onClick={(e) => scrollToSection(e, 'exclusive-access')}
+                className="transition-colors hover:text-[#111111] animate-none"
+              >
+                VIP Events
+              </a>
+              <a
+                href="#faq"
+                onClick={(e) => scrollToSection(e, 'faq')}
+                className="transition-colors hover:text-[#111111] animate-none"
               >
                 FAQ
               </a>
@@ -99,33 +146,33 @@ export const Navbar: React.FC<NavbarProps> = ({ page, onSwitch, onApplyClick }) 
           )}
         </div>
 
-        <div className="flex items-center gap-4">
-          {!isCreator ? (
+        {/* Action buttons */}
+        <div className="flex items-center gap-6">
+          {/* Secondary Action: Page Toggle */}
+          {isCreator ? (
             <button
-              onClick={() => onSwitch(isBlog ? 'brand' : 'creator')}
-              className={`hidden sm:flex items-center gap-1 text-sm font-medium text-neutral-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-2 py-1 ${activeLinkClass}`}
+              onClick={() => onSwitch('brand')}
+              className="text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-dark hover:text-[#111111] transition-colors flex items-center gap-1.5"
             >
-              {isBlog ? (
-                <><ArrowRight size={14} className="rotate-180" /> Back to Home</>
-              ) : (
-                <>Are you a creator? <ArrowRight size={14} /></>
-              )}
+              B2C Brands
+              <ArrowRight size={12} className="text-neutral-light" />
             </button>
           ) : (
             <button
-              onClick={() => onSwitch('brand')}
-              className={`hidden sm:flex items-center gap-1 text-sm font-medium text-neutral-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm px-2 py-1 ${activeLinkClass}`}
+              onClick={() => onSwitch('creator')}
+              className="text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-dark hover:text-[#111111] transition-colors flex items-center gap-1.5"
             >
-              <ArrowRight size={14} className="rotate-180" /> Back to Brands
+              For Creators
+              <ArrowRight size={12} className="text-neutral-light" />
             </button>
           )}
 
+          {/* Primary Action Button */}
           <button
-            onClick={handleActionClick}
-            disabled={isLoading}
-            className={`text-white px-5 py-2 text-sm font-bold tracking-tight rounded-md shadow-lg transition-all active:scale-95 inline-block text-center decoration-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-darkest focus-visible:ring-offset-2 disabled:opacity-80 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center min-w-[140px] ${buttonClass}`}
+            onClick={handlePrimaryAction}
+            className="bg-neutral-darkest hover:bg-neutral-dark text-white px-5 py-2 text-[10px] font-mono font-bold uppercase tracking-widest rounded transition-colors active:scale-[0.98] text-center"
           >
-            {!isCreator ? "Join the Roster" : "Join Slice"}
+            {isCreator ? "Apply to Roster" : "Get Started"}
           </button>
         </div>
       </div>

@@ -101,7 +101,7 @@ export default async function handler(req, res) {
             }
 
             // Delivery Engine (Resend API)
-            const emailSubject = `Payment Confirmed: ${businessName} x Slice99 Onboarding & Shipping Instructions`;
+            const emailSubject = `Payment Confirmed: ${businessName} x Slice99 Onboarding & Access Setup`;
 
             const htmlTemplate = `
 <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee;">
@@ -116,19 +116,18 @@ export default async function handler(req, res) {
   </p>
   
   <div style="background-color: #f0fdf4; border-left: 4px solid #16a34a; padding: 15px; border-radius: 0 8px 8px 0; margin: 20px 0;">
-    <h3 style="margin-top: 0; color: #166534;">1. Shipping Instructions</h3>
-    <p style="margin-bottom: 5px; color: #15803d;">Please ship your product to our hub:</p>
-    <p style="font-weight: bold; color: #166534;">
-      Slice99 C/O Nina Barango<br>
-      631 Montessor Crescent<br>
-      Ottawa, ON K0A 3K0
-    </p>
+    <h3 style="margin-top: 0; color: #166534;">1. Virtual Setup & Account Access</h3>
+    <p style="margin-bottom: 5px; color: #15803d;">Please reply directly to this email or send details to <a href="mailto:support@slice99.com" style="color: #166534; font-weight: bold; text-decoration: underline;">support@slice99.com</a> with:</p>
+    <ul style="color: #166534; line-height: 1.5; margin-top: 5px; padding-left: 20px;">
+      <li>Pre-configured premium log-in details for the creator.</li>
+      <li>Or a sandboxed test workspace/account invitation.</li>
+    </ul>
   </div>
 
   <h3 style="color: #333;">2. Projected Timeline</h3>
   <ul style="color: #555; line-height: 1.6;">
-    <li><strong>Logistics:</strong> Once the pool is completed, products are distributed to our creators.</li>
-    <li><strong>Content:</strong> Live within 14 days of full distribution.</li>
+    <li><strong>Matching:</strong> Once credentials are confirmed and the cohort is complete, creators are matched.</li>
+    <li><strong>Production:</strong> UGC-style routine video files delivered within 14 days of cohort matching.</li>
   </ul>
 
   <p style="margin-top: 30px; font-size: 14px; color: #888; border-top: 1px solid #eee; padding-top: 20px;">

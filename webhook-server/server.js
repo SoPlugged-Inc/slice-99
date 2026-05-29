@@ -104,30 +104,30 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
             }
 
             // 4. Delivery Engine (Resend API)
-            const emailSubject = `Payment Confirmed: ${businessName} x Slice99 Onboarding & Shipping Instructions`;
+            const emailSubject = `Payment Confirmed: ${businessName} x Slice99 Onboarding & Access Setup`;
 
             const htmlTemplate = `
         <p>Hi ${businessName},</p>
         
-        <p>This email confirms that we have received your payment for the upcoming Slice99 influencer campaign slot. We are excited to move into the logistics phase of this pool for your <strong>${itemToBeFilmed}</strong>.</p>
+        <p>This email confirms that we have received your payment for the upcoming Slice99 campaign slot. We are excited to move into the onboarding phase of this cohort for your B2C product, <strong>${itemToBeFilmed}</strong>.</p>
         
         <p>To ensure a seamless launch, please find your next steps and campaign timeline below:</p>
         
-        <h3>1. Shipping Instructions</h3>
-        <p>Please ship your product to our central processing hub. This allows us to oversee the unboxing and "bundle" creation before final distribution to our matched creators.</p>
+        <h3>1. Virtual Setup & Account Access</h3>
+        <p>Please reply directly to this thread or email us at <a href="mailto:support@slice99.com">support@slice99.com</a> with the virtual credentials the matched creator will need to integrate your product inside their routine vlog:</p>
         
-        <p><strong>Shipping Address:</strong><br/>
-        Slice99 C/O Nina Barango<br/>
-        631 Montessor Crescent<br/>
-        Ottawa, ON K0A3K0</p>
+        <ul>
+          <li>Pre-configured premium login credentials for the creator.</li>
+          <li>Or a sandboxed test workspace invitation.</li>
+        </ul>
         
-        <p>Please reply to this thread with your tracking number once the package has been dispatched.</p>
+        <p>Please provide these details at your earliest convenience to lock in your cohort scheduling.</p>
         
         <h3>2. Projected Timeline</h3>
         
-        <p><strong>Logistics:</strong> Once the pool is completed and all products have arrived, they will be distributed to a creator in our roster.</p>
+        <p><strong>Matching:</strong> Once credentials are confirmed and the cohort is complete, creators are matched.</p>
         
-        <p><strong>Content Creation:</strong> Content is scheduled to go live within 14 days of the pool being fully distributed.</p>
+        <p><strong>Content Production:</strong> UGC-style routine video files delivered within 14 days of active matching.</p>
         
         <p>If you have any questions, please reply directly to this email.</p>
         
