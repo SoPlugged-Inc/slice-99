@@ -290,17 +290,31 @@ export const BrandBookModal: React.FC<BrandBookModalProps> = ({ isOpen, onClose,
                                         <div className="pt-2">
                                             <span className="block text-[9px] font-mono text-neutral-light uppercase mb-2">Selected Growth Experiment Tier</span>
                                             <div className="grid grid-cols-3 gap-2">
-                                                {(['pilot', 'growth', 'enterprise'] as const).map((pkg) => (
-                                                    <button
-                                                        key={pkg}
-                                                        type="button"
-                                                        onClick={() => setSelectedPackage(pkg)}
-                                                        className={`p-3 border rounded text-center transition-all flex flex-col items-center justify-center ${selectedPackage === pkg ? 'border-primary bg-white ring-1 ring-primary' : 'border-[#E8E4DB] bg-white hover:border-neutral-dark'}`}
-                                                    >
-                                                        <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-neutral-darkest">{pkg}</span>
-                                                        <span className="text-xs font-bold font-mono text-primary mt-0.5">{packageInfo[pkg].price}</span>
-                                                    </button>
-                                                ))}
+                                                {(['pilot', 'growth', 'enterprise'] as const).map((pkg) => {
+                                                    const isLocked = pkg !== 'pilot';
+                                                    return (
+                                                        <button
+                                                            key={pkg}
+                                                            type="button"
+                                                            disabled={isLocked}
+                                                            onClick={() => !isLocked && setSelectedPackage(pkg)}
+                                                            className={`p-3 border rounded text-center transition-all flex flex-col items-center justify-center relative ${
+                                                                selectedPackage === pkg 
+                                                                    ? 'border-primary bg-white ring-1 ring-primary' 
+                                                                    : isLocked 
+                                                                        ? 'border-[#E8E4DB] bg-neutral-100 opacity-60 cursor-not-allowed'
+                                                                        : 'border-[#E8E4DB] bg-white hover:border-neutral-dark'
+                                                            }`}
+                                                        >
+                                                            <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-neutral-darkest">
+                                                                {pkg} {isLocked && '🔒'}
+                                                            </span>
+                                                            <span className="text-xs font-bold font-mono text-primary mt-0.5">
+                                                                {isLocked ? 'Waitlist' : packageInfo[pkg].price}
+                                                            </span>
+                                                        </button>
+                                                    );
+                                                })}
                                             </div>
                                         </div>
                                     </div>
@@ -325,7 +339,7 @@ export const BrandBookModal: React.FC<BrandBookModalProps> = ({ isOpen, onClose,
                                             disabled={isSubmitting || !productName || !productUrl}
                                             className="w-full bg-neutral-darkest text-white font-mono text-xs font-bold uppercase tracking-wider py-4 rounded hover:bg-neutral-dark transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            {isSubmitting ? 'Registering...' : 'Register Product & Launch Experiment'}
+                                            {isSubmitting ? 'Processing...' : 'Pay Now'}
                                             <ArrowRight size={14} />
                                         </button>
                                         <p className="text-center text-[9px] text-neutral-light font-mono leading-relaxed mt-2.5">

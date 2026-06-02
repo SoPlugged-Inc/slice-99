@@ -3,7 +3,8 @@ import {
     ArrowRight, 
     ChevronDown, 
     Check, 
-    TrendingUp
+    TrendingUp,
+    X
 } from 'lucide-react';
 import { LogoMarquee } from './Shared';
 
@@ -173,9 +174,140 @@ const CACCalculator = () => {
     );
 };
 
+interface WaitlistModalProps {
+    isOpen: boolean;
+    packageType: 'growth' | 'enterprise' | null;
+    onClose: () => void;
+}
+
+const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, packageType, onClose }) => {
+    const [email, setEmail] = useState('');
+    const [submitting, setSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    React.useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+            setEmail('');
+            setSubmitted(false);
+            setError(null);
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
+    if (!isOpen || !packageType) return null;
+
+    const packageName = packageType === 'growth' ? 'Growth Bundle (Multi-Stack Pack)' : 'Enterprise Bundle (Scale Pack)';
+    const price = packageType === 'growth' ? '$279' : '$799';
+
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+
+        setSubmitting(true);
+        setError(null);
+
+        try {
+            const response = await fetch('https://formspree.io/f/xnjlezlq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    waitlistPackage: packageName,
+                    priceTier: price,
+                    source: 'Landing Page Waitlist Signup'
+                })
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+            } else {
+                throw new Error('Something went wrong. Please try again.');
+            }
+        } catch (err: any) {
+            setError(err.message || 'Submission failed. Please try again.');
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    return (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true">
+            <div className="absolute inset-0 bg-neutral-darkest/60 backdrop-blur-sm transition-opacity" onClick={onClose} />
+            <div className="relative w-full max-w-md bg-[#FDFBF7] border border-[#E8E4DB] rounded-2xl shadow-2xl flex flex-col p-6 animate-[slideUpFade_0.3s_ease-out] text-neutral-darkest">
+                <button onClick={onClose} className="absolute top-4 right-4 text-neutral-dark hover:text-neutral-darkest transition-colors focus:outline-none">
+                    <X size={18} />
+                </button>
+
+                {submitted ? (
+                    <div className="text-center py-6">
+                        <div className="mb-4 inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full text-primary">
+                            <Check size={24} />
+                        </div>
+                        <h3 className="text-lg font-serif text-neutral-darkest mb-2">You're on the list!</h3>
+                        <p className="text-xs text-neutral-dark font-light leading-relaxed mb-6">
+                            We've registered your interest for the <span className="font-semibold">{packageName}</span>. We'll email you at <span className="font-semibold">{email}</span> as soon as active co-marketing slots become available.
+                        </p>
+                        <button onClick={onClose} className="w-full py-3 bg-neutral-darkest text-white text-xs font-mono font-bold uppercase tracking-wider rounded hover:bg-neutral-dark transition-colors">
+                            Close
+                        </button>
+                    </div>
+                ) : (
+                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                        <div>
+                            <span className="text-[9px] font-mono font-bold text-primary uppercase tracking-widest block mb-1">WAITLIST REGISTER</span>
+                            <h3 className="text-xl font-serif text-neutral-darkest mb-1.5 font-medium">Join the {packageType === 'growth' ? 'Growth' : 'Enterprise'} Waitlist</h3>
+                            <p className="text-xs text-neutral-dark font-light leading-relaxed">
+                                Due to extremely high demand, our matched creator cohorts for the <strong className="font-medium">{packageName} ({price})</strong> are currently at maximum capacity.
+                            </p>
+                            <p className="text-xs text-neutral-dark font-light leading-relaxed mt-2">
+                                Register below to secure early priority access when the next matching sprint launches.
+                            </p>
+                        </div>
+
+                        {error && (
+                            <div className="text-xs text-red-600 bg-red-50 border border-red-200 rounded p-2 text-center">
+                                {error}
+                            </div>
+                        )}
+
+                        <div>
+                            <label htmlFor="waitlist_email" className="block text-[9px] font-mono font-bold uppercase tracking-wider text-neutral-dark mb-1">Company Email</label>
+                            <input
+                                required
+                                type="email"
+                                id="waitlist_email"
+                                placeholder="founder@yourcompany.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full bg-white border border-[#E8E4DB] rounded px-3.5 py-2.5 text-xs text-neutral-darkest focus:outline-none focus:border-primary transition-colors placeholder-[#B8B2A5]"
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={submitting || !email}
+                            className="w-full py-3.5 bg-neutral-darkest text-white text-xs font-mono font-bold uppercase tracking-wider rounded hover:bg-neutral-dark transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {submitting ? 'Registering...' : 'Secure Waitlist Priority'}
+                            <ArrowRight size={14} />
+                        </button>
+                    </form>
+                )}
+            </div>
+        </div>
+    );
+};
+
 export const BrandLanding: React.FC<{ onSwitch?: (page: 'brand' | 'creator' | 'blog') => void, onBookClick?: (pkg: 'pilot' | 'growth' | 'enterprise') => void }> = ({ onSwitch, onBookClick }) => {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const [testimonialIdx, setTestimonialIdx] = useState(0);
+    const [waitlistPackage, setWaitlistPackage] = useState<'growth' | 'enterprise' | null>(null);
 
     const nextTestimonial = () => setTestimonialIdx((prev) => (prev + 1) % testimonials.length);
     const prevTestimonial = () => setTestimonialIdx((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
@@ -414,9 +546,12 @@ export const BrandLanding: React.FC<{ onSwitch?: (page: 'brand' | 'creator' | 'b
                     <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
                         
                         {/* Package 1 */}
-                        <div className="bg-white border border-[#E8E4DB]/60 rounded-xl p-8 flex flex-col justify-between shadow-sm">
+                        <div className="bg-white border-2 border-primary rounded-xl p-8 flex flex-col justify-between shadow-md relative hover:scale-[1.01] transition-all duration-300">
+                            <span className="absolute -top-3 right-6 bg-primary text-white text-[8px] font-mono font-bold tracking-widest uppercase px-2.5 py-0.5 rounded">
+                                MOST POPULAR
+                            </span>
                             <div>
-                                <span className="text-[9px] font-mono font-bold tracking-wider text-neutral-light uppercase mb-2 block">PILOT RUN</span>
+                                <span className="text-[9px] font-mono font-bold tracking-wider text-primary uppercase mb-2 block">PILOT RUN</span>
                                 <h3 className="text-xl font-bold text-neutral-darkest mb-4">The Single Slice</h3>
                                 <div className="flex items-baseline gap-1 mb-6">
                                     <span className="text-4xl font-bold font-mono text-neutral-darkest">$99</span>
@@ -450,12 +585,9 @@ export const BrandLanding: React.FC<{ onSwitch?: (page: 'brand' | 'creator' | 'b
                         </div>
 
                         {/* Package 2 */}
-                        <div className="bg-white border-2 border-primary rounded-xl p-8 flex flex-col justify-between shadow-sm relative">
-                            <span className="absolute -top-3 right-6 bg-primary text-white text-[8px] font-mono font-bold tracking-widest uppercase px-2.5 py-0.5 rounded">
-                                POPULAR
-                            </span>
+                        <div className="bg-white border border-[#E8E4DB]/60 rounded-xl p-8 flex flex-col justify-between shadow-sm hover:border-[#E8E4DB]/90 transition-all duration-300">
                             <div>
-                                <span className="text-[9px] font-mono font-bold tracking-wider text-primary uppercase mb-2 block">GROWTH PACKAGE</span>
+                                <span className="text-[9px] font-mono font-bold tracking-wider text-neutral-light uppercase mb-2 block">GROWTH PACKAGE</span>
                                 <h3 className="text-xl font-bold text-neutral-darkest mb-4">Multi-Stack Pack</h3>
                                 <div className="flex items-baseline gap-1 mb-6">
                                     <span className="text-4xl font-bold font-mono text-neutral-darkest">$279</span>
@@ -483,13 +615,13 @@ export const BrandLanding: React.FC<{ onSwitch?: (page: 'brand' | 'creator' | 'b
                                     </li>
                                 </ul>
                             </div>
-                            <button onClick={() => onBookClick ? onBookClick('growth') : window.open('https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00', '_blank')} className="w-full py-3 bg-neutral-darkest hover:bg-neutral-dark text-white font-mono text-[10px] font-bold uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-1.5">
-                                Book Growth Bundle <ArrowRight size={12} />
+                            <button onClick={() => setWaitlistPackage('growth')} className="w-full py-3 bg-neutral-darkest hover:bg-neutral-dark text-white font-mono text-[10px] font-bold uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-1.5 animate-pulse-subtle">
+                                Coming Soon <ArrowRight size={12} />
                             </button>
                         </div>
 
                         {/* Package 3 */}
-                        <div className="bg-white border border-[#E8E4DB]/60 rounded-xl p-8 flex flex-col justify-between shadow-sm">
+                        <div className="bg-white border border-[#E8E4DB]/60 rounded-xl p-8 flex flex-col justify-between shadow-sm hover:border-[#E8E4DB]/90 transition-all duration-300">
                             <div>
                                 <span className="text-[9px] font-mono font-bold tracking-wider text-neutral-light uppercase mb-2 block">SCALE PACK</span>
                                 <h3 className="text-xl font-bold text-neutral-darkest mb-4">Enterprise Bundle</h3>
@@ -519,8 +651,8 @@ export const BrandLanding: React.FC<{ onSwitch?: (page: 'brand' | 'creator' | 'b
                                     </li>
                                 </ul>
                             </div>
-                            <button onClick={() => onBookClick ? onBookClick('enterprise') : window.open('https://book.stripe.com/aFafZadjE3050Wh4Bq5Vu00', '_blank')} className="w-full py-3 bg-neutral-darkest hover:bg-neutral-dark text-white font-mono text-[10px] font-bold uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-1.5">
-                                Book Enterprise Slot <ArrowRight size={12} />
+                            <button onClick={() => setWaitlistPackage('enterprise')} className="w-full py-3 bg-neutral-darkest hover:bg-neutral-dark text-white font-mono text-[10px] font-bold uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-1.5 animate-pulse-subtle">
+                                Coming Soon <ArrowRight size={12} />
                             </button>
                         </div>
                     </div>
@@ -599,6 +731,12 @@ export const BrandLanding: React.FC<{ onSwitch?: (page: 'brand' | 'creator' | 'b
                     />
                 </div>
             </div>
+
+            <WaitlistModal 
+                isOpen={waitlistPackage !== null} 
+                packageType={waitlistPackage} 
+                onClose={() => setWaitlistPackage(null)} 
+            />
 
         </div>
     );
